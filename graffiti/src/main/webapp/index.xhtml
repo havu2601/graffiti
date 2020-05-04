@@ -1,12 +1,712 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Facelet Title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <title>HOMEPAGE</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="manifest" href="./site.webmanifest"/>
+        <link rel="shortcut icon" type="image/x-icon" href="./assets/logo_shop.png"/>
+        
+        <!-- Place favicon.ico in the root directory -->
+
+        <!-- CSS here -->
+        <link rel="stylesheet" href="./assets/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./assets/css/animate.min.css"/>
+        <link rel="stylesheet" href="./assets/css/default.css"/>
+        <link rel="stylesheet" href="./assets/css/style.css"/>
+        <link rel="stylesheet" href="./assets/css/responsive.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
     </h:head>
     <h:body>
-        Hello from Facelets
+        
+        <!-- header start -->
+        <header>
+            <div id="header-sticky" class="header-area box-90 sticky-header">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
+                            <div class="logo">
+                                <a href="index.html"><img style="width: 100px;height: 100px;" src="./assets/logo_shop.png" alt=""/></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-6 col-md-8 col-8 d-none d-xl-block">
+                            <div class="main-menu text-center">
+                                <nav id="mobile-menu" style="display: block;">
+                                    <ul>
+                                        <li>
+                                            <h:link value="ADMIN" outcome="admin_homepage.xhtml"/>
+                                        </li>
+                                        <li>
+                                            <a href="./detail.html">Spray Cans</a>
+                                        </li>
+                                        <li>
+                                            <a href="./login.html">Marker Inks</a>
+                                        </li>
+                                        <li>
+                                            <a href="./register.html">Accessories</a>
+                                        </li>
+                                        <li>
+                                            <a href="./cart.html">Drawing</a>
+                                        </li>
+                                            
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
+                            <div class="header-right f-right">
+                                <ul>
+                                    <li class="login-btn"><a href="#"><i class="far fa-user"></i></a></li>
+                                    <li class="d-shop-cart"><a href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a>
+                                        <!-- <ul class="minicart">
+                                            <li>
+                                                <div class="cart-img">
+                                                    <a href="#">
+                                                        <img src="./assets/pro1.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-content">
+                                                    <h3>
+                                                        <a href="#">Black &amp; White Shoes</a>
+                                                    </h3>
+                                                    <div class="cart-price">
+                                                        <span class="new">$ 229.9</span>
+                                                        <span>
+                                                            <del>$239.9</del>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="del-icon">
+                                                    <a href="#">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="cart-img">
+                                                    <a href="#">
+                                                        <img src="./assets/pro2.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-content">
+                                                    <h3>
+                                                        <a href="#">Black &amp; White Shoes</a>
+                                                    </h3>
+                                                    <div class="cart-price">
+                                                        <span class="new">$ 229.9</span>
+                                                        <span>
+                                                            <del>$239.9</del>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="del-icon">
+                                                    <a href="#">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="cart-img">
+                                                    <a href="#">
+                                                        <img src="./assets/pro3.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-content">
+                                                    <h3>
+                                                        <a href="#">Black &amp; White Shoes</a>
+                                                    </h3>
+                                                    <div class="cart-price">
+                                                        <span class="new">$ 229.9</span>
+                                                        <span>
+                                                            <del>$239.9</del>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="del-icon">
+                                                    <a href="#">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="total-price">
+                                                    <span class="f-left">Total:</span>
+                                                    <span class="f-right">$300.0</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="checkout-link">
+                                                    <a href="#">Shopping Cart</a>
+                                                    <a class="red-color" href="#">Checkout</a>
+                                                </div>
+                                            </li>
+                                        </ul> -->
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-12 d-xl-none">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header end -->
+
+        <main>
+
+        <!-- shop-area start -->
+        <section class="shop-area pt-150 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 col-lg-8">
+                        <!-- tab filter -->
+                        <div class="row mb-10">
+                            <div class="col-xl-5 col-lg-6 col-md-6">
+                                <div class="product-showing mb-40">
+                                    <p>Showing 1–22 of 32 results</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tab content -->
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem -->
+                                    <!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem --><!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem --><!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem --><!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem --><!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem --><!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem --><!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem --><!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem --><!-- ProductItem -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="product-wrapper mb-50">
+                                            <div class="product-img mb-25">
+                                                <a href="detail.html">
+                                                    <img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                                    <img class="secondary-img" src="./assets/EMC7060_1024x1024.jpg" alt=""/>
+                                                </a>
+                                                <div class="product-action text-center">
+                                                    <a href="#" title="Shoppingb Cart">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a href="#" title="Quick View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content pr-0">
+                                                <div class="pro-cat mb-10">
+                                                    <a href="#">Spray</a>
+                                                </div>
+                                                <h4>
+                                                    <a href="#">Montana Black</a>
+                                                </h4>
+                                                <div class="product-meta">
+                                                    <div class="pro-price">
+                                                        <span>$119.00 USD</span>
+                                                        <span class="old-price">$230.00 USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ProductItem -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--SideBar -->
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="sidebar-shop">
+                            <div class="shop-widget">
+                                <h3 class="shop-title">Search by</h3>
+                                <form action="#" class="shop-search">
+                                    <input type="text" placeholder="Your keyword...."/>
+                                    <button><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+<!-- 
+                            <div class="shop-widget">
+                                <h3 class="shop-title">Filter selection</h3>
+                                <div class="price-filter">
+                                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
+                                    <input type="text" id="amount">
+                                </div>
+                            </div> -->
+
+                            <div class="shop-widget">
+                                <h3 class="shop-title">SHOP BY</h3>
+                                <ul class="shop-link">
+                                    <li><a href="#">Name: A-Z</a></li>
+                                    <li><a href="#">Name: Z-A</a></li>
+                                    <li><a href="#">Price: High to Low</a></li>
+                                    <li><a href="#">Price: Low to High</a></li>
+                                    <li><a href="#">Product: Top Sales</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="shop-widget">
+                                <h3 class="shop-title">Recent Product</h3>
+                                <ul class="shop-sidebar-product">
+                                    <li>
+                                        <div class="side-pro-img">
+                                            <a href="#"><img src="./assets/EMC7060_1024x1024.jpg" alt=""/></a>
+                                        </div>
+                                        <div class="side-pro-content">
+                                            <div class="side-pro-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <h5><a href="#">Montana</a></h5>
+                                            <div class="side-pro-price">
+                                                <span>$119.00 USD</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="side-pro-img">
+                                            <a href="#"><img src="./assets/EMC7060_1024x1024.jpg" alt=""/></a>
+                                        </div>
+                                        <div class="side-pro-content">
+                                            <div class="side-pro-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <h5><a href="#">Montana</a></h5>
+                                            <div class="side-pro-price">
+                                                <span>$119.00 USD</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="side-pro-img">
+                                            <a href="#"><img src="./assets/EMC7060_1024x1024.jpg" alt=""/></a>
+                                        </div>
+                                        <div class="side-pro-content">
+                                            <div class="side-pro-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <h5><a href="#">Montana</a></h5>
+                                            <div class="side-pro-price">
+                                                <span>$119.00 USD</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="shop-widget">
+                                <div class="shop-sidebar-banner">
+                                    <a href="#"><img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /SideBar -->
+                </div>
+            </div>
+        </section>
+        <!-- shop-area end -->
+
+
+        </main>
+
+        <!-- footer start -->
+        <footer class="footer-area pl-100 pr-100">
+            <div class="footer-area box-90 pt-100 pb-60" data-background="img/bg/footer.jpg" style="background-image: url(&quot;img/bg/footer.jpg&quot;);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-6 col-md-6 ">
+                            <div class="footer-widget mb-40 pr-70">
+                                <div class="footer-logo">
+                                    <a href="#"><img src="./assets/logo_shop.png" alt=""/></a>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                    ut labore et dolore mag na
+                                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                    ex ea commodo consequat.
+                                </p>
+                                <div class="footer-time d-flex mt-30">
+                                    <div class="time-icon">
+                                        <img src="./assets/time.png" alt=""/>
+                                    </div>
+                                    <div class="time-text">
+                                        <span>Got Questions ? Call us 24/7!</span>
+                                        <h2>(0600) 874 548</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-3">
+                            <div class="footer-widget mb-40">
+                                <h3>Social Media</h3>
+                                <ul class="footer-link">
+                                    <li><a href="#">Facebook</a></li>
+                                    <li><a href="#">Twitter</a></li>
+                                    <li><a href="#">Behance</a></li>
+                                    <li><a href="#"> Dribbble</a></li>
+                                    <li><a href="#">Linkedin</a></li>
+                                    <li><a href="#">Youtube</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-2 col-md-3 d-md-none d-xl-block">
+                            <div class="footer-widget pl-50 mb-40">
+                                <h3>Location</h3>
+                                <ul class="footer-link">
+                                    <li><a href="#">New York</a></li>
+                                    <li><a href="#">Tokyo</a></li>
+                                    <li><a href="#">Dhaka</a></li>
+                                    <li><a href="#">Chittagong</a></li>
+                                    <li><a href="#">China</a></li>
+                                    <li><a href="#">Japan</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-3">
+                            <div class="footer-widget mb-40">
+                                <h3>About</h3>
+                                <ul class="footer-link">
+                                    <li><a href="#">Terms &amp; Conditions</a></li>
+                                    <li><a href="#"> Privacy Policy</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Wholesale</a></li>
+                                    <li><a href="#">Direction</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer end -->
+
+        <!-- Fullscreen search -->
+        <div class="search-wrap">
+            <div class="search-inner">
+                <i class="fas fa-times search-close" id="search-close"></i>
+                <div class="search-cell">
+                    <form method="get">
+                        <div class="search-field-holder">
+                            <input type="search" class="main-search-input" placeholder="Search Entire Store..."/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- end fullscreen search -->
     </h:body>
 </html>
 
