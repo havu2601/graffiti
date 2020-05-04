@@ -7,6 +7,8 @@ package dao;
 
 import ejb.AccountEJB;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -25,41 +27,24 @@ import model.UserAccount;
 public class LoginBean implements Serializable{
     @EJB
     private AccountEJB accEJB;
-    private Integer id = 0;
-    private String email;
-    private String password;
-    private UserAccount acc;
-
+    protected String email;
+    protected String password;
+    
+    
     @PostConstruct
     public void init(){
-        acc = new UserAccount();
     }
-    
     public String doLogin(){
-        acc = accEJB.findByID(id);
+        UserAccount acc = accEJB.findByEmail(email);
         if (null!=acc && acc.getPassword().equals(password)){
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-            session.setAttribute("ID", id);
+            session.setAttribute("ID", acc.getUserId());
             return "index.xhtml";
-        } else {
+        }
+        else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error","Error"));
             return "login.xhtml";
         }
-    }
-    public UserAccount getAcc() {
-        return acc;
-    }
-
-    public void setAcc(UserAccount acc) {
-        this.acc = acc;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -77,5 +62,7 @@ public class LoginBean implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
+
     
+        
 }

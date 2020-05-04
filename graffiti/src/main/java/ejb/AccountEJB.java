@@ -29,9 +29,8 @@ public class AccountEJB {
         return em.find(UserAccount.class, id);
     }
     
-    public List<UserAccount> findByEmail(String email){
-        return em.createQuery("select a from UserAccount a where a.userEmail like :email", UserAccount.class)
-                .setParameter("email", "%" + email + "%").getResultList();
+    public UserAccount findByEmail(String email){
+        return (UserAccount)em.createQuery("SELECT u FROM UserAccount u WHERE u.userEmail = :userEmail").setParameter("userEmail", email).getSingleResult();
     }
     
     public void register(UserAccount acc){
