@@ -33,63 +33,53 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
                             <div class="logo">
-                                <a href="index.html"><img style="width: 100px;height: 100px;" src="./assets/logo_shop.png" alt=""/></a>
+                                <a href="#"><img style="width: 100px;height: 100px;"  src="./assets/logo_shop.png" alt=""/></a>
+                            </div>
+
+                            <div class="category-menu">
+                                <h4>Category</h4>
+                                <ul>
+                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Table lamp</a></li>
+                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Furniture</a></li>
+                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Chair</a></li>
+                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Men</a></li>
+                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Women</a></li>
+                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Cloth</a></li>
+                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Trend</a></li>
+                                </ul>
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-6 col-md-8 col-8 d-none d-xl-block">
-                            <div class="main-menu text-center">
-                                <nav id="mobile-menu" style="display: block;">
-                                    <ul>
-                                        <li>
-                                            <a href="./index.html">Home</a>
-                                        </li>
-                                        <li>
-                                            <a href="./detail.html">Customer</a>
-                                        </li>
-                                        <li>
-                                            <!--<h:link value="Products" outcome="login.xhtml"/>-->
-<!--                                                    <a href="./login.html">Products</a>-->
-<h:form>
-    <h:commandLink action = "#{navigationBean.showPage('product.xhtml')}" value = "PRODUCT">
-        <f:param name="pageName" value=""/>
-   </h:commandLink> |
-    <h:commandLink action = "#{navigationBean.showPage('brand.xhtml')}" value = "BRAND">
-        <f:param name="pageName" value="brand.xhtml"/>
-   </h:commandLink> |
-   <h:commandLink action = "#{navigationBean.showPage('category.xhtml')}" value = "Category">
-      <f:param name = "pageName" value = "" />
-   </h:commandLink> |
-   <h:commandLink action = "#{navigationBean.showPage('subcategory.xhtml')}" value = "SubCategory">
-      <f:param name = "pageName" value = "" />
-   </h:commandLink> |
-   <h:commandLink action = "#{navigationBean.showPage('color.xhtml')}" value = "Color">
-      <f:param name = "pageName" value = "" />
-   </h:commandLink>
-</h:form>
-                                            
-                                        </li>
-                                        <li>
-                                            <a href="./register.html">Supplier</a>
-                                        </li>
-                                        <li>
-                                            <a href="./cart.html">Import</a>
-                                        </li>
-                                        <li>
-                                            <a href="./cart.html">Order</a>
-                                        </li>
-                                        <li>
-                                            <a href="./cart.html">Feedback</a>
-                                        </li>
-                                        
-                                    </ul>
-                                </nav>
+                                <div class="main-menu text-center">
+                                    <nav id="mobile-menu" style="display: block;">
+                                        <ul>
+                                            <li>
+                                                <a href="./index.html">Home</a>
+                                            </li>
+                                            <li>
+                                                <a href="./detail.html">Spray Cans</a>
+                                            </li>
+                                            <li>
+                                                <a href="./login.html">Marker &amp; Inks</a>
+                                            </li>
+                                            <li>
+                                                <a href="./register.html">Accessories</a>
+                                            </li>
+                                            <li>
+                                                <a href="./cart.html">Drawing</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
-                        </div>
                         <div class="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
                             <div class="header-right f-right">
                                 <ul>
+                                    <li class="search-btn">
+                                        <a class="search-btn nav-search search-trigger" href="#"><i class="fas fa-search"></i></a>
+                                    </li>
                                     <li class="login-btn"><a href="#"><i class="far fa-user"></i></a></li>
-                                    <!--<li class="d-shop-cart"><a href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a>-->
+                                    <li class="d-shop-cart"><a href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">3</span></a>
                                         <!-- <ul class="minicart">
                                             <li>
                                                 <div class="cart-img">
@@ -173,7 +163,7 @@
                                                 </div>
                                             </li>
                                         </ul> -->
-                                    <!--</li>-->
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -186,8 +176,7 @@
         </header>
         <!-- header end -->
 
-        <main>
-
+    <main>
         <!-- shop-area start -->
         <section class="shop-area pt-150 pb-100">
             <div class="container">
@@ -197,152 +186,74 @@
                         <div class="row mb-10">
                             <div class="col-xl-5 col-lg-6 col-md-6">
                                 <div class="product-showing mb-40">
-                                    <p>PRODUCT COLLECTION</p>
+                                    <p>COLOR    COLLECTION</p>
                                 </div>
                             </div>
                         </div>
                         <!-- tab content -->
+                        
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h:form>
                                 <div class="row">
                                     <!-- Product list -->
                                     
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                              <th>ID</th>
-                                              <th>NAME</th>
-                                              <th>CATEGORY</th>
-                                              <th>BRAND</th>
-                                              <th>CAPACITY</th>
-                                              <th>PRICE</th>
-                                              <th>STOCK</th>
-                                              <th>ACTION</th>
-                                            </tr>
-                                          </thead>
-                                          
-                                              <tbody>
-                                            <tr>
-                                              <td>1</td>
-                                              <td>MONTANA SPRAY BLACK</td>
-                                              <td>SPRAY CAN</td>
-                                              <td>MONTANA</td>
-                                              <td>400ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                            <tr>
-                                              <td>2</td>
-                                              <td>MONTANA SPRAY BLACKOUT</td>
-                                              <td>SPRAY CAN</td>
-                                              <td>MONTANA</td>
-                                              <td>400ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                            <tr>
-                                              <td>3</td>
-                                              <td>MONTANA SPRAY TARBLACK</td>
-                                              <td>SPRAY CAN</td>
-                                              <td>MONTANA</td>
-                                              <td>500ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                            <tr>
-                                              <td>4</td>
-                                              <td>MONTANA SPRAY GOLD</td>
-                                              <td>SPRAY </td>
-                                              <td>MONTANA</td>
-                                              <td>400ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                            <tr>
-                                              <td>5</td>
-                                              <td>MONTANA SPRAY SILVER</td>
-                                              <td>SPRAY CAN</td>
-                                              <td>MONTANA</td>
-                                              <td>400ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                            <tr>
-                                              <td>6</td>
-                                              <td>MONTANA SPRAY SILVERCHROME</td>
-                                              <td>SPRAY CAN</td>
-                                              <td>MONTANA</td>
-                                              <td>400ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                            <tr>
-                                              <td>7</td>
-                                              <td>MONTANA SPRAY WIDE</td>
-                                              <td>SPRAY CAN</td>
-                                              <td>MONTANA</td>
-                                              <td>400ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                            <tr>
-                                              <td>8</td>
-                                              <td>MONTANA SPRAY ULTRA WIDE</td>
-                                              <td>SPRAY CAN</td>
-                                              <td>MONTANA</td>
-                                              <td>400ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                            <tr>
-                                              <td>9</td>
-                                              <td>MONTANA SPRAY CHALK</td>
-                                              <td>SPRAY CAN</td>
-                                              <td>MONTANA</td>
-                                              <td>400ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                            <tr>
-                                              <td>10</td>
-                                              <td>MONTANA SPRAY TARBLACK</td>
-                                              <td>SPRAY CAN</td>
-                                              <td>MONTANA</td>
-                                              <td>600ML</td>
-                                              <td>119$</td>
-                                              <td>120</td>
-                                              <td><a href="#">Edit</a> | <a href="#">Disable</a></td>
-                                            </tr>
-                                          </tbody>
-                                          
-                                          
-                                          
-                                    </table>
+                                    
+                                    <h:dataTable class="table table-hover" value="#{colorBean.listColor}" var="c">
+                                            <h:column>
+                                                <f:facet name="header">ID</f:facet>
+                                                <h:outputText value="#{c.colorId}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">NAME</f:facet>
+                                                <h:outputText value="#{c.colorName}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">HEXCODE</f:facet>
+                                                <h:outputText value="#{c.colorHexcode}"/>
+                                            </h:column>
+                                            <h:column>
+                                                    <f:facet name="header">LIGHTFASTNESS</f:facet>
+                                                    <h:outputText value="#{c.colorLightfastness}"/>
+                                                </h:column>
+                                            <h:column>
+                                                    <f:facet name="header">PIGMENT</f:facet>
+                                                    <h:outputText value="#{c.colorPigment}"/>
+                                                </h:column>
+                                            <h:column>
+                                                    <f:facet name="header">COVERAGE</f:facet>
+                                                    <h:outputText value="#{c.colorCoverage}"/>
+                                                </h:column>
+                                            <h:column>
+                                                    <f:facet name="header">RGB</f:facet>
+                                                    <h:outputText value="#{c.colorRGB}"/>
+                                                </h:column>
+                                            <h:column>
+                                                <f:facet name="header">ACTION</f:facet>
+                                                <h:commandButton class="button" value="Edit" action="#{colorBean.loadColor(c.colorId)}"></h:commandButton>
+                                                <h:commandButton class="button" value="Remove" action="#{colorBean.remove(c.colorId)}"></h:commandButton>
+                                            </h:column>
+                                        </h:dataTable>
+                                    
                                     
                                     <!-- Product list -->
                                     
                                 </div>
+                                    </h:form>
                             </div>
                         </div>
+                            
                     </div>
                     <!--SideBar -->
                     <div class="col-xl-3 col-lg-4">
                         <div class="sidebar-shop">
                             <div class="shop-widget">
                                 <h3 class="shop-title">Search by</h3>
-                                <form action="#" class="shop-search">
-                                    <input type="text" placeholder="Your keyword...."/>
-                                    <button><i class="fa fa-search"></i></button>
-                                </form>
+                                <h:form class="shop-search">
+                                    <h:inputText p:placeholder="Your keyword...." value="#{colorBean.searchStr}"/>
+                                    <button onclick="#{colorBean.search()}"><i class="fa fa-search"></i></button>
+                                    
+                                </h:form>
                             </div>
 <!-- 
                             <div class="shop-widget">
@@ -354,81 +265,45 @@
                             </div> -->
 
                             <div class="shop-widget">
-                                <h3 class="shop-title">SORT BY</h3>
-                                <ul class="shop-link">
-                                    <li><a href="#">Name: A-Z</a></li>
-                                    <li><a href="#">Name: Z-A</a></li>
-                                    <li><a href="#">Price: High to Low</a></li>
-                                    <li><a href="#">Price: Low to High</a></li>
+                                <h3 class="shop-title">UPDATE COLOR COLLECTION</h3>
+                                <h:form>
+                                    <table class="table">
+                                        <tr>
+                                            <td>NAME</td>
+                                            <td><h:inputText value="#{colorBean.objColor.colorName}"></h:inputText></td>
+                                        </tr>
+                                        <tr>
+                                            <td>HEXCODE</td>
+                                            <td><h:inputText value="#{colorBean.objColor.colorHexcode}"></h:inputText></td>
+                                        </tr>
+                                        <tr>
+                                            <td>LIGHTFASTNESS</td>
+                                            <td><h:inputText value="#{colorBean.objColor.colorLightfastness}"></h:inputText></td>
+                                        </tr>
+                                        <tr>
+                                            <td>PIGMENT</td>
+                                            <td><h:inputText value="#{colorBean.objColor.colorPigment}"></h:inputText></td>
+                                        </tr>
+                                        <tr>
+                                            <td>COVERAGE</td>
+                                            <td><h:inputText value="#{colorBean.objColor.colorCoverage}"></h:inputText></td>
+                                        </tr>
+                                        <tr>
+                                            <td>RGB</td>
+                                            <td><h:inputText value="#{colorBean.objColor.colorRGB}"></h:inputText></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td colspan="2" style="text-align: center">
+                                                <h:commandButton class="button" action="#{colorBean.addNewColor()}" value="Submit"></h:commandButton>
+                                                <h:commandButton class="button" action="#{colorBean.reset()}" value="Reset"></h:commandButton>
+                                            </td>
+                                        </tr>
+                                    </table>
                                     
-                                </ul>
+                                </h:form>
                             </div>
-
-<!--                            <div class="shop-widget">
-                                <h3 class="shop-title">Recent Product</h3>
-                                <ul class="shop-sidebar-product">
-                                    <li>
-                                        <div class="side-pro-img">
-                                            <a href="#"><img src="./assets/EMC7060_1024x1024.jpg" alt=""></a>
-                                        </div>
-                                        <div class="side-pro-content">
-                                            <div class="side-pro-rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h5><a href="#">Montana</a></h5>
-                                            <div class="side-pro-price">
-                                                <span>$119.00 USD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="side-pro-img">
-                                            <a href="#"><img src="./assets/EMC7060_1024x1024.jpg" alt=""></a>
-                                        </div>
-                                        <div class="side-pro-content">
-                                            <div class="side-pro-rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h5><a href="#">Montana</a></h5>
-                                            <div class="side-pro-price">
-                                                <span>$119.00 USD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="side-pro-img">
-                                            <a href="#"><img src="./assets/EMC7060_1024x1024.jpg" alt=""></a>
-                                        </div>
-                                        <div class="side-pro-content">
-                                            <div class="side-pro-rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h5><a href="#">Montana</a></h5>
-                                            <div class="side-pro-price">
-                                                <span>$119.00 USD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>-->
                             
-                            <div class="shop-widget">
-                                <div class="shop-sidebar-banner">
-                                    <a href="#"><img src="./assets/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/></a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <!-- /SideBar -->
@@ -436,9 +311,11 @@
             </div>
         </section>
         <!-- shop-area end -->
+        
 
 
-        </main>
+    </main>
+
 
         <!-- footer start -->
         <footer class="footer-area pl-100 pr-100">
@@ -524,6 +401,7 @@
                 </div>
             </div>
         </div> <!-- end fullscreen search -->
+        
     </h:body>
 </html>
 

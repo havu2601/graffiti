@@ -27,7 +27,12 @@ public class BrandEJB {
     public void addBrand(Brand brand){
         em.merge(brand);
     }
+    
     public void updateBrand(Brand brand){
         em.merge(brand);
+    }
+    
+    public void delete(Brand brand){
+        em.remove(em.merge(brand));
     }
 }

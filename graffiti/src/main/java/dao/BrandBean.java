@@ -5,7 +5,6 @@
  */
 package dao;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import ejb.BrandEJB;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public class BrandBean implements Serializable{
     
     public void show(List<Brand> rs, String msg){
         listBrand = new ArrayList<>();
-        if(rs.isEmpty()){
+        if(rs.isEmpty() || rs==null){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,msg,msg));
         }else{
             listBrand.addAll(rs);
@@ -66,8 +65,28 @@ public class BrandBean implements Serializable{
     }
     
     public String addNewBrand(){
-        ejb.addBrand(objBrand);
+        if(objBrand.getBrandId()==null){
+            ejb.addBrand(objBrand);
+        }else{
+            ejb.updateBrand(objBrand);
+        }
         return "brand.xhtml?faces-redirect=true";
+    }
+    
+    public void reset(){
+        objBrand = new Brand();
+    }
+    public String remove(int id){
+        try {
+            ejb.delete(ejb.findById(id));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
+        }
+        return "brand.xhtml?faces-redirect=true";
+    }
+    
+    public void loadBrand(int id){
+        objBrand = ejb.findById(id);
     }
     
     public List<Brand> getListBrand() {

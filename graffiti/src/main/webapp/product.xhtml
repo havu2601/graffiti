@@ -186,7 +186,7 @@
                         <div class="row mb-10">
                             <div class="col-xl-5 col-lg-6 col-md-6">
                                 <div class="product-showing mb-40">
-                                    <p>BRAND    COLLECTION</p>
+                                    <p>PRODUCT    COLLECTION</p>
                                 </div>
                             </div>
                         </div>
@@ -199,32 +199,117 @@
                                     <!-- Product list -->
                                     
                                     
-                                        <h:dataTable class="table table-hover" value="#{brandBean.listBrand}" var="b">
+                                    <h:dataTable class="table table-hover" value="#{productBean.listProduct}" var="p">
                                             <h:column>
                                                 <f:facet name="header">ID</f:facet>
-                                                <h:outputText value="#{b.brandId}"/>
+                                                <h:outputText value="#{p.productId}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">NAME</f:facet>
-                                                <h:outputText value="#{b.brandName}"/>
+                                                <h:outputText value="#{p.productName}"/>
                                             </h:column>
                                             <h:column>
-                                                <f:facet name="header">DESCRIPTION</f:facet>
-                                                <h:outputText value="#{b.brandDescription}"/>
+                                                <f:facet name="header">CAPACITY</f:facet>
+                                                <h:outputText value="#{p.productCapacity} ML"/>
                                             </h:column>
+                                            <h:column>
+                                                    <f:facet name="header">PRICE</f:facet>
+                                                    <h:outputText value="#{p.productPrice} $"/>
+                                                </h:column>
+                                            <h:column>
+                                                    <f:facet name="header">STOCK</f:facet>
+                                                    <h:outputText value="#{p.productStock}"/>
+                                                </h:column>
                                             <h:column>
                                                 <f:facet name="header">ACTION</f:facet>
-                                                <h:commandButton value="Edit" action="#{brandBean.loadBrand(b.brandId)}"></h:commandButton>
+                                                <h:commandButton class="button" value="Edit" action="#{productBean.loadProduct()}"></h:commandButton>
+                                                <h:commandButton class="button" value="Remove" action="#{productBean.reset()}"></h:commandButton>
                                             </h:column>
                                         </h:dataTable>
                                     
                                     
                                     <!-- Product list -->
-                                    
+                                
+
                                 </div>
                                     </h:form>
                             </div>
                         </div>
+                        <div class="row mb-10">
+                        <div class="col-xl-5 col-lg-6 col-md-6">
+                            <div class="product-showing mb-40">
+                                <p>UPDATE PRODUCT</p>
+                            </div>
+                        </div>
+                    </div>
+                                <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                
+                                    <table class="table">
+                                        <tr>
+                                            <td>NAME</td>
+                                            <td><h:inputText value="#{productBean.objProduct.productName}"></h:inputText></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CAPACITY</td>
+                                            <td><h:inputText value="#{productBean.objProduct.productCapacity}"></h:inputText></td>
+                                        </tr>
+                                        <tr>
+                                            <td>PRICE</td>
+                                            <td><h:inputText value="#{productBean.objProduct.productPrice}"></h:inputText></td>
+                                        </tr>
+                                        <tr>
+                                            <td>STOCK</td>
+                                            <td><h:inputText value="#{productBean.objProduct.productStock}"></h:inputText></td>
+                                        </tr>
+                                        <tr>
+                                            <td>SUBCATEGORY</td>
+                                            <td>
+                                                <h:selectOneMenu value="#{productBean.objProduct.subcatId}">
+                                                    <f:selectItems value="#{subcategoryBean.listSubCat}" var="sc" itemValue="#{sc.subcatId}" itemLabel="#{sc.subcatName}"></f:selectItems>
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>BRAND</td>
+                                            <td>
+                                                <h:selectOneMenu value="#{productBean.objProduct.brandId}">
+                                                    <f:selectItems value="#{brandBean.listBrand}" var="b" itemValue="#{b.brandId}" itemLabel="#{b.brandName}"></f:selectItems>
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>COLOR</td>
+                                            <td>
+                                                <h:selectOneMenu value="#{productBean.objProduct.colorId}">
+                                                    <f:selectItems value="#{colorBean.listColor}" var="c" itemValue="#{c.colorId}" itemLabel="#{c.colorName} #{c.colorHexcode}"></f:selectItems>
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>IMAGE</td>
+                                            <td>
+                                                <h:form enctype="multipart/form-data">
+                                                    <h:inputFile value="#{uploadBean.image}">
+                                                        <f:passThroughAttribute name="accept" value="image"/>
+                                                        <f:ajax event="change" listener="#{uploadBean.doUpload()}" execute="@form" render="@form"/>
+                                                    </h:inputFile>
+                                                </h:form>
+                                            </td>
+                                        </tr>
+                                        <h:form>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center">
+                                                <h:commandButton class="button" action="#{colorBean.addNewColor()}" value="Submit"></h:commandButton>
+                                                <h:commandButton class="button" action="#{colorBean.reset()}" value="Reset"></h:commandButton>
+                                            </td>
+                                        </tr>
+                                        </h:form>
+                                    </table>
+                                    
+                                
+                            </div>
+                                </div>
                             
                     </div>
                     <!--SideBar -->
@@ -233,8 +318,9 @@
                             <div class="shop-widget">
                                 <h3 class="shop-title">Search by</h3>
                                 <h:form class="shop-search">
-                                    <h:inputText p:placeholder="Your keyword...." value="#{brandBean.searchStr}"/>
-                                    <button onclick="#{brandBean.search()}"><i class="fa fa-search"></i></button>
+                                    <h:inputText p:placeholder="Your keyword...." value="#{colorBean.searchStr}"/>
+                                    <button onclick="#{colorBean.search()}"><i class="fa fa-search"></i></button>
+                                    
                                 </h:form>
                             </div>
 <!-- 
@@ -247,26 +333,16 @@
                             </div> -->
 
                             <div class="shop-widget">
-                                <h3 class="shop-title">UPDATE BRAND COLLECTION</h3>
-                                <h:form>
-                                    <table class="table">
-                                        <tr>
-                                            <td>NAME</td>
-                                            <td><h:inputText value="#{brandBean.objBrand.brandName}"></h:inputText></td>
-                                        </tr>
-                                        <tr>
-                                            <td>DESCRIPTION</td>
-                                            <td><h:inputTextarea value="#{brandBean.objBrand.brandDescription}"></h:inputTextarea></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="text-align: center">
-                                                <h:commandButton class="button" action="#{brandBean.addNewBrand()}" value="Submit"></h:commandButton>
-                                                <h:commandButton class="button" action="#{brandBean.reset()}" value="Reset"></h:commandButton>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    
-                                </h:form>
+                                <h3 class="shop-title">SEARCH BY</h3>
+                                <div class="radio">
+                                    <label><input type="radio" name="optradio" checked="true"/>By Name</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="optradio"/>By Category</label>
+                                </div>
+                                <div class="radio disabled">
+                                    <label><input type="radio" name="optradio"/>By Brand</label>
+                                </div>
                                 
                             </div>
                             
