@@ -39,6 +39,7 @@ public class LoginBean implements Serializable{
         if (null!=acc && password.equals(acc.getPassword())){
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             session.setAttribute("ID", acc.getUserId());
+            session.setAttribute("role", acc.getRoleId().getRoleId());
             return "index.xhtml";
         }
         else {

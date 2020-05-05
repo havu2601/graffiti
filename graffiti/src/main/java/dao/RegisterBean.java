@@ -34,6 +34,7 @@ public class RegisterBean implements Serializable{
     String phone;
     String email;
     String password;
+    String rePassword;
     String address;
     
     
@@ -106,6 +107,14 @@ public class RegisterBean implements Serializable{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getRePassword() {
+        return rePassword;
+    }
+
+    public void setRePassword(String rePassword) {
+        this.rePassword = rePassword;
     }
     
 }

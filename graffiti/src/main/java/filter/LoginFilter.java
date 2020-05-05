@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author havu2601
  */
-@WebFilter(filterName = "LoginFilter", urlPatterns = {"/index.xhtml"})
+@WebFilter(filterName = "LoginFilter", urlPatterns = {"/index.html"})
 public class LoginFilter implements Filter {
     
     @Override

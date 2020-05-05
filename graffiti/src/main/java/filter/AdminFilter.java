@@ -6,9 +6,6 @@
 package filter;
 
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -37,6 +34,7 @@ public class AdminFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession(true);
         Integer Id = (Integer) session.getAttribute("ID");
+        Integer role = (Integer) session.getAttribute("role");
         if (Id == null) {
             HttpServletResponse resp = (HttpServletResponse) response;
             resp.sendRedirect(req.getContextPath() + "/adminlogin.xhtml");

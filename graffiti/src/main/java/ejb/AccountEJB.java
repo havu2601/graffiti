@@ -34,7 +34,7 @@ public class AccountEJB {
     }
     
     public void register(UserAccount acc){
-        em.persist(acc);
+        em.merge(acc);
     }
     
     public void editProfile(UserAccount acc){

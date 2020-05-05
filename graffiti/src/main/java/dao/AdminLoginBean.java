@@ -40,6 +40,7 @@ public class AdminLoginBean implements Serializable{
         if (null!=acc && password.equals(acc.getPassword()) && (acc.getRoleId().getRoleId()==1 || acc.getRoleId().getRoleId()==2)){
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             session.setAttribute("ID", acc.getUserId());
+            session.setAttribute("role", acc.getRoleId().getRoleId());
             return "admin/admin_homepage.xhtml";
         }
         else {
