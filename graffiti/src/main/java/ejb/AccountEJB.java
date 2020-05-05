@@ -30,10 +30,14 @@ public class AccountEJB {
     }
     
     public UserAccount findByEmail(String email){
-        return (UserAccount)em.createQuery("SELECT u FROM UserAccount u WHERE u.userEmail = :userEmail").setParameter("userEmail", email).getSingleResult();
+        return (UserAccount)em.createNamedQuery("UserAccount.findByUserEmail").setParameter("userEmail", email).getSingleResult();
     }
     
     public void register(UserAccount acc){
+        em.persist(acc);
+    }
+    
+    public void editProfile(UserAccount acc){
         em.merge(acc);
     }
 }

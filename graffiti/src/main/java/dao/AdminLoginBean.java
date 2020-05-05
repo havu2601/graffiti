@@ -20,9 +20,10 @@ import model.UserAccount;
  *
  * @author havu2601
  */
-@Named(value="loginBean")
+@Named(value = "adminLoginBean")
 @ViewScoped
-public class LoginBean implements Serializable{
+public class AdminLoginBean implements Serializable{
+
     @EJB
     private AccountEJB accEJB;
     
@@ -36,23 +37,15 @@ public class LoginBean implements Serializable{
     }
     public String doLogin(){
         acc = accEJB.findByEmail(email.toLowerCase());
-        if (null!=acc && password.equals(acc.getPassword())){
+        if (null!=acc && password.equals(acc.getPassword()) && (acc.getRoleId().getRoleId()==1 || acc.getRoleId().getRoleId()==2)){
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             session.setAttribute("ID", acc.getUserId());
-            return "index.xhtml";
+            return "admin/admin_homepage.xhtml";
         }
         else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error","Error"));
-            return "login.xhtml";
+            return "adminlogin.xhtml";
         }
-    }
-
-    public UserAccount getAcc() {
-        return acc;
-    }
-
-    public void setAcc(UserAccount acc) {
-        this.acc = acc;
     }
 
     public String getEmail() {
@@ -71,4 +64,12 @@ public class LoginBean implements Serializable{
         this.password = password;
     }
 
+    public UserAccount getAcc() {
+        return acc;
+    }
+
+    public void setAcc(UserAccount acc) {
+        this.acc = acc;
+    }
+    
 }
