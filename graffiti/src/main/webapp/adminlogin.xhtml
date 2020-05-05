@@ -185,8 +185,8 @@
                         <div class="breadcrumb-text text-center">
                             <h1>Login</h1>
                             <ul class="breadcrumb-menu">
-                                <li><a href="index.html">home</a></li>
-                                <li><span>Login</span></li>
+                                <li><a href="index.xhtml">home</a></li>
+                                <li><span>Admin Login</span></li>
                             </ul>
                         </div>
                     </div>
@@ -201,15 +201,13 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <div class="basic-login">
-                        <h3 class="text-center mb-60">Login From Here</h3>
+                        <h3 class="text-center mb-60">Login</h3>
                         <h:form>
                             <h:outputText value="Email Address"/>
-                            <h:inputText p:placeholder="Enter Username or Email address..." value="#{loginBean.email}"></h:inputText>
+                            <h:inputText p:placeholder="Enter Email address..." value="#{adminLoginBean.email}"></h:inputText>
                             <h:outputText value="Password"/>
-                            <h:inputSecret p:placeholder="Enter password" value="#{loginBean.password}"></h:inputSecret>
-                            <h:commandButton class="btn theme-btn-2 w-100" action="#{loginBean.doLogin()}" value="Log in"></h:commandButton>
-                            <div class="or-divide"><span>or</span></div>
-                            <h:link class="btn theme-btn w-100" value="Register Now" outcome="/register.xhtml"/>
+                            <h:inputSecret p:placeholder="Enter password" value="#{adminLoginBean.password}"></h:inputSecret>
+                            <h:commandButton class="btn theme-btn-2 w-100" action="#{adminLoginBean.doLogin()}" value="Log in"></h:commandButton>
                         </h:form>
                     </div>
                 </div>

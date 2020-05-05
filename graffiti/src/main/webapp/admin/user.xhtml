@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -17,15 +18,14 @@
         <!-- Place favicon.ico in the root directory -->
 
         <!-- CSS here -->
-        <link rel="stylesheet" href="./assets/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="./assets/css/animate.min.css"/>
-        <link rel="stylesheet" href="./assets/css/default.css"/>
-        <link rel="stylesheet" href="./assets/css/style.css"/>
-        <link rel="stylesheet" href="./assets/css/responsive.css"/>
+        <link rel="stylesheet" href="../assets/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../assets/css/animate.min.css"/>
+        <link rel="stylesheet" href="../assets/css/default.css"/>
+        <link rel="stylesheet" href="../assets/css/style.css"/>
+        <link rel="stylesheet" href="../assets/css/responsive.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
     </h:head>
     <h:body>
-
         <!-- header start -->
         <header>
             <div id="header-sticky" class="header-area box-90 sticky-header">
@@ -33,53 +33,57 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
                             <div class="logo">
-                                <a href="#"><img style="width: 100px;height: 100px;"  src="./assets/logo_shop.png" alt=""/></a>
-                            </div>
-
-                            <div class="category-menu">
-                                <h4>Category</h4>
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Table lamp</a></li>
-                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Furniture</a></li>
-                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Chair</a></li>
-                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Men</a></li>
-                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Women</a></li>
-                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Cloth</a></li>
-                                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Trend</a></li>
-                                </ul>
+                                <a href="index.html"><img style="width: 100px;height: 100px;" src="./assets/logo_shop.png" alt=""/></a>
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-6 col-md-8 col-8 d-none d-xl-block">
-                                <div class="main-menu text-center">
-                                    <nav id="mobile-menu" style="display: block;">
-                                        <ul>
-                                            <li>
-                                                <a href="./index.xhtml">Home</a>
-                                            </li>
-                                            <li>
-                                                <a href="./detail.html">Spray Cans</a>
-                                            </li>
-                                            <li>
-                                                <a href="./login.html">Marker &amp; Inks</a>
-                                            </li>
-                                            <li>
-                                                <a href="./register.html">Accessories</a>
-                                            </li>
-                                            <li>
-                                                <a href="./cart.html">Drawing</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+                            <div class="main-menu text-center">
+                                <nav id="mobile-menu" style="display: block;">
+                                    <ul>
+                                        <li>
+                                            <a href="./admin_homepage.xhtml">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="./user.xhtml">Manage User</a>
+                                        </li>
+                                        <li>
+                                            <!--<h:link value="Products" outcome="login.xhtml"/>-->
+<!--                                                    <a href="./login.html">Products</a>-->
+<h:form>
+    <h:commandLink action = "#{navigationBean.showPage('brand.xhtml')}" value = "BRAND">
+        <f:param name="pageName" value="brand.xhtml"/>
+   </h:commandLink> |
+   <h:commandLink action = "#{navigationBean.showPage()}" value = "Page2">
+      <f:param name = "pageName" value = "" />
+   </h:commandLink> |
+   <h:commandLink action = "#{navigationBean.showPage()}" value = "Home">
+      <f:param name = "pageName" value = "" />
+   </h:commandLink>
+</h:form>
+                                            
+                                        </li>
+                                        <li>
+                                            <a href="./#">Supplier</a>
+                                        </li>
+                                        <li>
+                                            <a href="./#">Import</a>
+                                        </li>
+                                        <li>
+                                            <a href="./#">Order</a>
+                                        </li>
+                                        <li>
+                                            <a href="./#">Feedback</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </nav>
                             </div>
+                        </div>
                         <div class="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
                             <div class="header-right f-right">
                                 <ul>
-                                    <li class="search-btn">
-                                        <a class="search-btn nav-search search-trigger" href="#"><i class="fas fa-search"></i></a>
-                                    </li>
                                     <li class="login-btn"><a href="#"><i class="far fa-user"></i></a></li>
-                                    <li class="d-shop-cart"><a href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">3</span></a>
+                                    <!--<li class="d-shop-cart"><a href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a>-->
                                         <!-- <ul class="minicart">
                                             <li>
                                                 <div class="cart-img">
@@ -163,7 +167,7 @@
                                                 </div>
                                             </li>
                                         </ul> -->
-                                    </li>
+                                    <!--</li>-->
                                 </ul>
                             </div>
                         </div>
@@ -175,18 +179,15 @@
             </div>
         </header>
         <!-- header end -->
-
-    <main>
-        <!-- breadcrumb-area-start -->
-        <section class="breadcrumb-area" style="height: 300px; background-image: url('./assets/page-title.png');">
+        <main>
+            <!-- breadcrumb-area-start -->
+        <section class="breadcrumb-area" style="height: 100px; background-image: url('./assets/page-title.png');">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="breadcrumb-text text-center">
-                            <h1>Login</h1>
                             <ul class="breadcrumb-menu">
-                                <li><a href="index.html">home</a></li>
-                                <li><span>Login</span></li>
+                                <li><span>manage user</span></li>
                             </ul>
                         </div>
                     </div>
@@ -194,30 +195,45 @@
             </div>
         </section>
         <!-- breadcrumb-area-end -->
-
-    <!-- login Area Strat-->
-    <section class="login-area pt-60">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="basic-login">
-                        <h3 class="text-center mb-60">Login From Here</h3>
+        <!-- Cart Area Strat-->
+        <section class="cart-area pt-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
                         <h:form>
-                            <h:outputText value="Email Address"/>
-                            <h:inputText p:placeholder="Enter Username or Email address..." value="#{loginBean.email}"></h:inputText>
-                            <h:outputText value="Password"/>
-                            <h:inputSecret p:placeholder="Enter password" value="#{loginBean.password}"></h:inputSecret>
-                            <h:commandButton class="btn theme-btn-2 w-100" action="#{loginBean.doLogin()}" value="Log in"></h:commandButton>
-                            <div class="or-divide"><span>or</span></div>
-                            <h:link class="btn theme-btn w-100" value="Register Now" outcome="/register.xhtml"/>
+                            <div class="table-content table-responsive">
+                                <h:dataTable class="table" value="#{userAdminBean.userList}" var="user">
+                                    <h:column>
+                                        <f:facet name="header" class="product-thumbnail">ID</f:facet>
+                                        <h:outputText class="product-thumbnail" value="${user.userId}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header" class="cart-product-name">Username</f:facet>
+                                        <h:outputText class="cart-product-name" value="${user.userName}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header" class="cart-product-name">Email</f:facet>
+                                        <h:outputText class="cart-product-name" value="${user.userEmail}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header" class="cart-product-name">Phone</f:facet>
+                                        <h:outputText class="cart-product-name" value="${user.userContact}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header" class="cart-product-name">Role</f:facet>
+                                        <h:outputText class="cart-product-name" value="${user.roleId.roleName}"/>
+                                    </h:column>  
+                                </h:dataTable>
+                            </div>
                         </h:form>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- login Area End-->
-    </main>
+        </section>
+        <!-- Cart Area End-->
+
+
+        </main>
 
 
         <!-- footer start -->

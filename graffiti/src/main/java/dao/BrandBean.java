@@ -5,7 +5,6 @@
  */
 package dao;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import ejb.BrandEJB;
 import java.io.Serializable;
 import java.util.ArrayList;

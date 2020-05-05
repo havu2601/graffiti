@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -26,6 +25,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
     </h:head>
     <h:body>
+
         <!-- header start -->
         <header>
             <div id="header-sticky" class="header-area box-90 sticky-header">
@@ -54,7 +54,7 @@
                                     <nav id="mobile-menu" style="display: block;">
                                         <ul>
                                             <li>
-                                                <a href="./index.html">Home</a>
+                                                <a href="./index.xhtml">Home</a>
                                             </li>
                                             <li>
                                                 <a href="./detail.html">Spray Cans</a>
@@ -177,97 +177,56 @@
         <!-- header end -->
 
     <main>
-        <!-- shop-area start -->
-        <section class="shop-area pt-150 pb-100">
+        <!-- breadcrumb-area-start -->
+        <section class="breadcrumb-area" style="height: 300px; background-image: url('./assets/page-title.png');">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-9 col-lg-8">
-                        <!-- tab filter -->
-                        <div class="row mb-10">
-                            <div class="col-xl-5 col-lg-6 col-md-6">
-                                <div class="product-showing mb-40">
-                                    <p>PRODUCT COLLECTION</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- tab content -->
-                        
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <h:form>
-                                <div class="row">
-                                    <!-- Product list -->
-                                    
-                                    
-                                        <h:dataTable class="table table-hover" value="#{brandBean.listBrand}" var="b">
-                                            <h:column>
-                                                <f:facet name="header">ID</f:facet>
-                                                <h:outputText value="#{b.brandId}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">NAME</f:facet>
-                                                <h:outputText value="#{b.brandName}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">DESCRIPTION</f:facet>
-                                                <h:outputText value="#{b.brandDescription}"/>
-                                            </h:column>
-                                        </h:dataTable>
-                                    
-                                    
-                                    <!-- Product list -->
-                                    
-                                </div>
-                                    </h:form>
-                            </div>
-                        </div>
-                            
-                    </div>
-                    <!--SideBar -->
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="sidebar-shop">
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Search by</h3>
-                                <form action="#" class="shop-search">
-                                    <input type="text" placeholder="Your keyword...."/>
-                                    <button><i class="fa fa-search"></i></button>
-                                </form>
-                            </div>
-<!-- 
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Filter selection</h3>
-                                <div class="price-filter">
-                                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-                                    <input type="text" id="amount">
-                                </div>
-                            </div> -->
-
-                            <div class="shop-widget">
-                                <h3 class="shop-title">ADD NEW BRAND</h3>
-                                <h:form>
-                                    <h:panelGrid columns="2">
-                                        <h:outputLabel value="NAME"></h:outputLabel>
-                                        <h:inputText value="#{brandBean.objBrand.brandName}"></h:inputText>
-                                        <h:outputLabel value="DESCRIPTION"></h:outputLabel>
-                                        <h:inputTextarea value="#{brandBean.objBrand.brandDescription}"></h:inputTextarea>
-                                        <f:facet name="footer">
-                                            <h:commandButton action="#{brandBean.addNewBrand()}" value="Submit"></h:commandButton>
-                                        </f:facet>
-                                    </h:panelGrid>
-                                </h:form>
-                            </div>
-                            
+                    <div class="col-xl-12">
+                        <div class="breadcrumb-text text-center">
+                            <h1>Login</h1>
+                            <ul class="breadcrumb-menu">
+                                <li><a href="index.html">home</a></li>
+                                <li><span>Login</span></li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- /SideBar -->
                 </div>
             </div>
         </section>
-        <!-- shop-area end -->
-        
+        <!-- breadcrumb-area-end -->
+
+        <!-- login Area Strat-->
+        <section class="login-area pt-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="basic-login">
+                            <h3 class="text-center mb-60">Signup From Here</h3>
+                            <h:form>
+                                <label for="name">Username <span>**</span></label>
+                                <h:inputText p:placeholder="Enter Username" value="#{registerBean.name}"/>
+                                <label for="name">Email <span>**</span></label>
+                                <h:inputText p:placeholder="Enter Email address" value="#{registerBean.email}"/>
+                                <label for="name">Password <span>**</span></label>
+                                <h:inputSecret p:placeholder="Enter Password" value="#{registerBean.password}"/>
+                                <label for="name">Phone <span>**</span></label>
+                                <h:inputText p:placehholder="Enter Phone No." value="#{registerBean.phone}"/>
+                                <label for="name">Address <span>**</span></label>
+                                <h:inputText p:placehholder="Enter Address" value="#{registerBean.address}"/>
+                                <div class="mt-10"></div>
+                                <h:commandButton class="btn theme-btn-2 w-100" action="#{registerBean.register()}" value="Register Now"/>
+                                <div class="or-divide"><span>or</span></div>
+                                <button class="btn theme-btn w-100">login Now</button>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- login Area End-->
 
 
-    </main>
+        </main>
 
 
         <!-- footer start -->
@@ -354,7 +313,6 @@
                 </div>
             </div>
         </div> <!-- end fullscreen search -->
-        
+
     </h:body>
 </html>
-
