@@ -50,19 +50,19 @@
                                             <!--<h:link value="Products" outcome="login.xhtml"/>-->
 <!--                                                    <a href="./login.html">Products</a>-->
 <h:form>
-    <h:commandLink action = "#{navigationBean.showPage('product.xhtml')}" value = "PRODUCT">
+    <h:commandLink action = "#{navigationBean.showPage('admin/product.xhtml')}" value = "PRODUCT">
         <f:param name="pageName" value=""/>
    </h:commandLink> |
-    <h:commandLink action = "#{navigationBean.showPage('brand.xhtml')}" value = "BRAND">
+    <h:commandLink action = "#{navigationBean.showPage('admin/brand.xhtml')}" value = "BRAND">
         <f:param name="pageName" value="brand.xhtml"/>
    </h:commandLink> |
-   <h:commandLink action = "#{navigationBean.showPage('category.xhtml')}" value = "Category">
+   <h:commandLink action = "#{navigationBean.showPage('admin/category.xhtml')}" value = "Category">
       <f:param name = "pageName" value = "" />
    </h:commandLink> |
-   <h:commandLink action = "#{navigationBean.showPage('subcategory.xhtml')}" value = "SubCategory">
+   <h:commandLink action = "#{navigationBean.showPage('admin/subcategory.xhtml')}" value = "SubCategory">
       <f:param name = "pageName" value = "" />
    </h:commandLink> |
-   <h:commandLink action = "#{navigationBean.showPage('color.xhtml')}" value = "Color">
+   <h:commandLink action = "#{navigationBean.showPage('admin/color.xhtml')}" value = "Color">
       <f:param name = "pageName" value = "" />
    </h:commandLink>
 </h:form>
