@@ -45,7 +45,7 @@ public class AdminLoginBean implements Serializable{
         }
         else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error","Error"));
-            return "adminlogin.xhtml";
+            return "/adminlogin.xhtml";
         }
     }
 
