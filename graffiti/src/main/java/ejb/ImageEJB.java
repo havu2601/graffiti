@@ -21,10 +21,10 @@ public class ImageEJB {
         return em.find(Image.class, id);
     }
     
-    public Image findByProduct(String searchStr){
-        return (Image) em.createNamedQuery("Image.findByProductId").setParameter("productId", searchStr).getSingleResult();
+    public List<Image> findByProduct(int id){
+        return em.createNamedQuery("Image.findByProductId").setParameter("productId", id).getResultList();
     }
-    
+
     public void addImage(Image image){
         em.merge(image);
     }
