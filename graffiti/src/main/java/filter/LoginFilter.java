@@ -5,7 +5,9 @@
  */
 package filter;
 
+import dao.LoginBean;
 import java.io.IOException;
+import javax.persistence.Id;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -15,7 +17,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,9 +33,8 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpSession session = req.getSession(true);
-        Integer Id = (Integer) session.getAttribute("ID");
-        if (Id == null) {
+        LoginBean session =(LoginBean) req.getSession(true).getAttribute("userSession");
+        if (session == null || !session.getIsLoggedin()) {
             HttpServletResponse resp = (HttpServletResponse) response;
             resp.sendRedirect(req.getContextPath() + "/login.xhtml");
         } else {

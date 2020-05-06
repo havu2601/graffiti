@@ -7,6 +7,7 @@ package dao;
 
 import ejb.AccountEJB;
 import java.io.Serializable;
+import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -26,6 +27,8 @@ public class LoginBean implements Serializable{
     @EJB
     private AccountEJB accEJB;
     
+    boolean isLoggedin;
+    boolean isAdmin;
     String email;
     String password;
     UserAccount acc;
@@ -34,18 +37,33 @@ public class LoginBean implements Serializable{
     public void init(){
         acc = new UserAccount();
     }
-    public String doLogin(){
-        acc = accEJB.findByEmail(email.toLowerCase());
-        if (null!=acc && password.equals(acc.getPassword())){
-            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-            session.setAttribute("ID", acc.getUserId());
-            session.setAttribute("role", acc.getRoleId().getRoleId());
-            return "index.xhtml";
+
+    public LoginBean() {
+        super();
+        isLoggedin = false;
+        isAdmin = false;
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        session.setAttribute("userSession", this);
+    }
+    
+    public String doLogin() throws SQLException{
+        try{
+            acc = accEJB.findByEmail(email.toLowerCase());
+            if (null!=acc && password.equals(acc.getPassword())){
+                isLoggedin = true;
+                if (acc.getRoleId().getRoleId()==1 || acc.getRoleId().getRoleId()==2){
+                    isAdmin = true;
+                }
+                return "index.xhtml";
+            }
+            else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error","Error"));
+                return "login.xhtml";
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
-        else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error","Error"));
-            return "login.xhtml";
-        }
+        return null;
     }
 
     public UserAccount getAcc() {
@@ -70,6 +88,22 @@ public class LoginBean implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean getIsLoggedin() {
+        return isLoggedin;
+    }
+
+    public void setIsLoggedin(boolean isLoggedin) {
+        this.isLoggedin = isLoggedin;
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 }
