@@ -42,8 +42,8 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">ACTION</f:facet>
-                                                <h:commandButton class="button" value="Edit" action="#{categoryBean.loadCategory(c.categoryId)}"></h:commandButton>
-                                                <h:commandButton class="button" value="Remove" action="#{categoryBean.remove(c.categoryId)}"></h:commandButton>
+                                                <h:commandLink class="button" value="Edit" action="#{categoryBean.loadCategory(c.categoryId)}"></h:commandLink> |
+                                                <h:commandLink class="button" value="Remove" action="#{categoryBean.remove(c.categoryId)}"></h:commandLink>
                                             </h:column>
                                         </h:dataTable>
                                     

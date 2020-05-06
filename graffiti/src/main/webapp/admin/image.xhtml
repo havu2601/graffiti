@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
+    <ui:define name="content">
+    <main>
+        <f:metadata>
+            <f:viewParam name="pid" value="#{imageBean.productId}"/>
+            <f:viewAction action="#{imageBean.search()}"/>
+        </f:metadata>
+        <!-- shop-area start -->
+        <h:form enctype="multipart/form-data">
+        <section class="shop-area pt-150 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 col-lg-8">
+                        <!-- tab filter -->
+                        
+                        
+                        <!--<h:form>-->   
+                        <div class="row mb-10">
+                            <div class="col-xl-5 col-lg-6 col-md-6">
+                                <div class="product-showing mb-40">
+                                    <p>ID#{imageBean.objProduct.productId} - #{imageBean.objProduct.productName}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tab content -->
+                        
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                
+                                <div class="row">
+                                    <!-- Product list -->
+                                    
+                                    
+                                    <h:dataTable class="table table-hover" value="#{imageBean.listImage}" var="i" >
+                                            <h:column>
+                                                <f:facet name="header">IMAGE</f:facet>
+                                                <img style="width: 420px; height: 224px" src="#{i.imagePath}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">ACTION</f:facet>
+                                                <h:commandButton value="Remove" action="#{imageBean.delete(i.imageId)}"></h:commandButton>
+                                            </h:column>
+                                        </h:dataTable>
+                                    
+                                    <!-- Product list -->
+                                
+
+                                </div>
+                                    
+                            </div>
+                        </div>
+                        <!--</h:form>-->
+
+                    </div>          
+                    <!--SideBar -->
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="sidebar-shop">
+
+                            <div class="shop-widget">
+                                <h3 class="shop-title">ADD NEW IMAGE</h3>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <img id="newimage" src="#{imageBean.objImage.imagePath}"/>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                            <td>
+                                                <h:inputFile value="#{imageBean.image}" onchange="loadFile(event)">
+                                                    <f:passThroughAttribute name="accept" value="image"/>
+                                                </h:inputFile>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h:commandButton value="SUBMIT" action="#{imageBean.addToList()}"></h:commandButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- /SideBar -->
+                </div>
+            </div>
+        </section>
+        <!-- shop-area end -->
+        
+        
+</h:form>
+        <script type="text/javascript">
+            var loadFile = function(event) {
+            var output = document.getElementById('newimage');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+              URL.revokeObjectURL(output.src) // free memory
+            }
+          };
+        </script>
+    </main>
+    </ui:define>
+    </ui:composition>
+        
+</html>
+
