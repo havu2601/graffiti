@@ -41,7 +41,7 @@ public class AdminLoginBean implements Serializable{
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             session.setAttribute("ID", acc.getUserId());
             session.setAttribute("role", acc.getRoleId().getRoleId());
-            return "admin/admin_homepage.xhtml";
+            return "admin/admin_homepage.xhtml?faces-redirect=true";
         }
         else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error","Error"));
@@ -72,5 +72,5 @@ public class AdminLoginBean implements Serializable{
     public void setAcc(UserAccount acc) {
         this.acc = acc;
     }
-    
+
 }
