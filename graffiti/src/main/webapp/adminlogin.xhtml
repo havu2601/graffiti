@@ -98,10 +98,10 @@
                         <h3 class="text-center mb-60">Login</h3>
                         <h:form>
                             <h:outputText value="Email Address"/>
-                            <h:inputText p:placeholder="Enter Email address..." value="#{loginBean.email}"></h:inputText>
+                            <h:inputText p:placeholder="Enter Email address..." value="#{userBean.email}"></h:inputText>
                             <h:outputText value="Password"/>
-                            <h:inputSecret p:placeholder="Enter password" value="#{loginBean.password}"></h:inputSecret>
-                            <h:commandButton class="btn theme-btn-2 w-100" action="#{loginBean.doLogin()}" value="Log in"></h:commandButton>
+                            <h:inputSecret p:placeholder="Enter password" value="#{userBean.password}"></h:inputSecret>
+                            <h:commandButton class="btn theme-btn-2 w-100" action="#{userBean.doLogin()}" value="Log in"></h:commandButton>
                         </h:form>
                     </div>
                 </div>

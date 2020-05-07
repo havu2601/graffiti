@@ -19,20 +19,45 @@ import model.UserAccount;
  *
  * @author havu2601
  */
-@Named(value = "userAdminBean")
+@Named(value = "manageUserBean")
 @ViewScoped
-public class UserAdminBean implements Serializable{
+public class ManageUserBean implements Serializable{
 
     @EJB
     AccountEJB accEJB;
     private List<UserAccount> userList;
+    private UserAccount account;
+    private String uID;
     
     @PostConstruct
     public void init(){
         userList = new ArrayList<>();
         userList = accEJB.findAll();
+        account = new UserAccount();
+    }
+    
+    public void findByID(){
+        account = accEJB.findByID(Integer.parseInt(uID));
     }
 
+    public UserAccount getAccount() {
+        return account;
+    }
+
+    public void setAccount(UserAccount account) {
+        this.account = account;
+    }
+
+    public String getuID() {
+        return uID;
+    }
+
+    public void setuID(String uID) {
+        this.uID = uID;
+    }
+
+    
+    
     public List<UserAccount> getUserList() {
         return userList;
     }

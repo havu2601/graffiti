@@ -21,10 +21,11 @@ import model.UserAccount;
  *
  * @author havu2601
  */
-@Named(value="loginBean")
+@Named(value = "userBean")
 @ViewScoped
-public class LoginBean implements Serializable{
-    @EJB
+public class UserBean implements Serializable{
+
+@EJB
     private AccountEJB accEJB;
     
     boolean isLoggedin;
@@ -38,7 +39,7 @@ public class LoginBean implements Serializable{
         acc = new UserAccount();
     }
 
-    public LoginBean() {
+    public UserBean() {
         super();
         isLoggedin = false;
         isAdmin = false;
@@ -106,4 +107,5 @@ public class LoginBean implements Serializable{
         this.isAdmin = isAdmin;
     }
 
+    
 }

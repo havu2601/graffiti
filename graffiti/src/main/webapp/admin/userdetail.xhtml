@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
+        <ui:define name="content">
+            <main>
+                <!-- breadcrumb-area-start -->
+                <section class="breadcrumb-area" style="height: 70px; background-image: url('./assets/page-title.png');">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="breadcrumb-text text-center">
+                                    <ul class="breadcrumb-menu">
+                                        <li><span><h3>user details</h3></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- breadcrumb-area-end -->
+                <f:metadata>
+                    <f:viewParam name="uID" value="#{manageUserBean.uID}"/>
+                    <f:viewAction action="#{manageUserBean.findByID()}"/>
+                </f:metadata>
+                <section class="cart-area mt-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col-md-5 mr-auto">
+                                        <div class="cart-page-total">
+                                            <ul class="mb-20">
+                                                <li><span><h:outputText value="#{manageUserBean.account.userName}"/></span>Username:</li>
+                                                <li><span><h:outputText value="#{manageUserBean.account.userEmail}"/></span>Email:</li>
+                                                <li><span><h:outputText value="#{manageUserBean.account.userContact}"/></span>Phone:</li>
+                                                <li><span><h:outputText value="#{manageUserBean.account.userAddress}"/></span>Address:</li>
+                                                <li><span><h:outputText value="#{manageUserBean.account.roleId.roleName}"/></span>Role:</li>
+                                                <li><h:link outcome="orderhistory.xhtml?uID=${manageUserBean.account.userId}" value="View Order History"/></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </section>
+            </main>
+        </ui:define>
+    </ui:composition>
+</html>
