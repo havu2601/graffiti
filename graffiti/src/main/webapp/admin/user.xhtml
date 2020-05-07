@@ -29,11 +29,7 @@
                         <div class="col-12">
                             <h:form>
                                 <div class="table-content table-responsive">
-                                    <h:dataTable class="table" value="#{userAdminBean.userList}" var="user">
-                                        <h:column>
-                                            <f:facet name="header" class="product-thumbnail">ID</f:facet>
-                                            <h:outputText class="product-thumbnail" value="${user.userId}"/>
-                                        </h:column>
+                                    <h:dataTable class="table" value="#{manageUserBean.userList}" var="user">
                                         <h:column>
                                             <f:facet name="header" class="cart-product-name">Username</f:facet>
                                             <h:outputText class="cart-product-name" value="${user.userName}"/>
@@ -49,7 +45,11 @@
                                         <h:column>
                                             <f:facet name="header" class="cart-product-name">Role</f:facet>
                                             <h:outputText class="cart-product-name" value="${user.roleId.roleName}"/>
-                                        </h:column>  
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header" class="product-thumbnail"></f:facet>
+                                            <h:link class="product-thumbnail" outcome="userdetail.xhtml?uID=${user.userId}" value="Detail"/>
+                                        </h:column>
                                     </h:dataTable>
                                 </div>
                             </h:form>

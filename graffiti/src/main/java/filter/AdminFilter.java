@@ -5,7 +5,7 @@
  */
 package filter;
 
-import dao.LoginBean;
+import dao.UserBean;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -33,7 +33,7 @@ public class AdminFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        LoginBean session =(LoginBean) req.getSession(true).getAttribute("userSession");
+        UserBean session =(UserBean) req.getSession(true).getAttribute("userSession");
         if (session == null || !session.getIsAdmin()) {
             HttpServletResponse resp = (HttpServletResponse) response;
             resp.sendRedirect(req.getContextPath() + "/adminlogin.xhtml");
