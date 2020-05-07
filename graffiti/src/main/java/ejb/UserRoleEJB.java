@@ -5,6 +5,7 @@
  */
 package ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,5 +23,9 @@ public class UserRoleEJB {
     
     public UserRole findByID(Integer ID){
         return em.find(UserRole.class, ID);
+    }
+    
+    public List<UserRole> findAll(){
+        return em.createNamedQuery("UserRole.findAll").getResultList();
     }
 }

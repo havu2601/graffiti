@@ -43,31 +43,61 @@ and open the template in the editor.
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-6 col-md-8 col-8 d-none d-xl-block">
-                                <div class="main-menu text-center">
-                                    <nav id="mobile-menu" style="display: block;">
-                                        <ul>
-                                            <li>
-                                                <a href="order.xhtml">Manage Orders</a>
-                                            </li>
-                                            <li>
-                                                <a href="user.xhtml">Manage Users</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.xhtml">Manage Product</a>
-                                            </li>
-                                            <li>
-                                                <a href="color.xhtml">Manage Color</a>
-                                            </li>
-                                            <li>
-                                                <a href="category.xhtml">Manage Category</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+                            <div class="main-menu text-center">
+                                <nav id="mobile-menu" style="display: block;">
+                                    <ul>
+                                        <li>
+                                            <a href="order.xhtml">Manage Orders</a>
+                                        </li>
+                                        <li>
+                                            <a href="user.xhtml">Manage Users</a>
+                                        </li>
+                                        <li>
+                                            <a href="product.xhtml">Manage Product</a>
+                                        </li>
+                                        <li>
+                                            <a href="color.xhtml">Manage Color</a>
+                                        </li>
+                                        <li>
+                                            <a href="category.xhtml">Manage Category</a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-                        
-                        <div class="col-12 d-xl-none">
-                            <div class="mobile-menu"></div>
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
+                            <div class="header-right f-right">
+                                <ul>
+                                    <li class="search-btn">
+                                        <a class="search-btn nav-search search-trigger" href="#"><i class="fas fa-search"></i></a>
+                                    </li>
+                                    <li class="login-btn"><a href="#"><i class="far fa-user"></i></a>
+                                        <h:panelGroup rendered="#{not userBean.isLoggedin}">
+                                            <ul class="minicart" style="width: 150px;margin-top: 5px">
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <a href="./login.xhtml">Log In</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{userBean.isLoggedin}">
+                                            <ul class="minicart" style="width: 150px;margin-top: 5px">
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <a href="#"><h:outputText value="Hello, #{userBean.acc.userName}" /></a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <h:commandButton class="cart-product-name" action="#{userBean.doLogout()}" value="Log out"/>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </h:panelGroup>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

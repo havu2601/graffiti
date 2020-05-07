@@ -6,6 +6,7 @@
 package dao;
 
 import ejb.AccountEJB;
+import ejb.UserRoleEJB;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import model.UserAccount;
+import model.UserRole;
 
 /**
  *
@@ -25,21 +27,43 @@ public class ManageUserBean implements Serializable{
 
     @EJB
     AccountEJB accEJB;
+    @EJB
+    UserRoleEJB roleEJB;
     private List<UserAccount> userList;
+    private List<UserRole> roleList;
     private UserAccount account;
+    private UserRole role;
     private String uID;
+    private Integer roleID;
+
+    public Integer getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(Integer roleID) {
+        this.roleID = roleID;
+    }
     
     @PostConstruct
     public void init(){
         userList = new ArrayList<>();
         userList = accEJB.findAll();
         account = new UserAccount();
+        roleList = roleEJB.findAll();
     }
     
     public void findByID(){
         account = accEJB.findByID(Integer.parseInt(uID));
+        roleID = account.getRoleId().getRoleId();
     }
 
+    public String doSetRole(){
+        role = new UserRole();
+        role = roleEJB.findByID(roleID);
+        account.setRoleId(role);
+        accEJB.editProfile(account);
+        return "userdetail.xhtml?uID="+account.getUserId()+"&&faces-redirect=true";
+    }
     public UserAccount getAccount() {
         return account;
     }
@@ -66,5 +90,11 @@ public class ManageUserBean implements Serializable{
         this.userList = userList;
     }
     
-    
+    public List<UserRole> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<UserRole> roleList) {
+        this.roleList = roleList;
+    }
 }

@@ -64,7 +64,7 @@ and open the template in the editor.
                                         </ul>
                                     </nav>
                                 </div>
-                            </div>
+                        </div>
                         <div class="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
                             <div class="header-right f-right">
                                 <ul>
@@ -72,18 +72,34 @@ and open the template in the editor.
                                         <a class="search-btn nav-search search-trigger" href="#"><i class="fas fa-search"></i></a>
                                     </li>
                                     <li class="login-btn"><a href="#"><i class="far fa-user"></i></a>
-                                        <ul class="minicart" style="width: 150px;margin-top: 5px">
-                                            <li>
-                                                <div class="cart-content">
-                                                    <a href="./login.xhtml">Log In</a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="cart-content">
-                                                    <a href="./register.xhtml">Register</a>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                        <h:panelGroup rendered="#{not userBean.isLoggedin}">
+                                            <ul class="minicart" style="width: 150px;margin-top: 5px">
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <a href="./login.xhtml">Log In</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <a href="./register.xhtml">Register</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{userBean.isLoggedin}">
+                                            <ul class="minicart" style="width: 150px;margin-top: 5px">
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <a href="#"><h:outputText value="Hello, #{userBean.acc.userName}" /></a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <h:commandButton action="#{userBean.doLogout()}" value="Log out"/>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </h:panelGroup>
                                     </li>
                                     <li class="d-shop-cart"><a href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">3</span></a>
                                         <!-- <ul class="minicart">

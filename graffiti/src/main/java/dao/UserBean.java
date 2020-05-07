@@ -10,10 +10,10 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
 import model.UserAccount;
 
@@ -22,7 +22,7 @@ import model.UserAccount;
  * @author havu2601
  */
 @Named(value = "userBean")
-@ViewScoped
+@SessionScoped
 public class UserBean implements Serializable{
 
 @EJB
@@ -50,7 +50,7 @@ public class UserBean implements Serializable{
     public String doLogin() throws SQLException{
         try{
             acc = accEJB.findByEmail(email.toLowerCase());
-            if (null!=acc && password.equals(acc.getPassword())){
+            if (null!=acc && password.equals(acc.getPassword()) && acc.getRoleId().getRoleId()!=4){
                 isLoggedin = true;
                 if (acc.getRoleId().getRoleId()==1 || acc.getRoleId().getRoleId()==2){
                     isAdmin = true;
@@ -65,6 +65,12 @@ public class UserBean implements Serializable{
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public String doLogout(){
+        ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+				.getSession(true)).invalidate();
+        return "index.xhtml";
     }
 
     public UserAccount getAcc() {

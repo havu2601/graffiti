@@ -36,7 +36,7 @@ and open the template in the editor.
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <form action="#">
+                            <h:form>
                                 <div class="row">
                                     <div class="col-md-5 mr-auto">
                                         <div class="cart-page-total">
@@ -45,13 +45,18 @@ and open the template in the editor.
                                                 <li><span><h:outputText value="#{manageUserBean.account.userEmail}"/></span>Email:</li>
                                                 <li><span><h:outputText value="#{manageUserBean.account.userContact}"/></span>Phone:</li>
                                                 <li><span><h:outputText value="#{manageUserBean.account.userAddress}"/></span>Address:</li>
-                                                <li><span><h:outputText value="#{manageUserBean.account.roleId.roleName}"/></span>Role:</li>
+                                                <li><span>
+                                                        <h:selectOneMenu value="#{manageUserBean.roleID}">
+                                                            <f:selectItems value="#{manageUserBean.roleList}" var="role" itemValue="#{role.roleId}" itemLabel="#{role.roleName}"/>
+                                                        </h:selectOneMenu>
+                                                    </span>Role:</li>
                                                 <li><h:link outcome="orderhistory.xhtml?uID=${manageUserBean.account.userId}" value="View Order History"/></li>
+                                                <li><h:commandButton action="#{manageUserBean.doSetRole}" value="Save"/></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </h:form>
                         </div>
                     </div>
                 </div>

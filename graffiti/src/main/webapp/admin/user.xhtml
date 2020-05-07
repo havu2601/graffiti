@@ -39,16 +39,12 @@
                                             <h:outputText class="cart-product-name" value="${user.userEmail}"/>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header" class="cart-product-name">Phone</f:facet>
-                                            <h:outputText class="cart-product-name" value="${user.userContact}"/>
-                                        </h:column>
-                                        <h:column>
                                             <f:facet name="header" class="cart-product-name">Role</f:facet>
                                             <h:outputText class="cart-product-name" value="${user.roleId.roleName}"/>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header" class="product-thumbnail"></f:facet>
-                                            <h:link class="product-thumbnail" outcome="userdetail.xhtml?uID=${user.userId}" value="Detail"/>
+                                            <f:facet name="header" class="product-thumbnail">More</f:facet>
+                                            <h:link class="product-thumbnail" outcome="userdetail.xhtml?uID=${user.userId}" value="View Detail"/>
                                         </h:column>
                                     </h:dataTable>
                                 </div>
