@@ -14,7 +14,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.servlet.http.Part;
 import model.Brand;
 import model.Color;
 import model.Image;
@@ -41,18 +40,19 @@ public class ProductBean implements Serializable{
     List<Image> listImage;
     
     Product objProduct;
-    Image objImage;
     Brand objBrand;
     SubCategory objSubCat;
     Color objColor;
     
+    String productId;
     String brandId;
     String subcatId;
     String colorId;
     String capacity;
     String stock;
     String price;
-    Part image;
+    String status;
+    String buyState;
     
     String searchStr;
     String searchType;
@@ -60,7 +60,6 @@ public class ProductBean implements Serializable{
     @PostConstruct
     public void init(){
         objProduct = new Product();
-        objImage = new Image();
         listProduct = ejbProduct.findAll();
     }
     
@@ -79,6 +78,17 @@ public class ProductBean implements Serializable{
         }
     }
 
+    public void showDetail(){
+        objProduct = ejbProduct.findById(Integer.parseInt(productId));
+        if(objProduct.getProductStock()==0){
+            status = "Out Of Stock";
+            buyState = "none";
+        }else{
+            status = "In Stock";
+            buyState = "block";
+        }
+    }
+    
     public void loadProduct(int id){
         objProduct = ejbProduct.findById(id);
         brandId = objProduct.getBrandId().getBrandId().toString();
@@ -165,14 +175,6 @@ public class ProductBean implements Serializable{
 
     public void setObjProduct(Product objProduct) {
         this.objProduct = objProduct;
-    }
-
-    public Image getObjImage() {
-        return objImage;
-    }
-
-    public void setObjImage(Image objImage) {
-        this.objImage = objImage;
     }
 
     public Brand getObjBrand() {
@@ -262,16 +264,30 @@ public class ProductBean implements Serializable{
     public void setSearchType(String searchType) {
         this.searchType = searchType;
     }
-    
-    //IMAGE
 
-    public Part getImage() {
-        return image;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setImage(Part image) {
-        this.image = image;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
-    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getBuyState() {
+        return buyState;
+    }
+
+    public void setBuyState(String buyState) {
+        this.buyState = buyState;
+    }
+
     
 }

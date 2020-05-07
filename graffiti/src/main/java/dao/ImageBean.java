@@ -75,7 +75,7 @@ public class ImageBean implements Serializable{
         try {
             InputStream in = image.getInputStream();
             
-            File f = new File("D:\\PRJ4\\gitCode\\graffiti\\graffiti\\src\\main\\webapp\\assets\\images\\" + image.getSubmittedFileName());
+            File f = new File("D:\\PRJ4\\finalCode\\graffiti\\graffiti\\src\\main\\webapp\\assets\\images\\" + image.getSubmittedFileName());
             f.createNewFile();
             FileOutputStream out = new FileOutputStream(f);
             
