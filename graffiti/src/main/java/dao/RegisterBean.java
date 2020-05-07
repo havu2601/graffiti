@@ -8,6 +8,7 @@ package dao;
 import ejb.AccountEJB;
 import ejb.UserRoleEJB;
 import java.io.Serializable;
+import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -45,20 +46,23 @@ public class RegisterBean implements Serializable{
         acc.setRoleId(role);
     }
     
-    public String register(){
-        acc = accEJB.findByEmail(email.toLowerCase());
-        if (null==acc){
-            acc.setUserEmail(email.toLowerCase());
-            acc.setUserName(name);
-            acc.setUserContact(phone);
-            acc.setUserAddress(address);
-            acc.setPassword(password);
-            accEJB.register(acc);
-            return "index.xhtml";
+    public String register() throws SQLException{
+        try {
+            if (null==accEJB.findByEmail(email.toLowerCase())){
+                acc.setUserEmail(email.toLowerCase());
+                acc.setUserName(name);
+                acc.setUserContact(phone);
+                acc.setUserAddress(address);
+                acc.setPassword(password);
+                accEJB.register(acc);
+                return "index.xhtml?faces-redirect=true";
+            }
+            else {
+                return "register.xhtml";
+            }
+        } catch(SQLException e){
         }
-        else {
-            return "register.xhtml";
-        }
+        return null;
     }
 
     public String getName() {

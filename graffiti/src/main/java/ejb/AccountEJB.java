@@ -5,6 +5,7 @@
  */
 package ejb;
 
+import java.sql.SQLException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,8 +30,13 @@ public class AccountEJB {
         return em.find(UserAccount.class, id);
     }
     
-    public UserAccount findByEmail(String email){
-        return (UserAccount)em.createNamedQuery("UserAccount.findByUserEmail").setParameter("userEmail", email).getSingleResult();
+    public UserAccount findByEmail(String email)throws SQLException{
+        try {
+            return (UserAccount)em.createNamedQuery("UserAccount.findByUserEmail").setParameter("userEmail", email).getSingleResult();
+        } catch (Exception e){
+            return null;
+        }
+        
     }
     
     public void register(UserAccount acc){

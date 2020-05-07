@@ -37,11 +37,11 @@ public class OrderEJB {
     }
     
     public void createOrder(Orders order){
-        em.persist(order);
+        em.merge(order);
     }
     
     public void createOrderDetail(OrderDetail detail){
-        em.persist(detail);
+        em.merge(detail);
     }
     
     public void updateOrder(Orders order){
@@ -55,4 +55,5 @@ public class OrderEJB {
     public void deleteDetail(OrderDetail detail){
         em.remove(em.merge(detail));
     }
+
 }
