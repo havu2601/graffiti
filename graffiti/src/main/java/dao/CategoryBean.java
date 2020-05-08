@@ -13,14 +13,11 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import model.Category;
 
-/**
- *
- * @author DELL
- */
+
 @Named(value = "categoryBean")
 @ViewScoped
 public class CategoryBean implements Serializable{
@@ -48,7 +45,7 @@ public class CategoryBean implements Serializable{
                 Category ct = ejb.findByName(searchStr);
                 List<Category> rs = new ArrayList<>();
                 rs.add(ct);
-                String msg = "Cannot find Brand with name " + searchStr;
+                String msg = "Cannot find Category with name" + searchStr;
                 show(rs,msg);
             }
         }

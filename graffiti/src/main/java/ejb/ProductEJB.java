@@ -37,6 +37,10 @@ public class ProductEJB {
         return (Product) em.createNamedQuery("Product.findByBrandId").setParameter("brandId", searchStr).getSingleResult();
     }
     
+    public List<Product> findByAny(String searchStr){
+        return em.createNamedQuery("Product.findByAny").setParameter("searchStr", searchStr).getResultList();
+    }
+    
     public Product findBySubCat(String searchStr){
         return (Product) em.createNamedQuery("Product.findBySubCatId").setParameter("subcatId", searchStr).getSingleResult();
     }
