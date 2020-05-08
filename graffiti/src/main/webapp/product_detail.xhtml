@@ -5,18 +5,13 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pr="http://primefaces.org/ui">
     <ui:composition template="/WEB-INF/templates/clienttemplate.xhtml">
         <ui:define name="content"> 
 
 <main>
     <style>
-/*        .thumbnail-list{
-            overflow-x: scroll;
-        }*/
-/*        .thumbnail-list li{
-            list-style: none;
-        }*/
 
     </style>
     <f:metadata>
@@ -48,11 +43,11 @@
                     <div class="col-xl-2 col-lg-4">
                         <div class="shop-thumb-tab" style="overflow:auto; width: 200px; height:400px;">
                             
-                            <h:dataTable class="table" value="#{productBean.listImage}" var="img">
-                                <h:column>
+                            <pr:dataTable class="table" value="#{productBean.listImage}" var="img">
+                                <pr:column>
                                     <img src="#{img.imagePath}" alt="" style="max-width: 100px; max-height: 100px;" onclick="showImage(this);"/>
-                                </h:column>
-                            </h:dataTable>
+                                </pr:column>
+                            </pr:dataTable>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4">
