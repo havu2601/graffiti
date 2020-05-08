@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pr="http://primefaces.org/ui">
     <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
     <ui:define name="content">
 
@@ -31,102 +32,102 @@
                                     <!-- Product list -->
                                     
                                     
-                                    <h:dataTable class="table table-hover" value="#{colorBean.listColor}" var="c">
-                                            <h:column>
-                                                <f:facet name="header">ID</f:facet>
-                                                <h:outputText value="#{c.colorId}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">NAME</f:facet>
-                                                <h:outputText value="#{c.colorName}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">HEXCODE</f:facet>
-                                                <h:outputText value="#{c.colorHexcode}"/>
-                                            </h:column>
-                                            <h:column>
-                                                    <f:facet name="header">LIGHTFASTNESS</f:facet>
-                                                    <h:outputText value="#{c.colorLightfastness}"/>
-                                                </h:column>
-                                            <h:column>
-                                                    <f:facet name="header">PIGMENT</f:facet>
-                                                    <h:outputText value="#{c.colorPigment}"/>
-                                                </h:column>
-                                            <h:column>
-                                                    <f:facet name="header">COVERAGE</f:facet>
-                                                    <h:outputText value="#{c.colorCoverage}"/>
-                                                </h:column>
-                                            <h:column>
-                                                    <f:facet name="header">RGB</f:facet>
-                                                    <h:outputText value="#{c.colorRGB}"/>
-                                                </h:column>
-                                            <h:column>
-                                                <f:facet name="header">ACTION</f:facet>
-                                                <h:commandLink class="button" value="Edit" action="#{colorBean.loadColor(c.colorId)}"></h:commandLink> |
-                                                <h:commandLink class="button" value="Remove" action="#{colorBean.remove(c.colorId)}"></h:commandLink>
-                                            </h:column>
-                                        </h:dataTable>
+                                    <pr:dataTable style="text-align: center" class="table table-hover" value="#{colorBean.listColor}" var="c">
+                                        <pr:column style="width: 70px;">
+                                            <f:facet name="header">ID</f:facet>
+                                            <h:outputText value="#{c.colorId}"/>
+                                        </pr:column>
+                                        <pr:column sortBy="#{c.colorName}">
+                                            <f:facet name="header">NAME</f:facet>
+                                            <h:outputText value="#{c.colorName}"/>
+                                        </pr:column>
+                                        <pr:column>
+                                            <f:facet name="header">HEXCODE</f:facet>
+                                            <h:outputText value="#{c.colorHexcode}"/>
+                                        </pr:column>
+                                        <pr:column sortBy="#{c.colorLightfastness}">
+                                            <f:facet name="header">LIGHTFASTNESS</f:facet>
+                                            <h:outputText value="#{c.colorLightfastness}"/>
+                                        </pr:column>
+<!--                                        <pr:column>
+                                            <f:facet name="header">PIGMENT</f:facet>
+                                            <h:outputText value=""/>
+                                        </pr:column>-->
+<!--                                        <pr:column>
+                                            <f:facet name="header">COVERAGE</f:facet>
+                                            <h:outputText value=""/>
+                                        </pr:column>-->
+                                        <pr:column>
+                                            <f:facet name="header">RGB</f:facet>
+                                            <h:outputText value="#{c.colorRGB}"/>
+                                        </pr:column>
+                                        <pr:column>
+                                            <f:facet name="header">ACTION</f:facet>
+                                            <h:commandLink class="button" value="Edit" action="#{colorBean.loadColor(c.colorId)}"></h:commandLink> |
+                                            <h:commandLink class="button" value="Remove" action="#{colorBean.remove(c.colorId)}"></h:commandLink>
+                                        </pr:column>
+                                    </pr:dataTable>
                                     
                                     
                                     <!-- Product list -->
                                     
                                 </div>
-                                    </h:form>
-                            </div>
-                        </div>
-                            
-                    </div>
-                    <!--SideBar -->
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="sidebar-shop">
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Search by</h3>
-                                <h:form class="shop-search">
-                                    <h:inputText p:placeholder="Your keyword...." value="#{colorBean.searchStr}"/>
-                                    <button onclick="#{colorBean.search()}"><i class="fa fa-search"></i></button>
-                                    
                                 </h:form>
                             </div>
-<!-- 
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Filter selection</h3>
-                                <div class="price-filter">
-                                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-                                    <input type="text" id="amount">
+                        </div>
+<!--                        <div class="row mb-10">
+                            <div class="col-xl-5 col-lg-6 col-md-6">
+                                <div class="product-showing mb-40">
+                                    <p>UPDATE COLOR COLLECTION</p>
                                 </div>
-                            </div> -->
-
-                            <div class="shop-widget">
-                                <h3 class="shop-title">UPDATE COLOR COLLECTION</h3>
-                                <h:form>
+                            </div>
+                        </div>-->
+                        <!-- tab content -->
+                        
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <h:form>
                                     <table class="table">
                                         <tr>
                                             <td>COLOR</td>
-                                            <td><h:inputTextarea style="background-color: #{colorBean.objColor.colorHexcode};" disabled="true"></h:inputTextarea></td>
+                                            <td><button style="background-color: #{colorBean.objColor.colorHexcode}; width: 400px; height: 30px" disabled="true"/></td>
                                         </tr>
                                         <tr>
                                             <td>NAME</td>
-                                            <td><h:inputText value="#{colorBean.objColor.colorName}"></h:inputText></td>
+                                            <td><pr:inputText id="cname" style="width: 400px;" value="#{colorBean.objColor.colorName}" validatorMessage="Name cannot be blank!">
+                                                    <f:validateRequired/>
+                                                </pr:inputText>
+                                                <pr:message for="cname"/>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>HEXCODE</td>
-                                            <td><h:inputText value="#{colorBean.objColor.colorHexcode}"></h:inputText></td>
+                                            <td><pr:inputText id="hexcode" style="width: 400px;" value="#{colorBean.objColor.colorHexcode}" validatorMessage="Hexcode invalid!">
+                                                    <f:validateRequired/>
+                                                    <f:validateRegex pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"/>
+                                                </pr:inputText>
+                                                <pr:message for="hexcode"/>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>LIGHTFASTNESS</td>
-                                            <td><h:inputText value="#{colorBean.objColor.colorLightfastness}"></h:inputText></td>
+                                            <td><pr:inputText style="width: 400px;" type="number" value="#{colorBean.objColor.colorLightfastness}" validatorMessage="Lightfastness invalid!">
+                                                </pr:inputText>
+                                                <pr:message for="hexcode"/>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>PIGMENT</td>
-                                            <td><h:inputText value="#{colorBean.objColor.colorPigment}"></h:inputText></td>
+                                            <td><pr:inputText style="width: 400px;" value="#{colorBean.objColor.colorPigment}"></pr:inputText></td>
                                         </tr>
                                         <tr>
                                             <td>COVERAGE</td>
-                                            <td><h:inputText value="#{colorBean.objColor.colorCoverage}"></h:inputText></td>
+                                            <td><pr:inputText style="width: 400px;" value="#{colorBean.objColor.colorCoverage}"></pr:inputText></td>
                                         </tr>
                                         <tr>
                                             <td>RGB</td>
-                                            <td><h:inputText value="#{colorBean.objColor.colorRGB}"></h:inputText></td>
+                                            <td><pr:inputText style="width: 400px;" value="#{colorBean.objColor.colorRGB}"></pr:inputText></td>
                                         </tr>
                                         
                                         <tr>
@@ -138,7 +139,24 @@
                                     </table>
                                     
                                 </h:form>
+
+                                </div>
                             </div>
+                        </div>    
+                    </div>
+                    <!--SideBar -->
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="sidebar-shop">
+                            <div class="shop-widget">
+                                <h3 class="shop-title">Search by</h3>
+                                <h:form class="shop-search">
+                                    <pr:inputText p:placeholder="Your keyword...." value="#{colorBean.searchStr}">
+                                        <f:ajax event="change" listener="#{colorBean.search()}"/>
+                                    </pr:inputText>
+                                    <button onclick="#{colorBean.search()}"><i class="fa fa-search"></i></button>
+                                </h:form>
+                            </div>
+
                             
                         </div>
                     </div>

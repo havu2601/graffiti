@@ -4,43 +4,24 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pr="http://primefaces.org/ui">
     <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
     <ui:define name="content">
-
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <h:form>
-                                            <div class="row">
-                                                <!-- Product list -->
-                                                <h:dataTable class="table table-hover" value="#{brandBean.listBrand}" var="b">
-                                                    <h:column>
-                                                        <f:facet name="header">ID</f:facet>
-                                                        <h:outputText value="#{b.brandId}"/>
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">NAME</f:facet>
-                                                        <h:outputText value="#{b.brandName}"/>
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">DESCRIPTION</f:facet>
-                                                        <h:outputText value="#{b.brandDescription}"/>
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">ACTION</f:facet>
-                                                        <h:commandButton value="Edit" action="#{brandBean.loadBrand(b.brandId)}"></h:commandButton>
-                                                    </h:column>
-                                                </h:dataTable>
-                                                <!-- Product list -->
-
-                                            </div>
-                                        </h:form>
-                                    </div>
+        <main>
+            <!-- shop-area start -->
+        <section class="shop-area pt-150 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 col-lg-8">
+                        <!-- tab filter -->
+                        <div class="row mb-10">
+                            <div class="col-xl-5 col-lg-6 col-md-6">
+                                <div class="product-showing mb-40">
+                                    <p>CATEGORY    COLLECTION</p>
                                 </div>
-
                             </div>
                         </div>
-                        <!-- tab content -->
                         
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -49,95 +30,46 @@
                                     <!-- Product list -->
                                     
                                     
-                                        <h:dataTable class="table table-hover" value="#{brandBean.listBrand}" var="b">
-                                            <h:column>
+                                        <pr:dataTable class="table table-hover" value="#{brandBean.listBrand}" var="b">
+                                            <pr:column>
                                                 <f:facet name="header">ID</f:facet>
                                                 <h:outputText value="#{b.brandId}"/>
-                                            </h:column>
-                                            <h:column>
+                                            </pr:column>
+                                            <pr:column>
                                                 <f:facet name="header">NAME</f:facet>
                                                 <h:outputText value="#{b.brandName}"/>
-                                            </h:column>
-                                            <h:column>
+                                            </pr:column>
+                                            <pr:column>
                                                 <f:facet name="header">DESCRIPTION</f:facet>
                                                 <h:outputText value="#{b.brandDescription}"/>
-                                            </h:column>
-                                            <h:column>
+                                            </pr:column>
+                                            <pr:column>
                                                 <f:facet name="header">ACTION</f:facet>
                                                 <h:commandLink value="Edit" action="#{brandBean.loadBrand(b.brandId)}"></h:commandLink>
-                                            </h:column>
-                                        </h:dataTable>
-                                    
-                                    
+                                            </pr:column>
+                                        </pr:dataTable>
                                     <!-- Product list -->
-                                    
                                 </div>
                                     </h:form>
                                 </div>
-        <!-- 
-                                <div class="shop-widget">
-                                    <h3 class="shop-title">Filter selection</h3>
-                                    <div class="price-filter">
-                                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-                                        <input type="text" id="amount">
-                                    </div>
-                                </div> -->
-
-                                <div class="shop-widget">
-                                    <h3 class="shop-title">UPDATE BRAND COLLECTION</h3>
-                                    <h:form>
-                                        <table class="table">
-                                            <tr>
-                                                <td>NAME</td>
-                                                <td><h:inputText value="#{brandBean.objBrand.brandName}"></h:inputText></td>
-                                            </tr>
-                                            <tr>
-                                                <td>DESCRIPTION</td>
-                                                <td><h:inputTextarea value="#{brandBean.objBrand.brandDescription}"></h:inputTextarea></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="text-align: center">
-                                                    <h:commandButton class="button" action="#{brandBean.addNewBrand()}" value="Submit"></h:commandButton>
-                                                    <h:commandButton class="button" action="#{brandBean.reset()}" value="Reset"></h:commandButton>
-                                                </td>
-                                            </tr>
-                                        </table>
-
-                                    </h:form>
-                                </div>
-                            </div>
+        
                         </div>
-                    </div>
-                    <!--SideBar -->
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="sidebar-shop">
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Search by</h3>
-                                <h:form class="shop-search">
-                                    <h:inputText p:placeholder="Your keyword...." value="#{brandBean.searchStr}"/>
-                                    <button onclick="#{brandBean.search()}"><i class="fa fa-search"></i></button>
-                                </h:form>
-                            </div>
-<!-- 
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Filter selection</h3>
-                                <div class="price-filter">
-                                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-                                    <input type="text" id="amount">
-                                </div>
-                            </div> -->
-
-                            <div class="shop-widget">
-                                <h3 class="shop-title">UPDATE BRAND COLLECTION</h3>
-                                <h:form>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <h:form>
                                     <table class="table">
                                         <tr>
                                             <td>NAME</td>
-                                            <td><h:inputText value="#{brandBean.objBrand.brandName}"></h:inputText></td>
+                                            <td><pr:inputText style="width: 400px;" id="brandName" value="#{brandBean.objBrand.brandName}" validatorMessage="Name cannot be blank!">
+                                                    <f:validateRequired/>
+                                                </pr:inputText>
+                                                <h:message style="color: red" for="brandName"/>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>DESCRIPTION</td>
-                                            <td><h:inputTextarea value="#{brandBean.objBrand.brandDescription}"></h:inputTextarea></td>
+                                            <td><pr:inputTextarea style="width: 400px;" value="#{brandBean.objBrand.brandDescription}"></pr:inputTextarea></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2" style="text-align: center">
@@ -149,7 +81,22 @@
                                     
                                 </h:form>
                                 </div>
-                            
+                            </div>
+                        </div>
+                    </div>
+                    <!--SideBar -->
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="sidebar-shop">
+                            <div class="shop-widget">
+                                <h3 class="shop-title">Search by</h3>
+                                <h:form class="shop-search">
+                                    <h:inputText p:placeholder="Your keyword...." value="#{brandBean.searchStr}">
+                                        <f:ajax event="change" listener="#{brandBean.search()}"/>
+                                    </h:inputText>
+                                    <button onclick="#{brandBean.search()}"><i class="fa fa-search"></i></button>
+                                </h:form>
+                            </div>
+
                         </div>
                     </div>
                     <!-- /SideBar -->

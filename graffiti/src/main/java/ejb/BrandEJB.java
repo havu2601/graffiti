@@ -20,8 +20,8 @@ public class BrandEJB {
         return em.find(Brand.class, id);
     }
     
-    public Brand findByName(String searchStr){
-        return (Brand) em.createNamedQuery("Brand.findByBrandName").setParameter("brandName", searchStr).getSingleResult();
+    public List<Brand> findByName(String searchStr){
+        return em.createNamedQuery("Brand.findByBrandName").setParameter("brandName", searchStr).getResultList();
     }
     
     public void addBrand(Brand brand){

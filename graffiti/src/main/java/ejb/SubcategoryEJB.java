@@ -22,8 +22,12 @@ public class SubcategoryEJB {
         return em.find(SubCategory.class, id);
     }
     
-    public SubCategory findByName(String searchStr){
-        return (SubCategory) em.createNamedQuery("SubCategory.findBySubcatName").setParameter("subcatName", searchStr).getSingleResult();
+    public List<SubCategory> findByName(String searchStr){
+        return em.createNamedQuery("SubCategory.findBySubcatName").setParameter("subcatName", searchStr).getResultList();
+    }
+    
+    public List<SubCategory> findByCategory(int cateId){
+        return em.createNamedQuery("SubCategory.findByCategory").setParameter("categoryId", cateId).getResultList();
     }
     
     public void addSubCat(SubCategory sc){

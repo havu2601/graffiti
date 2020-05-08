@@ -47,11 +47,13 @@ public class BrandBean implements Serializable{
             rs = ejb.findAll();
             show(rs,"");
         }else{
-            Brand br = ejb.findByName(searchStr);
-            List<Brand> rs = new ArrayList<>();
-            rs.add(br);
-            String msg = "Cannot find Brand with name " + searchStr;
-            show(rs,msg);
+            if(null!=ejb.findByName("%"+searchStr+"%")){
+                List<Brand> br = ejb.findByName("%"+searchStr+"%");
+                List<Brand> rs = new ArrayList<>();
+                rs.addAll(br);
+                String msg = "Cannot find Brand with name " + searchStr;
+                show(rs,msg);
+            }
         }
     }
     

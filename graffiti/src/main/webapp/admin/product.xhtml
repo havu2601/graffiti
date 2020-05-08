@@ -47,90 +47,114 @@
                                                    <h:outputText value="#{pr.productStock}"></h:outputText>
                                         </pr:column>
                                         <pr:column headerText="ACTION">
-                                            <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(p.productId)}"></h:commandLink> | 
-                                            <h:commandLink class="button" value="Remove" action="#{productBean.reset()}"></h:commandLink> |
-                                            <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(p.productId)}"></h:commandLink>
+                                            <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(pr.productId)}"></h:commandLink> | 
+                                            <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(pr.productId)}"></h:commandLink>
                                         </pr:column>
                                     </pr:dataTable>
-                                    
-                                    
-                                    
                                     <!-- Product list -->
-                                
-
                                 </div>
-                                    </h:form>
+                                </h:form>
                             </div>
                         </div>
-                        <div class="row mb-10">
+<!--                        <div class="row mb-10">
                         <div class="col-xl-5 col-lg-6 col-md-6">
                             <div class="product-showing mb-40">
-                                <p>UPDATE PRODUCT</p>
+                                <p>UPDATE PRODUCT COLLECTION</p>
+                            </div>
+                        </div>-->
+                    <!--</div>-->
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <table class="table">
+                                    <h:form>
+                                    <tr>
+                                        <td>NAME</td>
+                                        <td><pr:inputText style="width: 400px;" id="pName" value="#{productBean.objProduct.productName}" validatorMessage="Name cannot be blank!">
+                                                <f:validateRequired/>
+                                            </pr:inputText>
+                                        </td>
+                                        <td>
+                                            <h:message style="color: red" for="pName"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CAPACITY</td>
+                                        <td><pr:inputText style="width: 400px;" id="capacity" type="number" value="#{productBean.capacity}" validatorMessage="Capacity invalid!">
+                                                <f:validateRequired/>
+                                                <f:validateDoubleRange minimum="10"/>
+                                            </pr:inputText>
+                                        </td>
+                                        <td>
+                                            <h:message style="color: red" for="capacity"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PRICE</td>
+                                        <td><pr:inputText style="width: 400px;" id="price" type="number" value="#{productBean.price}" validatorMessage="Price invalid">
+                                                <f:convertNumber type="currency" currencySymbol="$"/>
+                                                <f:validateRequired/>
+                                                <f:validateDoubleRange minimum="1"/>
+                                            </pr:inputText>
+                                        </td>
+                                        <td>
+                                            <h:message style="color: red" for="price"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>STOCK</td>
+                                        <td><pr:inputText style="width: 400px;" id="stock" type="number" value="#{productBean.stock}" validatorMessage="Stock invalid">
+                                                <f:validateRequired/>
+                                                <f:validateDoubleRange minimum="1"/>
+                                            </pr:inputText>
+                                        </td>
+                                        <td>
+                                            <h:message style="color: red" for="stock"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>DESCRIPTION</td>
+                                        <td><pr:inputTextarea style="width: 400px;" id="desc" value="#{productBean.objProduct.productDesc}" validatorMessage="Description cannot be blank!">
+                                                <f:validateRequired/>
+                                            </pr:inputTextarea>
+                                        </td>
+                                        <td>
+                                            <h:message style="color: red" for="desc"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>SUBCATEGORY</td>
+                                        <td>
+                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.subcatId}">
+                                                <f:selectItems value="#{subcategoryBean.listSubCat}" var="sc" itemValue="#{sc.subcatId}" itemLabel="#{sc.subcatName}"/>
+                                            </pr:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>BRAND</td>
+                                        <td>
+                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.brandId}">
+                                                <f:selectItems value="#{brandBean.listBrand}" var="b" itemValue="#{b.brandId}" itemLabel="#{b.brandName}"/>
+                                            </pr:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>COLOR</td>
+                                        <td>
+                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.colorId}">
+                                                <f:selectItems value="#{colorBean.listColor}" var="c" itemValue="#{c.colorId}" itemLabel="#{c.colorName}"/>
+                                            </pr:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align: center">
+                                            <h:commandButton action="#{productBean.addNewProduct()}" value="Submit"></h:commandButton>
+                                            <h:commandButton action="#{productBean.reset()}" value="Reset"></h:commandButton>
+                                        </td>
+                                    </tr>
+                                    </h:form>
+                                </table>
                             </div>
                         </div>
-                    </div>
-                                <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                
-                                    <table class="table">
-                                        <h:form>
-                                        <tr>
-                                            <td>NAME</td>
-                                            <td><h:inputText value="#{productBean.objProduct.productName}"></h:inputText></td>
-                                        </tr>
-                                        <tr>
-                                            <td>CAPACITY</td>
-                                            <td><h:inputText value="#{productBean.capacity}"></h:inputText></td>
-                                        </tr>
-                                        <tr>
-                                            <td>PRICE</td>
-                                            <td><h:inputText value="#{productBean.price}"></h:inputText></td>
-                                        </tr>
-                                        <tr>
-                                            <td>STOCK</td>
-                                            <td><h:inputText value="#{productBean.stock}"></h:inputText></td>
-                                        </tr>
-                                        <tr>
-                                            <td>DESCRIPTION</td>
-                                            <td><h:inputTextarea value="#{productBean.objProduct.productDesc}"></h:inputTextarea></td>
-                                        </tr>
-                                        <tr>
-                                            <td>SUBCATEGORY</td>
-                                            <td>
-                                                <h:selectOneMenu value="#{productBean.subcatId}">
-                                                    <f:selectItems value="#{subcategoryBean.listSubCat}" var="sc" itemValue="#{sc.subcatId}" itemLabel="#{sc.subcatName}"/>
-                                                </h:selectOneMenu>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>BRAND</td>
-                                            <td>
-                                                <h:selectOneMenu value="#{productBean.brandId}">
-                                                    <f:selectItems value="#{brandBean.listBrand}" var="b" itemValue="#{b.brandId}" itemLabel="#{b.brandName}"/>
-                                                </h:selectOneMenu>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>COLOR</td>
-                                            <td>
-                                                <h:selectOneMenu value="#{productBean.colorId}">
-                                                    <f:selectItems value="#{colorBean.listColor}" var="c" itemValue="#{c.colorId}" itemLabel="#{c.colorName}"/>
-                                                </h:selectOneMenu>
-                                            </td>
-                                        </tr>
-                                            
-                                        <tr>
-                                            <td colspan="2" style="text-align: center">
-                                                <h:commandButton class="button" action="#{productBean.addNewProduct()}" value="Submit"></h:commandButton>
-                                                <h:commandButton class="button" action="#{productBean.reset()}" value="Reset"></h:commandButton>
-                                            </td>
-                                        </tr>
-                                        </h:form>
-                                    </table>
-                                                                                    
-                                
-                            </div>
-                                </div>
                             
                     </div>
                     <!--SideBar -->
@@ -139,32 +163,12 @@
                             <div class="shop-widget">
                                 <h3 class="shop-title">Search by</h3>
                                 <h:form class="shop-search">
-                                    <h:inputText p:placeholder="Your keyword...." value="#{productBean.searchStr}"/>
+                                    <pr:inputText p:placeholder="Your keyword...." value="#{productBean.searchStr}">
+                                        <f:ajax event="change" listener="#{productBean.search()}"/>
+                                    </pr:inputText>
                                     <button onclick="#{productBean.search()}"><i class="fa fa-search"></i></button>
                                     
                                 </h:form>
-                            </div>
-<!-- 
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Filter selection</h3>
-                                <div class="price-filter">
-                                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-                                    <input type="text" id="amount">
-                                </div>
-                            </div> -->
-
-                            <div class="shop-widget">
-                                <h3 class="shop-title">SEARCH BY</h3>
-                                <div class="radio">
-                                    <label><input type="radio" name="optradio" checked="true"/>By Name</label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="optradio"/>By Category</label>
-                                </div>
-                                <div class="radio disabled">
-                                    <label><input type="radio" name="optradio"/>By Brand</label>
-                                </div>
-                                
                             </div>
                             
                         </div>

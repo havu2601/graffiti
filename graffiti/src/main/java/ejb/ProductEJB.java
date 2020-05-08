@@ -33,20 +33,20 @@ public class ProductEJB {
         return (Product) em.createNamedQuery("Product.findByProductName").setParameter("productName", searchStr).getSingleResult();
     }
     
-    public Product findByBrand(String searchStr){
-        return (Product) em.createNamedQuery("Product.findByBrandId").setParameter("brandId", searchStr).getSingleResult();
+    public Product findByBrand(int id){
+        return (Product) em.createNamedQuery("Product.findByBrandId").setParameter("brandId", id).getSingleResult();
     }
     
     public List<Product> findByAny(String searchStr){
         return em.createNamedQuery("Product.findByAny").setParameter("searchStr", searchStr).getResultList();
     }
     
-    public Product findBySubCat(String searchStr){
-        return (Product) em.createNamedQuery("Product.findBySubCatId").setParameter("subcatId", searchStr).getSingleResult();
+    public List<Product> findBySubCat(int id){
+        return em.createNamedQuery("Product.findBySubCatId").setParameter("subcatId", id).getResultList();
     }
     
-    public Product findByColor(String searchStr){
-        return (Product) em.createNamedQuery("Product.findByColorId").setParameter("colorId", searchStr).getSingleResult();
+    public List<Product> findByColor(int id){
+        return em.createNamedQuery("Product.findByColorId").setParameter("colorId", id).getResultList();
     }
     
     public void addProduct(Product product){

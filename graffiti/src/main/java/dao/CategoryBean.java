@@ -6,6 +6,7 @@
 package dao;
 
 import ejb.CategoryEJB;
+import ejb.SubcategoryEJB;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,11 @@ import model.Category;
 public class CategoryBean implements Serializable{
 
     @EJB
-    private CategoryEJB ejb;
+    private CategoryEJB ejbCate;
     
+    @EJB
+    private SubcategoryEJB ejbSubcat;
+            
     List<Category> listCategory;
     Category objCategory;
     String searchStr;
@@ -38,11 +42,11 @@ public class CategoryBean implements Serializable{
     public void search(){
         if(null==searchStr || searchStr.isEmpty()){
             List<Category> rs = new ArrayList<>();
-            rs = ejb.findAll();
+            rs = ejbCate.findAll();
             show(rs,"");
         }else{
-            if(null!=ejb.findByName("%"+searchStr+"%")){
-                List<Category> ct = ejb.findByName("%"+searchStr+"%");
+            if(null!=ejbCate.findByName("%"+searchStr+"%")){
+                List<Category> ct = ejbCate.findByName("%"+searchStr+"%");
                 List<Category> rs = new ArrayList<>();
                 rs.addAll(ct);
                 String msg = "Cannot find Category with name " + searchStr;
@@ -62,9 +66,9 @@ public class CategoryBean implements Serializable{
     
     public String addNewCategory(){
         if(null==objCategory.getCategoryId()){
-            ejb.addCategory(objCategory);
+            ejbCate.addCategory(objCategory);
         }else{
-            ejb.updateCategory(objCategory);
+            ejbCate.updateCategory(objCategory);
         }
         return "category.xhtml?faces-redirect=true";
     }
@@ -75,7 +79,12 @@ public class CategoryBean implements Serializable{
     
     public String remove(int id){
         try {
-            ejb.delete(ejb.findById(id));
+            if(ejbSubcat.findByCategory(id)==null || ejbSubcat.findByCategory(id).isEmpty()){
+            ejbCate.delete(ejbCate.findById(id));
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
+            }
+            
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
         }
@@ -83,7 +92,7 @@ public class CategoryBean implements Serializable{
     }
     
     public void loadCategory(int id){
-        objCategory = ejb.findById(id);
+        objCategory = ejbCate.findById(id);
     }
 
     public List<Category> getListCategory() {
@@ -109,7 +118,5 @@ public class CategoryBean implements Serializable{
     public void setSearchStr(String searchStr) {
         this.searchStr = searchStr;
     }
-    
 
-    
 }

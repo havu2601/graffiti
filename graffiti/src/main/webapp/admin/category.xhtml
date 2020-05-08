@@ -30,32 +30,63 @@
                                 <h:form>
                                 <div class="row">
                                     <!-- Product list -->
-                                    
-                                    
-                                    <h:dataTable class="table table-hover" value="#{categoryBean.listCategory}" var="c">
-                                            <h:column>
+                                    <pr:dataTable class="table table-hover" value="#{categoryBean.listCategory}" var="c">
+                                            <pr:column>
                                                 <f:facet name="header">ID</f:facet>
                                                 <h:outputText value="#{c.categoryId}"/>
-                                            </h:column>
-                                            <h:column>
+                                            </pr:column>
+                                            <pr:column>
                                                 <f:facet name="header">NAME</f:facet>
                                                 <h:outputText value="#{c.categoryName}"/>
-                                            </h:column>
-                                            <h:column>
+                                            </pr:column>
+                                            <pr:column>
                                                 <f:facet name="header">ACTION</f:facet>
                                                 <h:commandLink class="button" value="Edit" action="#{categoryBean.loadCategory(c.categoryId)}"></h:commandLink> |
                                                 <h:commandLink class="button" value="Remove" action="#{categoryBean.remove(c.categoryId)}"></h:commandLink>
-                                            </h:column>
-                                        </h:dataTable>
+                                            </pr:column>
+                                        </pr:dataTable>
                                     
                                     
                                     <!-- Product list -->
                                     
                                 </div>
+                                    
                                     </h:form>
+                                
                             </div>
                         </div>
-                            
+<!--                        <div class="row mb-10">
+                            <div class="col-xl-5 col-lg-6 col-md-6">
+                                <div class="product-showing mb-40">
+                                    <p>UPDATE CATEGORY COLLECTION</p>
+                                </div>
+                            </div>
+                        </div>-->
+                        <!-- tab content -->
+                        
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <h:form>
+                                    <table class="table">
+                                        <tr>
+                                            <td>NAME</td>
+                                            <td><pr:inputText style="width: 400px;" id="categoryName" value="#{categoryBean.objCategory.categoryName}" validatorMessage="Name cannot be blank">
+                                                    <f:validateRequired/>
+                                                </pr:inputText>
+                                                <h:message style="color: red;" for="categoryName"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center">
+                                                <h:commandButton class="button" action="#{categoryBean.addNewCategory()}" value="Submit"></h:commandButton>
+                                                <h:commandButton class="button" action="#{categoryBean.reset()}" value="Reset"></h:commandButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!--SideBar -->
                     <div class="col-xl-3 col-lg-4">
@@ -71,40 +102,8 @@
                                     </div>
                                 </h:form>
                             </div>
-<!-- 
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Filter selection</h3>
-                                <div class="price-filter">
-                                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-                                    <input type="text" id="amount">
-                                </div>
-                            </div> -->
-
-                            <div class="shop-widget">
-                                <h3 class="shop-title">UPDATE CATEGORY COLLECTION</h3>
-                                <h:form>
-                                    <table class="table">
-                                        <tr>
-                                            <td>NAME</td>
-                                            <td><pr:inputText id="categoryName" value="#{categoryBean.objCategory.categoryName}" validatorMessage="Category name cannot be blank">
-                                                    <f:validateRequired/>
-                                                </pr:inputText>
-                                                <h:message style="color: red;" for="categoryName"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="text-align: center">
-                                                <h:commandButton class="button" action="#{categoryBean.addNewCategory()}" value="Submit"></h:commandButton>
-                                                <h:commandButton class="button" action="#{categoryBean.reset()}" value="Reset"></h:commandButton>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    
-                                </h:form>
-                            </div>
-                            
                         </div>
                     </div>
-                    <!-- /SideBar -->
                 </div>
             </div>
         </section>
