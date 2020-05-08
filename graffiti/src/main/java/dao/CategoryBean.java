@@ -41,11 +41,11 @@ public class CategoryBean implements Serializable{
             rs = ejb.findAll();
             show(rs,"");
         }else{
-            if(null!=ejb.findByName(searchStr)){
-                Category ct = ejb.findByName(searchStr);
+            if(null!=ejb.findByName("%"+searchStr+"%")){
+                List<Category> ct = ejb.findByName("%"+searchStr+"%");
                 List<Category> rs = new ArrayList<>();
-                rs.add(ct);
-                String msg = "Cannot find Category with name" + searchStr;
+                rs.addAll(ct);
+                String msg = "Cannot find Category with name " + searchStr;
                 show(rs,msg);
             }
         }

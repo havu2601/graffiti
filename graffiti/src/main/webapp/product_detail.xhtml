@@ -12,7 +12,26 @@
 
 <main>
     <style>
-
+        .ui-galleria{
+            border-style: none;
+            box-shadow: 0px 12px 24px 0px rgba(254, 69, 54, 0.2);
+        }
+        .ui-galleria-nav-prev, .ui-galleria-nav-next{
+           transform: scale(1.5)
+        }
+        .ui-galleria-nav-prev:hover, .ui-galleria-nav-next:hover{
+           transform: scale(2)
+        }
+        .ui-galleria-filmstrip{
+            border-top: rgba(254, 69, 54, 0.2) solid thin;
+        }
+        .btnColor{
+            width: 100px; 
+            height: 20px;
+        }
+        .btnColor:hover{
+            transform: scale(1.5);
+        }
     </style>
     <f:metadata>
         <f:viewParam name="pid" value="#{productBean.productId}"/>
@@ -40,20 +59,12 @@
         <section class="shop-details-area pt-55">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-2 col-lg-4">
-                        <div class="shop-thumb-tab" style="overflow:auto; width: 200px; height:400px;">
-                            
-                            <pr:dataTable class="table" value="#{productBean.listImage}" var="img">
-                                <pr:column>
-                                    <img src="#{img.imagePath}" alt="" style="max-width: 100px; max-height: 100px;" onclick="showImage(this);"/>
-                                </pr:column>
-                            </pr:dataTable>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4">
-                        <div class="product-details-img mb-10">
-                            <img id="imageShow" style="width: 400px; height: 400px;" src="#{productBean.objImage.imagePath}"/>
-                        </div>
+                    <div class="col-xl-6 col-lg-6">
+                            <h:form id="form">
+                                <pr:galleria value="#{productBean.listImage}" var="img" style="font-size: 40px" panelWidth="560" panelHeight="480" frameHeight="100" frameWidth="85" effect="slide" >
+                                    <pr:graphicImage style="height: 480px; width: 560px;" value="#{img.imagePath}"/> 
+                                </pr:galleria>
+                            </h:form>
                     </div>
                     <div class="col-xl-6 col-lg-8">
                         <div class="product-details mb-30 pl-30">
@@ -76,7 +87,7 @@
                                         <li><span>Brands:</span> #{productBean.objProduct.brandId.brandName}</li>
                                         <!--<li><span>Product Code:</span> d12</li>-->
                                         <li><span>Reward Points:</span> 100</li>
-                                        <li><span>Color:</span> <span style="background-color: #{productBean.objProduct.colorId.colorHexcode}; color: #{productBean.objProduct.colorId.colorHexcode};">color</span></li>
+                                        <li><span>Color:</span> <button class="btnColor" style="background-color: #{productBean.objProduct.colorId.colorHexcode};"></button></li>
                                         <li><span>Hexcode:</span> #{productBean.objProduct.colorId.colorHexcode}</li>
                                         <li><span>Pigment:</span> #{productBean.objProduct.colorId.colorPigment}</li>
                                         <li><span>Coverage:</span> #{productBean.objProduct.colorId.colorCoverage}</li>
@@ -407,13 +418,19 @@
                     </div>
             </section>
             <!-- product-area end -->
-            
+<!--            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script type="text/javascript" src="assets/js/materialize.min.js"></script>-->
             <script>
                 function showImage(img){
                     var image = document.getElementById("imageShow");
                     image.src = img.src;
                 }
             </script>
+<!--            <script>
+                $(document).ready(function(){
+                   $('.carousel').carousel();
+                });
+            </script>-->
         </main>        
         </ui:define>
     </ui:composition>

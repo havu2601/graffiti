@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pr="http://primefaces.org/ui">
         <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
         <ui:define name="content"> 
 
@@ -62,8 +63,12 @@
                             <div class="shop-widget">
                                 <h3 class="shop-title">Search by</h3>
                                 <h:form class="shop-search">
-                                    <h:inputText p:placeholder="Your keyword...." value="#{categoryBean.searchStr}"/>
+                                    <div class="shop-search">
+                                        <h:inputText p:placeholder="Your keyword...." value="#{categoryBean.searchStr}">
+                                            <f:ajax event="change" listener="#{categoryBean.search()}"/>
+                                        </h:inputText>
                                     <button onclick="#{categoryBean.search()}"><i class="fa fa-search"></i></button>
+                                    </div>
                                 </h:form>
                             </div>
 <!-- 
@@ -81,7 +86,10 @@
                                     <table class="table">
                                         <tr>
                                             <td>NAME</td>
-                                            <td><h:inputText value="#{categoryBean.objCategory.categoryName}"></h:inputText></td>
+                                            <td><pr:inputText id="categoryName" value="#{categoryBean.objCategory.categoryName}" validatorMessage="Category name cannot be blank">
+                                                    <f:validateRequired/>
+                                                </pr:inputText>
+                                                <h:message style="color: red;" for="categoryName"/></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2" style="text-align: center">
