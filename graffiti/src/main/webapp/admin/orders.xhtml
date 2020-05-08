@@ -8,7 +8,6 @@ and open the template in the editor.
 <html   xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
         <ui:define name="content">
@@ -27,40 +26,40 @@ and open the template in the editor.
                         </div>
                     </div>
                 </section>
-                <!-- User Area Strat-->
+                <!-- Order list Area Start-->
                 <section class="cart-area pt-10">
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
                                 <h:form>
-                                    <div class="table-content table-responsive">
-                                        <h:dataTable class="table" value="#{orderBean.list}" var="order">
-                                            <h:column>
-                                                <f:facet name="header" class="cart-product-name">Username</f:facet>
-                                                <h:outputText class="cart-product-name" value="${order.userId.userName}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header" class="cart-product-name">Order Date</f:facet>
-                                                <h:outputText class="cart-product-name" value="${order.orderDate}">
-                                                    <f:convertDateTime pattern = "dd-mm-yyyy" />
-                                                </h:outputText>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header" class="cart-product-name">Status</f:facet>
-                                                <h:outputText class="cart-product-name" value="${order.status}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header" class="product-thumbnail">More</f:facet>
-                                                <h:link class="product-thumbnail" outcome="orderdetail.xhtml?oID=${order.orderId}" value="View Detail"/>
-                                            </h:column>
-                                        </h:dataTable>
-                                    </div>
-                                </h:form>
+                                <div class="table-content table-responsive">
+                                    <h:dataTable class="table" value="#{orderBean.list}" var="order">
+                                        <h:column>
+                                            <f:facet name="header" class="cart-product-name">Username</f:facet>
+                                            <h:outputText class="cart-product-name" value="${order.userId.userName}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header" class="cart-product-name">Order Date</f:facet>
+                                            <h:outputText class="cart-product-name" value="${order.orderDate}">
+                                                <f:convertDateTime pattern="hh:mm dd-MM-yyyy"/>
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header" class="cart-product-name">Status</f:facet>
+                                            <h:outputText class="cart-product-name" value="${order.status}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header" class="cart-product-name">More</f:facet>
+                                            <h:link class="cart-product-name" outcome="orderdetail.xhtml?oID=${order.orderId}" value="View Detail"/>
+                                        </h:column>
+                                    </h:dataTable>
+                                </div>
+                            </h:form>
                             </div>
                         </div>
                     </div>
                 </section>
-                <!-- Cart Area End-->
+                <!-- Order list Area End-->
             </main>
         </ui:define>
     </ui:composition>

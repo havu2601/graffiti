@@ -5,6 +5,7 @@
  */
 package dao;
 
+import ejb.OrderDetailEJB;
 import ejb.OrderEJB;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,31 +27,34 @@ public class OrderBean implements Serializable{
 
     @EJB
     OrderEJB ejb;
+    @EJB
+    OrderDetailEJB detailEJB;
     private Orders order;
     private List<Orders> list;
-    private String orderID;
+    private String oID;
     private List<OrderDetail> listDetail;
+    
     @PostConstruct
     public void init(){
         order = new Orders();
-    }
-
-    public void show(){
         list = new ArrayList<>();
         list = ejb.findAll();
     }
     
     public void getDetail(){
-        listDetail = ejb.findDetail(Integer.parseInt(orderID));
+        listDetail = new ArrayList<>();
+        listDetail = detailEJB.findDetail(oID);
+        order = ejb.findByID(Integer.parseInt(oID));
     }
 
-    public String getOrderID() {
-        return orderID;
+    public String getoID() {
+        return oID;
     }
 
-    public void setOrderID(String orderID) {
-        this.orderID = orderID;
+    public void setoID(String oID) {
+        this.oID = oID;
     }
+
 
     public List<OrderDetail> getListDetail() {
         return listDetail;
