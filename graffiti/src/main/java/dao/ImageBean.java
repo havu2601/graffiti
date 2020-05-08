@@ -55,7 +55,7 @@ public class ImageBean implements Serializable{
     public void addToList(){
         doUpload();
         objImage = new Image();
-        objImage.setImagePath("../assets/images/" + image.getSubmittedFileName());
+        objImage.setImagePath("assets/images/" + image.getSubmittedFileName());
         objImage.setProductId(objProduct);
         ejbImage.addImage(objImage);
         listImage = new ArrayList<>();

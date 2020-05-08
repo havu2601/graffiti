@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pr="http://primefaces.org/ui">
     <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
     <ui:define name="content">
     <main>
@@ -29,35 +30,29 @@
                                 <div class="row">
                                     <!-- Product list -->
                                     
+                                    <pr:dataTable class="table table-hover" style="text-align: center;" value="#{productBean.listProduct}" var="pr">
+                                        <pr:column headerText="ID" style="width: 50px ">
+                                            <h:outputText value="#{pr.productId}"></h:outputText>
+                                        </pr:column>
+                                        <pr:column headerText="NAME" sortBy="#{pr.productName}">
+                                                   <h:outputText value="#{pr.productName}"></h:outputText>
+                                        </pr:column>
+                                        <pr:column headerText="CAPACITY" style="width: 100px">
+                                            <h:outputText value="#{pr.productCapacity}"></h:outputText>
+                                        </pr:column>
+                                        <pr:column headerText="PRICE" sortBy="#{pr.productPrice}">
+                                                   <h:outputText value="#{pr.productPrice} USD"></h:outputText>
+                                        </pr:column>
+                                        <pr:column headerText="STOCK" style="width: 70px;" sortBy="#{pr.productStock}">
+                                                   <h:outputText value="#{pr.productStock}"></h:outputText>
+                                        </pr:column>
+                                        <pr:column headerText="ACTION">
+                                            <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(p.productId)}"></h:commandLink> | 
+                                            <h:commandLink class="button" value="Remove" action="#{productBean.reset()}"></h:commandLink> |
+                                            <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(p.productId)}"></h:commandLink>
+                                        </pr:column>
+                                    </pr:dataTable>
                                     
-                                    <h:dataTable class="table table-hover" value="#{productBean.listProduct}" var="p">
-                                            <h:column>
-                                                <f:facet name="header">ID</f:facet>
-                                                <h:outputText value="#{p.productId}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">NAME</f:facet>
-                                                <h:outputText value="#{p.productName}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">CAPACITY</f:facet>
-                                                <h:outputText value="#{p.productCapacity} ML"/>
-                                            </h:column>
-                                            <h:column>
-                                                    <f:facet name="header">PRICE</f:facet>
-                                                    <h:outputText value="#{p.productPrice} $"/>
-                                                </h:column>
-                                            <h:column>
-                                                    <f:facet name="header">STOCK</f:facet>
-                                                    <h:outputText value="#{p.productStock}"/>
-                                                </h:column>
-                                            <h:column>
-                                                <f:facet name="header">ACTION</f:facet>
-                                                <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(p.productId)}"></h:commandLink> | 
-                                                <h:commandLink class="button" value="Remove" action="#{productBean.reset()}"></h:commandLink> |
-                                                <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(p.productId)}"></h:commandLink>
-                                            </h:column>
-                                        </h:dataTable>
                                     
                                     
                                     <!-- Product list -->
@@ -144,8 +139,8 @@
                             <div class="shop-widget">
                                 <h3 class="shop-title">Search by</h3>
                                 <h:form class="shop-search">
-                                    <h:inputText p:placeholder="Your keyword...." value="#{colorBean.searchStr}"/>
-                                    <button onclick="#{colorBean.search()}"><i class="fa fa-search"></i></button>
+                                    <h:inputText p:placeholder="Your keyword...." value="#{productBean.searchStr}"/>
+                                    <button onclick="#{productBean.search()}"><i class="fa fa-search"></i></button>
                                     
                                 </h:form>
                             </div>

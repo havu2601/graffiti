@@ -5,11 +5,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pr="http://primefaces.org/ui">
     <ui:composition template="/WEB-INF/templates/clienttemplate.xhtml">
         <ui:define name="content"> 
 
 <main>
+    <style>
+
+    </style>
     <f:metadata>
         <f:viewParam name="pid" value="#{productBean.productId}"/>
         <f:viewAction action="#{productBean.showDetail()}"/>
@@ -36,44 +40,19 @@
         <section class="shop-details-area pt-55">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-6 col-lg-4">
-                        <div class="product-details-img mb-10">
-                            <div class="tab-content" id="myTabContentpro">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel">
-                                    <div class="product-large-img">
-                                        <img src="assets/images/EMC7060_1024x1024.jpg" alt=""/>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel">
-                                    <div class="product-large-img">
-                                        <img src="assetspro2.jpg" alt=""/>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile1" role="tabpanel">
-                                    <div class="product-large-img">
-                                        <img src="img/product/pro3.jpg" alt=""/>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-xl-2 col-lg-4">
+                        <div class="shop-thumb-tab" style="overflow:auto; width: 200px; height:400px;">
+                            
+                            <pr:dataTable class="table" value="#{productBean.listImage}" var="img">
+                                <pr:column>
+                                    <img src="#{img.imagePath}" alt="" style="max-width: 100px; max-height: 100px;" onclick="showImage(this);"/>
+                                </pr:column>
+                            </pr:dataTable>
                         </div>
-                        <div class="shop-thumb-tab mb-30">
-                            <ul class="nav" id="myTab2" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-selected="true">
-                                        <img src="img/product/pro1.jpg" alt=""/> 
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-selected="false">
-                                        <img src="img/product/pro2.jpg" alt=""/>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile1" role="tab" aria-selected="false">
-                                        <img src="img/product/pro3.jpg" alt=""/>
-                                    </a>
-                                </li>
-                            </ul>
+                    </div>
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="product-details-img mb-10">
+                            <img id="imageShow" style="width: 400px; height: 400px;" src="#{productBean.objImage.imagePath}"/>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-8">
@@ -81,7 +60,7 @@
                             <div class="details-cat mb-20">
                                 <a href="#">#{productBean.objProduct.subcatId.categoryId.categoryName}</a>
                             </div>
-                            <h2 class="pro-details-title mb-15">#{productBean.objProduct.productName}</h2>
+                            <h2 class="pro-details-title mb-15">#{productBean.objProduct.productName} - #{productBean.objProduct.colorId.colorName}</h2>
                             <div class="details-price mb-20">
                                 <span>$#{productBean.objProduct.productPrice}</span>
                             </div>
@@ -97,11 +76,16 @@
                                         <li><span>Brands:</span> #{productBean.objProduct.brandId.brandName}</li>
                                         <!--<li><span>Product Code:</span> d12</li>-->
                                         <li><span>Reward Points:</span> 100</li>
+                                        <li><span>Color:</span> <span style="background-color: #{productBean.objProduct.colorId.colorHexcode}; color: #{productBean.objProduct.colorId.colorHexcode};">color</span></li>
+                                        <li><span>Hexcode:</span> #{productBean.objProduct.colorId.colorHexcode}</li>
+                                        <li><span>Pigment:</span> #{productBean.objProduct.colorId.colorPigment}</li>
+                                        <li><span>Coverage:</span> #{productBean.objProduct.colorId.colorCoverage}</li>
+                                        <li><span>Lightfastness:</span> #{productBean.objProduct.colorId.colorLightfastness}</li>
                                         <li><span>Stock:</span> <span class="in-stock">#{productBean.status}</span></li>
                                     </ul>
                                 </div>
 
-                                <div class="product-action-details variant-item" style="display: #{productBean.notBuy}">
+                                <div class="product-action-details variant-item" style="display: #{productBean.buyState}">
                                     <div class="product-details-action">
                                         <form action="#">
                                             <div class="plus-minus">
@@ -423,8 +407,13 @@
                     </div>
             </section>
             <!-- product-area end -->
-
-
+            
+            <script>
+                function showImage(img){
+                    var image = document.getElementById("imageShow");
+                    image.src = img.src;
+                }
+            </script>
         </main>        
         </ui:define>
     </ui:composition>

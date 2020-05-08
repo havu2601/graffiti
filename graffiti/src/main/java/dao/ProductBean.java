@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import model.Brand;
@@ -43,6 +45,7 @@ public class ProductBean implements Serializable{
     Brand objBrand;
     SubCategory objSubCat;
     Color objColor;
+    Image objImage;
     
     String productId;
     String brandId;
@@ -64,22 +67,36 @@ public class ProductBean implements Serializable{
     }
     
     public void search(){
-        switch(searchType){
-            case "subcat":
-                break;
-            case "brand":
-                break;
-            case "color":
-                break;
-            case "":
-                break;
-            default:
-                break;
+        if(null==searchStr || searchStr.isEmpty()){
+            List<Product> rs = new ArrayList<>();
+            rs = ejbProduct.findAll();
+            show(rs,"");
+        }else{
+            if(null!=ejbProduct.findByAny("%"+searchStr+"%")){
+                List<Product> p = ejbProduct.findByAny("%"+searchStr+"%");
+                List<Product> rs = new ArrayList<>();
+                rs.addAll(p);
+                String msg = "Cannot find Product with name " + searchStr;
+                show(rs,msg);
+            }
+        }
+    }
+    
+    public void show(List<Product> rs, String msg){
+        listProduct = new ArrayList<>();
+        if(rs.isEmpty() || rs==null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,msg,msg));
+        }else{
+            listProduct.addAll(rs);
         }
     }
 
     public void showDetail(){
         objProduct = ejbProduct.findById(Integer.parseInt(productId));
+        listImage = ejbImage.findByProduct(objProduct.getProductId());
+        if(null!=listImage && !listImage.isEmpty()){
+            objImage = listImage.get(0);
+        }
         if(objProduct.getProductStock()==0){
             status = "Out Of Stock";
             buyState = "none";
@@ -289,5 +306,12 @@ public class ProductBean implements Serializable{
         this.buyState = buyState;
     }
 
-    
+    public Image getObjImage() {
+        return objImage;
+    }
+
+    public void setObjImage(Image objImage) {
+        this.objImage = objImage;
+    }
+
 }
