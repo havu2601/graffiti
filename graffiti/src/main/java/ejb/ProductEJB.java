@@ -33,8 +33,12 @@ public class ProductEJB {
         return (Product) em.createNamedQuery("Product.findByProductName").setParameter("productName", searchStr).getSingleResult();
     }
     
-    public Product findByBrand(int id){
-        return (Product) em.createNamedQuery("Product.findByBrandId").setParameter("brandId", id).getSingleResult();
+    public List<Product> findByBrand(int id){
+        return em.createNamedQuery("Product.findByBrandId").setParameter("brandId", id).getResultList();
+    }
+    
+    public List<Product> findByCate(int id){
+        return em.createNamedQuery("Product.findByBrandId").setParameter("brandId", id).getResultList();
     }
     
     public List<Product> findByAny(String searchStr){

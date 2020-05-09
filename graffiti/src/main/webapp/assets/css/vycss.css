@@ -1,0 +1,56 @@
+/*index*/
+.sortBtn{
+    width: 150px;
+    height: 35px;
+    background-color: white;
+    border-radius: 10px;
+}
+.sortBtn:hover{
+    box-shadow: 0px 5px 5px 0px rgba(254, 69, 54, 0.3);
+}
+/*end index*/
+
+/*sub_product*/
+ul.sidemenu{
+    width: 350px;
+    background-color: white;
+}
+ul.sidemenu li{
+    list-style: none;
+    border-bottom: #00fff6 solid thin;
+    text-align: right;
+    font-size: 20px;
+}
+ul.sidemenu li .btnSC{
+    background-color: white;
+}
+
+ul.sidemenu li .btnSC:hover{
+    color: red;
+    background-color: white;
+}
+/*end sub_product*/
+
+/*product-detail*/
+.ui-galleria{
+        border-style: none;
+        box-shadow: 0px 12px 24px 0px rgba(254, 69, 54, 0.3);
+    }
+    .ui-galleria-nav-prev, .ui-galleria-nav-next{
+       transform: scale(1.5)
+    }
+    .ui-galleria-nav-prev:hover, .ui-galleria-nav-next:hover{
+       transform: scale(2)
+    }
+    .ui-galleria-filmstrip{
+        border-top: rgba(254, 69, 54, 0.2) solid thin;
+    }
+    .btnColor{
+        width: 100px; 
+        height: 20px;
+    }
+    .btnColor:hover{
+        transform: scale(1.5);
+    }
+    
+/* end product-detail*/

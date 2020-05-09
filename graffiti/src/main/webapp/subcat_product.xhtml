@@ -189,9 +189,13 @@
             
         </header>
         <!-- header end -->
+ 
 
         <main>
-            
+            <f:metadata>
+                <f:viewParam name="id" value="#{subproductBean.cateId}"></f:viewParam>
+                <f:viewAction action="#{subproductBean.loadSubCat()}"/>
+            </f:metadata>
         <!-- shop-area start -->
         <section class="shop-area pt-150 pb-100">
             <div class="container">
@@ -201,7 +205,7 @@
                         <div class="row mb-10">
                             <div class="col-xl-5 col-lg-6 col-md-6">
                                 <div class="product-showing mb-40">
-                                    <p>Showing #{productBean.listProduct.size()} results</p>
+                                    <p>Showing #{subproductBean.listProduct.size()} results</p>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +214,7 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
                                     <!-- ProductItem -->
-                                        <c:forEach items="#{productBean.listProduct}" var="p">
+                                    <c:forEach items="#{subproductBean.listProduct}" var="p">
                                             <div class="col-xl-4 col-lg-6 col-md-6">
                                             <div class="product-wrapper mb-50">
                                                 <div class="product-img mb-25">
@@ -253,59 +257,17 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="sidebar-shop">
                             <div class="shop-widget">
-                                <h3 class="shop-title">Search by</h3>
+                                <h3 class="shop-title" style="text-align: right;"> #{subproductBean.objCategory.categoryName}</h3>
                                 <h:form class="shop-search">
-                                    <pr:inputText type="text" placeholder="Your keyword...." value="#{productBean.searchStr}">
-                                        <f:ajax event="change" listener="#{productBean.search()}"/>
-                                    </pr:inputText>
-                                    <button onclick="#{productBean.search()}"><i class="fa fa-search"></i></button>
-                                </h:form>
-                            </div>
-                            <h:form>
-                            <div class="shop-widget">
-                                <h3 class="shop-title">SORT BY</h3>
-                                <ul class="shop-link">
-                                    <li><h:commandButton class="sortBtn" value="Name: A-Z" action="#{productBean.sortNameAsc()}">
-                                        </h:commandButton></li>
-                                    <li><h:commandButton class="sortBtn" value="Name: Z-A" action="#{productBean.sortNameDesc()}">
-                                        </h:commandButton></li>
-                                    <li><h:commandButton class="sortBtn" value="Price: Low to High" action="#{productBean.sortPriceAsc()}">
-                                        </h:commandButton></li>
-                                    <li><h:commandButton class="sortBtn" value="Name: High to Low" action="#{productBean.sortPriceDesc()}">
-                                        </h:commandButton></li>
-                                </ul>
-                            </div>
-                            </h:form>
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Recent Product</h3>
-                                <ul class="shop-sidebar-product">
-                                    
-                                    <li>
-                                        <div class="side-pro-img">
-                                            <a href="#"><img src="./assets/images/EMC7060_1024x1024.jpg" alt=""/></a>
-                                        </div>
-                                        <div class="side-pro-content">
-                                            <div class="side-pro-rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h5><a href="#">Montana</a></h5>
-                                            <div class="side-pro-price">
-                                                <span>$119.00 USD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                            <div class="shop-widget">
-                                <div class="shop-sidebar-banner">
-                                    <a href="#"><img src="./assets/images/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/></a>
-                                </div>
+                                    <ul class="sidemenu">
+                                        <c:forEach items="#{subproductBean.listSubcat}" var="sc">
+                                            <li>
+                                                <h:commandButton class="btnSC" action="#{subproductBean.loadProduct(sc.subcatId)}" value="#{sc.subcatName}">
+                                                </h:commandButton>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </h:form>    
                             </div>
                         </div>
                     </div>
@@ -403,4 +365,3 @@
 
     </h:body>
 </html>
-
