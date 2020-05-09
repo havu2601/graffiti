@@ -14,7 +14,7 @@
     <style>
         .ui-galleria{
             border-style: none;
-            box-shadow: 0px 12px 24px 0px rgba(254, 69, 54, 0.2);
+            box-shadow: 0px 12px 24px 0px rgba(254, 69, 54, 0.3);
         }
         .ui-galleria-nav-prev, .ui-galleria-nav-next{
            transform: scale(1.5)
@@ -92,11 +92,11 @@
                                         <li><span>Pigment:</span> #{productBean.objProduct.colorId.colorPigment}</li>
                                         <li><span>Coverage:</span> #{productBean.objProduct.colorId.colorCoverage}</li>
                                         <li><span>Lightfastness:</span> #{productBean.objProduct.colorId.colorLightfastness}</li>
-                                        <li><span>Stock:</span> <span class="in-stock">#{productBean.status}</span></li>
+                                        <li><span>Stock:</span> <span class="in-stock">#{productBean.objProduct.productStock == 0 ? 'Out Of Stock' : 'In Stock'}</span></li>
                                     </ul>
                                 </div>
 
-                                <div class="product-action-details variant-item" style="display: #{productBean.buyState}">
+                                <div class="product-action-details variant-item" style="display: #{productBean.objProduct.productStock == 0 ? 'none' : 'block'}">
                                     <div class="product-details-action">
                                         <form action="#">
                                             <div class="plus-minus">

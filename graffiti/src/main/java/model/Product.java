@@ -74,6 +74,9 @@ public class Product implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "product_desc")
     private String productDesc;
+    @Basic(optional = false)
+    @Column(name = "product_status")
+    private int productStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private List<Image> imageList;
     @JoinColumn(name = "brand_id", referencedColumnName = "brand_id")
@@ -97,13 +100,14 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String productName, int productStock, double productPrice, int productCapacity, String productDesc) {
+    public Product(Integer productId, String productName, int productStock, double productPrice, int productCapacity, String productDesc, int productStatus) {
         this.productId = productId;
         this.productName = productName;
         this.productStock = productStock;
         this.productPrice = productPrice;
         this.productCapacity = productCapacity;
         this.productDesc = productDesc;
+        this.productStatus = productStatus;
     }
 
     public Integer getProductId() {
@@ -205,6 +209,15 @@ public class Product implements Serializable {
         this.orderDetailList = orderDetailList;
     }
 
+    public int getProductStatus() {
+        return productStatus;
+    }
+
+    public void setProductStatus(int productStatus) {
+        this.productStatus = productStatus;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

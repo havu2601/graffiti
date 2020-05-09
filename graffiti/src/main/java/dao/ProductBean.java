@@ -55,7 +55,9 @@ public class ProductBean implements Serializable{
     String stock;
     String price;
     String status;
-    String buyState;
+    
+//    String buyStatus;
+//    String buyState;
     
     String searchStr;
     String searchType;
@@ -64,6 +66,7 @@ public class ProductBean implements Serializable{
     public void init(){
         objProduct = new Product();
         listProduct = ejbProduct.findAll();
+        status = "1";
     }
     
     public void search(){
@@ -97,13 +100,13 @@ public class ProductBean implements Serializable{
         if(null!=listImage && !listImage.isEmpty()){
             objImage = listImage.get(0);
         }
-        if(objProduct.getProductStock()==0){
-            status = "Out Of Stock";
-            buyState = "none";
-        }else{
-            status = "In Stock";
-            buyState = "block";
-        }
+//        if(objProduct.getProductStock()==0){
+//            buyStatus = "Out Of Stock";
+//            buyState = "none";
+//        }else{
+//            buyStatus = "In Stock";
+//            buyState = "block";
+//        }
     }
     
     public void loadProduct(int id){
@@ -114,6 +117,7 @@ public class ProductBean implements Serializable{
         capacity = String.valueOf(objProduct.getProductCapacity());
         price = String.valueOf(objProduct.getProductPrice());
         stock = String.valueOf(objProduct.getProductStock());
+        status = String.valueOf(objProduct.getProductStatus());
     }
     
     public void reset(){
@@ -125,6 +129,7 @@ public class ProductBean implements Serializable{
         capacity = "";
         price = "";
         stock = "";
+        status = "1";
     }
     
     public String addNewProduct(){
@@ -144,6 +149,7 @@ public class ProductBean implements Serializable{
         objProduct.setProductPrice(Double.parseDouble(price));
         objProduct.setProductCapacity(Integer.parseInt(capacity));
         objProduct.setProductStock(Integer.parseInt(stock));
+        objProduct.setProductStatus(Integer.parseInt(status));
         updateBrand();
         objProduct.setBrandId(objBrand);
         updateColor();
@@ -298,14 +304,22 @@ public class ProductBean implements Serializable{
         this.status = status;
     }
 
-    public String getBuyState() {
-        return buyState;
-    }
-
-    public void setBuyState(String buyState) {
-        this.buyState = buyState;
-    }
-
+//    public String getBuyState() {
+//        return buyState;
+//    }
+//
+//    public void setBuyState(String buyState) {
+//        this.buyState = buyState;
+//    }
+//
+//    public String getBuyStatus() {
+//        return buyStatus;
+//    }
+//
+//    public void setBuyStatus(String buyStatus) {
+//        this.buyStatus = buyStatus;
+//    }
+    
     public Image getObjImage() {
         return objImage;
     }
@@ -314,4 +328,5 @@ public class ProductBean implements Serializable{
         this.objImage = objImage;
     }
 
+    
 }

@@ -69,7 +69,7 @@
                                         <tr>
                                             <td>CATEGORY</td>
                                             <td>
-                                                <pr:selectOneMenu style="width: 400px;" value="#{subcategoryBean.categoryId}">
+                                                <pr:selectOneMenu style="width: 400px;" value="#{subcategoryBean.categoryId}"filter="true" effect="fold" title="Select Category">
                                                     <f:selectItems value="#{categoryBean.listCategory}" var="c" itemValue="#{c.categoryId}" itemLabel="#{c.categoryName}"></f:selectItems>
                                                 </pr:selectOneMenu>
                                             </td>

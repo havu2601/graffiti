@@ -5,7 +5,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:pr="http://primefaces.org/ui">
+      xmlns:pr="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:cc="http://java.sun.com/jsf/composite">
     <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
     <ui:define name="content">
     <main>
@@ -31,7 +33,7 @@
                                     <!-- Product list -->
                                     
                                     <pr:dataTable class="table table-hover" style="text-align: center;" value="#{productBean.listProduct}" var="pr">
-                                        <pr:column headerText="ID" style="width: 50px ">
+                                        <pr:column headerText="ID" style="width: 50px;">
                                             <h:outputText value="#{pr.productId}"></h:outputText>
                                         </pr:column>
                                         <pr:column headerText="NAME" sortBy="#{pr.productName}">
@@ -40,11 +42,15 @@
                                         <pr:column headerText="CAPACITY" style="width: 100px">
                                             <h:outputText value="#{pr.productCapacity}"></h:outputText>
                                         </pr:column>
-                                        <pr:column headerText="PRICE" sortBy="#{pr.productPrice}">
+                                        <pr:column style="width: 150px" headerText="PRICE" sortBy="#{pr.productPrice}">
                                                    <h:outputText value="#{pr.productPrice} USD"></h:outputText>
                                         </pr:column>
                                         <pr:column headerText="STOCK" style="width: 70px;" sortBy="#{pr.productStock}">
                                                    <h:outputText value="#{pr.productStock}"></h:outputText>
+                                        </pr:column>
+                                        <pr:column headerText="STATUS" sortBy="#{pr.productStock}">
+                                            <h:outputText value="#{pr.productStatus == 1 ? 'For Sale' : 'Not For Sale'}"></h:outputText>
+                                            
                                         </pr:column>
                                         <pr:column headerText="ACTION">
                                             <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(pr.productId)}"></h:commandLink> | 
@@ -91,7 +97,6 @@
                                     <tr>
                                         <td>PRICE</td>
                                         <td><pr:inputText style="width: 400px;" id="price" type="number" value="#{productBean.price}" validatorMessage="Price invalid">
-                                                <f:convertNumber type="currency" currencySymbol="$"/>
                                                 <f:validateRequired/>
                                                 <f:validateDoubleRange minimum="1"/>
                                             </pr:inputText>
@@ -124,7 +129,7 @@
                                     <tr>
                                         <td>SUBCATEGORY</td>
                                         <td>
-                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.subcatId}">
+                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.subcatId}" filter="true" effect="fold" title="Select SubCategory">
                                                 <f:selectItems value="#{subcategoryBean.listSubCat}" var="sc" itemValue="#{sc.subcatId}" itemLabel="#{sc.subcatName}"/>
                                             </pr:selectOneMenu>
                                         </td>
@@ -132,7 +137,7 @@
                                     <tr>
                                         <td>BRAND</td>
                                         <td>
-                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.brandId}">
+                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.brandId}" filter="true" effect="fold" title="Select Brand">
                                                 <f:selectItems value="#{brandBean.listBrand}" var="b" itemValue="#{b.brandId}" itemLabel="#{b.brandName}"/>
                                             </pr:selectOneMenu>
                                         </td>
@@ -140,9 +145,18 @@
                                     <tr>
                                         <td>COLOR</td>
                                         <td>
-                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.colorId}">
+                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.colorId}" filter="true" effect="fold" title="Select Color">
                                                 <f:selectItems value="#{colorBean.listColor}" var="c" itemValue="#{c.colorId}" itemLabel="#{c.colorName}"/>
                                             </pr:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>STATUS</td>
+                                        <td>
+                                            <pr:selectOneRadio style="width: 400px;" value="#{productBean.status}">
+                                                <f:selectItem itemValue="1" itemLabel="For Sale"/>
+                                                <f:selectItem itemValue="0" itemLabel="Not For Sale"/>
+                                            </pr:selectOneRadio>>
                                         </td>
                                     </tr>
                                     <tr>
