@@ -44,10 +44,10 @@ public class ColorBean implements Serializable{
             rs = ejb.findAll();
             show(rs,"");
         }else{
-            if(null!=ejb.findByName(searchStr)){
-                Color ct = ejb.findByName(searchStr);
+            if(null!=ejb.findByAny("%"+searchStr+"%")){
+                List<Color> ct = ejb.findByAny("%"+searchStr+"%");
                 List<Color> rs = new ArrayList<>();
-                rs.add(ct);
+                rs.addAll(ct);
                 String msg = "Cannot find Brand with name " + searchStr;
                 show(rs,msg);
             }

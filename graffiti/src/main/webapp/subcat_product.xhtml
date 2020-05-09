@@ -28,6 +28,13 @@
         <link rel="stylesheet" href="./assets/css/responsive.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
         <link rel="stylesheet" href="assets/css/vycss.css"/>
+        <style>
+            .colorbox:hover{
+                transform: scale(1.1);
+                box-shadow: 0px 12px 24px 0px rgba(254, 69, 54, 0.5);
+                z-index:#{colorBean.listColor.size()};
+            }
+        </style>
     </h:head>
     <h:body>
         <!-- header start -->
@@ -217,7 +224,7 @@
                                     <c:forEach items="#{subproductBean.listProduct}" var="p">
                                             <div class="col-xl-4 col-lg-6 col-md-6">
                                             <div class="product-wrapper mb-50">
-                                                <div class="product-img mb-25">
+                                                <div class="product-img mb-25" style="opacity: #{p.productStock == 0 ? 0.3 : 1}">
                                                     <a href="detail.html">
                                                         <img src="./assets/images/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
                                                         <img class="secondary-img" src="./assets/images/EMC7060_1024x1024.jpg" alt=""/>
@@ -240,7 +247,7 @@
                                                     </h4>
                                                     <div class="product-meta">
                                                         <div class="pro-price">
-                                                            <span>$#{p.productPrice} USD</span>
+                                                            <span>$#{p.productPrice} USD</span><span style="color: red">#{p.productStock == 0 ? 'Sold Out' : 'In Stock'}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -262,7 +269,7 @@
                                     <ul class="sidemenu">
                                         <c:forEach items="#{subproductBean.listSubcat}" var="sc">
                                             <li>
-                                                <h:commandButton class="btnSC" action="#{subproductBean.loadProduct(sc.subcatId)}" value="#{sc.subcatName}">
+                                                <h:commandButton class="btnSC" action="#{subproductBean.loadProductBySubcat(sc.subcatId)}" value="#{sc.subcatName}">
                                                 </h:commandButton>
                                             </li>
                                         </c:forEach>
@@ -272,6 +279,34 @@
                         </div>
                     </div>
                     <!-- /SideBar -->
+                </div>
+                <div class="row" style="margin-top: 300px">
+                    <div class="row mb-12">
+                        <div class="col-xl-6 col-lg-6 col-md-6">
+                            <div class="product-showing mb-40">
+                                <p>COLOR COllECTION</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h:form>
+                    <div class="col-xl-12 col-lg-12" style="overflow-y: scroll; height: 910px;">
+                        <div class="row mb-12">
+                            <c:forEach items="#{colorViewBean.listColor}" var="c">
+                                <div class="col-xl-4 col-lg-6 col-md-6 colorbox" style="background-color: #{c.colorHexcode};">
+                                    <div class="colorbox-panel">
+                                        <span>#{c.colorName}</span><br/>
+                                        #{c.colorHexcode}<br/>
+                                        <h:commandButton class="btnCl" action="#{subproductBean.loadProductByColor(c.colorId)}" value="Get Product >>">
+<!--                                            <i class="fas fa-info-circle"></i>
+                                            Get Product
+                                            <i class="fas fa-play"></i>-->
+                                        </h:commandButton>>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                    </h:form>
                 </div>
             </div>
         </section>

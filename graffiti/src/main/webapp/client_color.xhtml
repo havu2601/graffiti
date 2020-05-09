@@ -9,7 +9,6 @@
     <ui:composition template="/WEB-INF/templates/clienttemplate.xhtml">
         <ui:define name="content"> 
             <style>
-                
                 .colorbox{
                     height: 130px; 
                     align-items: center;
@@ -73,7 +72,7 @@
                     <div class="col-xl-12 col-lg-12">
                         <!-- tab filter -->
                         <div class="row mb-12">
-                            <c:forEach items="#{colorBean.listColor}" var="c">
+                            <c:forEach items="#{colorViewBean.listColor}" var="c">
                                 <div class="col-xl-4 col-lg-6 col-md-6 colorbox" style="background-color: #{c.colorHexcode};"
                                      onclick="openPopup()">
                                     <div class="colorbox-panel">

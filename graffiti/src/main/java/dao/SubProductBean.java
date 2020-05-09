@@ -52,7 +52,7 @@ public class SubProductBean implements Serializable{
     
     public void loadSubCat(){
         listSubcat = ejbSubcat.findByCategory(Integer.parseInt(cateId));
-        listProduct = ejbProduct.findByCate(Integer.parseInt(cateId));
+        listProduct = ejbProduct.findByCateClient(Integer.parseInt(cateId));
         objCategory = ejbCate.findById(Integer.parseInt(cateId));
     }
     
@@ -60,8 +60,12 @@ public class SubProductBean implements Serializable{
         return "subcat_product.xhtml?cid=" +id+"&faces-redirect=true"; 
     }
     
-    public void loadProduct(int scId){
-        listProduct = ejbProduct.findBySubCat(scId);
+    public void loadProductBySubcat(int scId){
+        listProduct = ejbProduct.findBySubCatClient(scId);
+    }
+    
+    public void loadProductByColor(int cId){
+        listProduct = ejbProduct.findByColorClient(cId);
     }
 
     public String getCateId() {

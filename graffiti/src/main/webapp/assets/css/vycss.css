@@ -23,11 +23,35 @@ ul.sidemenu li{
 }
 ul.sidemenu li .btnSC{
     background-color: white;
+    color: black;
 }
 
 ul.sidemenu li .btnSC:hover{
-    color: red;
+    color: #20c997;
     background-color: white;
+}
+
+.colorbox{
+    height: 130px; 
+    align-items: center;
+    border: #ffffff solid 5px;
+    border-radius: 20px;
+}
+
+.colorbox-panel{
+    color: white; 
+    font-weight: bolder; 
+    font-size: 20px;
+    margin-bottom: .200rem; 
+    margin-right: 0.45rem; 
+    margin-left: 0.35rem; 
+    margin-top: 18px;
+}
+.btnCl{
+    position: absolute;
+    border: none;
+    background-color: white;
+    border-radius: 10px;
 }
 /*end sub_product*/
 
@@ -54,3 +78,5 @@ ul.sidemenu li .btnSC:hover{
     }
     
 /* end product-detail*/
+
+
