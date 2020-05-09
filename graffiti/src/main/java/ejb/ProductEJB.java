@@ -49,6 +49,26 @@ public class ProductEJB {
         return em.createNamedQuery("Product.findByColorId").setParameter("colorId", id).getResultList();
     }
     
+    public List<Product> findProductAscByName(){
+        return em.createNamedQuery("Product.findProductAscByName").getResultList();
+    }
+    
+    public List<Product> findProductDescByName(){
+        return em.createNamedQuery("Product.findProductDescByName").getResultList();
+    }
+    
+    public List<Product> findProductAscByPrice(){
+        return em.createNamedQuery("Product.findProductAscByPrice").getResultList();
+    }
+    
+    public List<Product> findProductDescByPrice(){
+        return em.createNamedQuery("Product.findProductDescByPrice").getResultList();
+    }
+    
+    public List<Product> findProductAscByCategory(){
+        return em.createNamedQuery("Product.findProductAscByCategory").getResultList();
+    }
+    
     public void addProduct(Product product){
         em.merge(product);
     }

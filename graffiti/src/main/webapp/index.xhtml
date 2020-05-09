@@ -5,12 +5,23 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pr="http://primefaces.org/ui">
     <ui:composition template="/WEB-INF/templates/clienttemplate.xhtml">
         <ui:define name="content"> 
 
         <main>
-
+            <style>
+                .sortBtn{
+                    width: 150px;
+                    height: 35px;
+                    background-color: white;
+                    border-radius: 10px;
+                }
+                .sortBtn:hover{
+                    box-shadow: 0px 5px 5px 0px rgba(254, 69, 54, 0.3);
+                }
+            </style>
         <!-- shop-area start -->
         <section class="shop-area pt-150 pb-100">
             <div class="container">
@@ -29,7 +40,6 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
                                     <!-- ProductItem -->
-                                    <!--<h:form>-->
                                         <c:forEach items="#{productBean.listProduct}" var="p">
                                             <div class="col-xl-4 col-lg-6 col-md-6">
                                             <div class="product-wrapper mb-50">
@@ -63,7 +73,6 @@
                                             </div>
                                         </div>
                                         </c:forEach>
-                                    <!--</h:form>-->
                                 </div>
 
                                 </div>
@@ -75,31 +84,28 @@
                         <div class="sidebar-shop">
                             <div class="shop-widget">
                                 <h3 class="shop-title">Search by</h3>
-                                <form action="#" class="shop-search">
-                                    <input type="text" placeholder="Your keyword...."/>
-                                    <button><i class="fa fa-search"></i></button>
-                                </form>
+                                <h:form class="shop-search">
+                                    <pr:inputText type="text" placeholder="Your keyword...." value="#{productBean.searchStr}">
+                                        <f:ajax event="change" listener="#{productBean.search()}"/>
+                                    </pr:inputText>
+                                    <button onclick="#{productBean.search()}"><i class="fa fa-search"></i></button>
+                                </h:form>
                             </div>
-<!-- 
+                            <h:form>
                             <div class="shop-widget">
-                                <h3 class="shop-title">Filter selection</h3>
-                                <div class="price-filter">
-                                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-                                    <input type="text" id="amount">
-                                </div>
-                            </div> -->
-
-                            <div class="shop-widget">
-                                <h3 class="shop-title">SHOP BY</h3>
+                                <h3 class="shop-title">SORT BY</h3>
                                 <ul class="shop-link">
-                                    <li><a href="#">Name: A-Z</a></li>
-                                    <li><a href="#">Name: Z-A</a></li>
-                                    <li><a href="#">Price: High to Low</a></li>
-                                    <li><a href="#">Price: Low to High</a></li>
-                                    <li><a href="#">Product: Top Sales</a></li>
+                                    <li><h:commandButton class="sortBtn" value="Name: A-Z" action="#{productBean.sortNameAsc()}">
+                                        </h:commandButton></li>
+                                    <li><h:commandButton class="sortBtn" value="Name: Z-A" action="#{productBean.sortNameDesc()}">
+                                        </h:commandButton></li>
+                                    <li><h:commandButton class="sortBtn" value="Price: Low to High" action="#{productBean.sortPriceAsc()}">
+                                        </h:commandButton></li>
+                                    <li><h:commandButton class="sortBtn" value="Name: High to Low" action="#{productBean.sortPriceDesc()}">
+                                        </h:commandButton></li>
                                 </ul>
                             </div>
-
+                            </h:form>
                             <div class="shop-widget">
                                 <h3 class="shop-title">Recent Product</h3>
                                 <ul class="shop-sidebar-product">
@@ -139,7 +145,7 @@
         </section>
         <!-- shop-area end -->
 
-
+        
         </main>
         </ui:define>
     </ui:composition>

@@ -8,12 +8,18 @@ package dao;
 import ejb.ImageEJB;
 import ejb.ProductEJB;
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.DataModel;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import model.Brand;
@@ -23,11 +29,6 @@ import model.Product;
 import model.SubCategory;
 
 
-
-/**
- *
- * @author DELL
- */
 @Named(value = "productBean")
 @ViewScoped
 public class ProductBean implements Serializable{
@@ -47,6 +48,8 @@ public class ProductBean implements Serializable{
     Color objColor;
     Image objImage;
     
+    DataModel<Product> products;
+    
     String productId;
     String brandId;
     String subcatId;
@@ -56,17 +59,14 @@ public class ProductBean implements Serializable{
     String price;
     String status;
     
-//    String buyStatus;
-//    String buyState;
-    
     String searchStr;
     String searchType;
     
     @PostConstruct
     public void init(){
         objProduct = new Product();
-        listProduct = ejbProduct.findAll();
         status = "1";
+        search();
     }
     
     public void search(){
@@ -100,13 +100,6 @@ public class ProductBean implements Serializable{
         if(null!=listImage && !listImage.isEmpty()){
             objImage = listImage.get(0);
         }
-//        if(objProduct.getProductStock()==0){
-//            buyStatus = "Out Of Stock";
-//            buyState = "none";
-//        }else{
-//            buyStatus = "In Stock";
-//            buyState = "block";
-//        }
     }
     
     public void loadProduct(int id){
@@ -176,6 +169,23 @@ public class ProductBean implements Serializable{
         return "image.xhtml?pid="+id+"&faces-redirect=true";
     }
     
+    public void sortNameAsc(){
+        listProduct = ejbProduct.findProductAscByName();
+    }
+    public void sortNameDesc(){
+        listProduct = ejbProduct.findProductDescByName();
+    }
+    public void sortPriceAsc(){
+        listProduct = ejbProduct.findProductAscByPrice();
+    }
+    public void sortPriceDesc(){
+        listProduct = ejbProduct.findProductDescByPrice();
+    }
+    public void sortcategory(){
+        listProduct = ejbProduct.findProductAscByCategory();
+    }
+        
+ 
     public List<Product> getListProduct() {
         return listProduct;
     }
@@ -304,28 +314,20 @@ public class ProductBean implements Serializable{
         this.status = status;
     }
 
-//    public String getBuyState() {
-//        return buyState;
-//    }
-//
-//    public void setBuyState(String buyState) {
-//        this.buyState = buyState;
-//    }
-//
-//    public String getBuyStatus() {
-//        return buyStatus;
-//    }
-//
-//    public void setBuyStatus(String buyStatus) {
-//        this.buyStatus = buyStatus;
-//    }
-    
     public Image getObjImage() {
         return objImage;
     }
 
     public void setObjImage(Image objImage) {
         this.objImage = objImage;
+    }
+
+    public DataModel<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(DataModel<Product> products) {
+        this.products = products;
     }
 
     
