@@ -47,9 +47,9 @@
                                                    <h:outputText value="#{pr.productStock}"></h:outputText>
                                         </pr:column>
                                         <pr:column headerText="ACTION">
-                                            <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(p.productId)}"></h:commandLink> | 
+                                            <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(pr.productId)}"></h:commandLink> | 
                                             <h:commandLink class="button" value="Remove" action="#{productBean.reset()}"></h:commandLink> |
-                                            <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(p.productId)}"></h:commandLink>
+                                            <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(pr.productId)}"></h:commandLink>
                                         </pr:column>
                                     </pr:dataTable>
                                     
