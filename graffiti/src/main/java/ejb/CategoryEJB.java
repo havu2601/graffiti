@@ -29,8 +29,8 @@ public class CategoryEJB {
         return em.find(Category.class, id);
     }
     
-    public Category findByName(String searchStr){
-        return (Category) em.createNamedQuery("Category.findByCategoryName").setParameter("categoryName", searchStr).getSingleResult();
+    public List<Category> findByName(String searchStr){
+        return em.createNamedQuery("Category.findByCategoryName").setParameter("categoryName", searchStr).getResultList();
     }
     
     public void addCategory(Category category){

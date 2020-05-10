@@ -4,7 +4,8 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:pr="http://primefaces.org/ui">
     <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
     <ui:define name="content">
     <main>
@@ -35,21 +36,21 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 
                                 <div class="row">
-                                    <!-- Product list -->
+                                    <!-- Image list -->
                                     
                                     
-                                    <h:dataTable class="table table-hover" value="#{imageBean.listImage}" var="i" >
-                                            <h:column>
-                                                <f:facet name="header">IMAGE</f:facet>
-                                                <img style="width: 260px; height: 300px;" src="../#{i.imagePath}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">ACTION</f:facet>
-                                                <h:commandButton value="Remove" action="#{imageBean.delete(i.imageId)}"></h:commandButton>
-                                            </h:column>
-                                        </h:dataTable>
+                                    <pr:dataTable class="table table-hover" value="#{imageBean.listImage}" var="i" >
+                                        <pr:column>
+                                            <f:facet name="header">IMAGE</f:facet>
+                                            <img style="width: 260px; height: 300px;" src="../#{i.imagePath}"/>
+                                        </pr:column>
+                                        <pr:column>
+                                            <f:facet name="header">ACTION</f:facet>
+                                            <h:commandButton value="Remove" action="#{imageBean.delete(i.imageId)}"></h:commandButton>
+                                        </pr:column>
+                                    </pr:dataTable>
                                     
-                                    <!-- Product list -->
+                                    <!-- Image list -->
                                 
 
                                 </div>

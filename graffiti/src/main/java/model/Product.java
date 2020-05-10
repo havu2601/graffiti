@@ -36,13 +36,26 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
     @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName LIKE :productName"),
-    @NamedQuery(name = "Product.findByAny", query = "SELECT p FROM Product p WHERE p.productName LIKE :searchStr OR p.brandId.brandName LIKE :searchStr OR p.subcatId.subcatName LIKE :searchStr OR p.subcatId.categoryId.categoryName LIKE :searchStr OR p.colorId.colorName LIKE :searchStr"),
-    @NamedQuery(name = "Product.findByColorId", query = "SELECT p FROM Product p WHERE p.colorId = :colorId"),
-    @NamedQuery(name = "Product.findByBrandId", query = "SELECT p FROM Product p WHERE p.brandId = :brandId"),
-    @NamedQuery(name = "Product.findBySubCatId", query = "SELECT p FROM Product p WHERE p.subcatId = :subcatId"),
+    @NamedQuery(name = "Product.findByAny", query = "SELECT p FROM Product p WHERE p.productName LIKE :searchStr OR p.brandId.brandName LIKE :searchStr OR p.subcatId.subcatName LIKE :searchStr OR p.subcatId.categoryId.categoryName LIKE :searchStr OR p.colorId.colorName LIKE :searchStr OR p.colorId.colorHexcode LIKE :searchStr"),
+    @NamedQuery(name = "Product.findByColorId", query = "SELECT p FROM Product p WHERE p.colorId.colorId = :colorId"),
+    @NamedQuery(name = "Product.findByBrandId", query = "SELECT p FROM Product p WHERE p.brandId.brandId = :brandId"),
+    @NamedQuery(name = "Product.findBySubCatId", query = "SELECT p FROM Product p WHERE p.subcatId.subcatId = :subcatId"),
+    @NamedQuery(name = "Product.findByCateId", query = "SELECT p FROM Product p WHERE p.subcatId.categoryId.categoryId = :categoryId"),
+    
+    @NamedQuery(name = "Product.findByAnyClient", query = "SELECT p FROM Product p WHERE (p.productName LIKE :searchStr OR p.brandId.brandName LIKE :searchStr OR p.subcatId.subcatName LIKE :searchStr OR p.subcatId.categoryId.categoryName LIKE :searchStr OR p.colorId.colorName LIKE :searchStr OR p.colorId.colorHexcode LIKE :searchStr) AND p.productStatus > 0"),
+    @NamedQuery(name = "Product.findByColorClient", query = "SELECT p FROM Product p WHERE p.colorId.colorId = :colorId AND p.productStatus > 0"),
+    @NamedQuery(name = "Product.findByBrandClient", query = "SELECT p FROM Product p WHERE p.brandId.brandId = :brandId AND p.productStatus > 0"),
+    @NamedQuery(name = "Product.findBySubCatClient", query = "SELECT p FROM Product p WHERE p.subcatId.subcatId = :subcatId AND p.productStatus > 0"),
+    @NamedQuery(name = "Product.findByCateClient", query = "SELECT p FROM Product p WHERE p.subcatId.categoryId.categoryId = :categoryId AND p.productStatus > 0"),
+    
     @NamedQuery(name = "Product.findByProductStock", query = "SELECT p FROM Product p WHERE p.productStock = :productStock"),
     @NamedQuery(name = "Product.findByProductPrice", query = "SELECT p FROM Product p WHERE p.productPrice = :productPrice"),
     @NamedQuery(name = "Product.findByProductCapacity", query = "SELECT p FROM Product p WHERE p.productCapacity = :productCapacity"),
+    @NamedQuery(name = "Product.findProductDescByName", query = "SELECT p FROM Product p WHERE p.productStatus > 0 ORDER BY p.productName DESC"),
+    @NamedQuery(name = "Product.findProductAscByName", query = "SELECT p FROM Product p WHERE p.productStatus > 0 ORDER BY p.productName ASC"),
+    @NamedQuery(name = "Product.findProductDescByPrice", query = "SELECT p FROM Product p WHERE p.productStatus > 0 ORDER BY p.productPrice DESC"),
+    @NamedQuery(name = "Product.findProductAscByPrice", query = "SELECT p FROM Product p WHERE p.productStatus > 0 ORDER BY p.productPrice ASC"),
+    @NamedQuery(name = "Product.findProductAscByCategory", query = "SELECT p FROM Product p WHERE p.productStatus > 0 ORDER BY p.subcatId.categoryId ASC"),
     @NamedQuery(name = "Product.findByProductDesc", query = "SELECT p FROM Product p WHERE p.productDesc = :productDesc")})
 public class Product implements Serializable {
 
@@ -74,6 +87,9 @@ public class Product implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "product_desc")
     private String productDesc;
+    @Basic(optional = false)
+    @Column(name = "product_status")
+    private int productStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private List<Image> imageList;
     @JoinColumn(name = "brand_id", referencedColumnName = "brand_id")
@@ -97,13 +113,14 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String productName, int productStock, double productPrice, int productCapacity, String productDesc) {
+    public Product(Integer productId, String productName, int productStock, double productPrice, int productCapacity, String productDesc, int productStatus) {
         this.productId = productId;
         this.productName = productName;
         this.productStock = productStock;
         this.productPrice = productPrice;
         this.productCapacity = productCapacity;
         this.productDesc = productDesc;
+        this.productStatus = productStatus;
     }
 
     public Integer getProductId() {
@@ -205,6 +222,15 @@ public class Product implements Serializable {
         this.orderDetailList = orderDetailList;
     }
 
+    public int getProductStatus() {
+        return productStatus;
+    }
+
+    public void setProductStatus(int productStatus) {
+        this.productStatus = productStatus;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

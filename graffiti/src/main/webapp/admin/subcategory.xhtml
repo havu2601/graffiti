@@ -3,7 +3,8 @@
 <html   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
-        xmlns:f="http://xmlns.jcp.org/jsf/core">    
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:pr="http://primefaces.org/ui">    
     <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
     <ui:define name="content"> 
 
@@ -28,33 +29,60 @@
                                 <h:form>
                                 <div class="row">
                                     <!-- Product list -->
-                                    
-                                    
-                                    <h:dataTable class="table table-hover" value="#{subcategoryBean.listSubCat}" var="sc">
-                                            <h:column>
-                                                <f:facet name="header">ID</f:facet>
-                                                <h:outputText value="#{sc.subcatId}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">NAME</f:facet>
-                                                <h:outputText value="#{sc.subcatName}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">CATEGORY</f:facet>
-                                                <h:outputText value="#{sc.categoryId.categoryName}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">ACTION</f:facet>
-                                                <h:commandLink class="button" value="Edit" action="#{subcategoryBean.loadCategory(sc.subcatId)}"></h:commandLink> |
-                                                <h:commandLink class="button" value="Remove" action="#{subcategoryBean.remove(sc.subcatId)}"></h:commandLink>
-                                            </h:column>
-                                        </h:dataTable>
-                                    
-                                    
+                                    <pr:dataTable class="table table-hover" value="#{subcategoryBean.listSubCat}" var="sc">
+                                        <pr:column>
+                                            <f:facet name="header">ID</f:facet>
+                                            <h:outputText value="#{sc.subcatId}"/>
+                                        </pr:column>
+                                        <pr:column>
+                                            <f:facet name="header">NAME</f:facet>
+                                            <h:outputText value="#{sc.subcatName}"/>
+                                        </pr:column>
+                                        <pr:column>
+                                            <f:facet name="header">CATEGORY</f:facet>
+                                            <h:outputText value="#{sc.categoryId.categoryName}"/>
+                                        </pr:column>
+                                        <pr:column>
+                                            <f:facet name="header">ACTION</f:facet>
+                                            <h:commandLink class="button" value="Edit" action="#{subcategoryBean.loadCategory(sc.subcatId)}"></h:commandLink> |
+                                            <h:commandLink class="button" value="Remove" action="#{subcategoryBean.remove(sc.subcatId)}"></h:commandLink>
+                                        </pr:column>
+                                    </pr:dataTable>
                                     <!-- Product list -->
-                                    
                                 </div>
-                                    </h:form>
+                                </h:form>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <h:form>
+                                    <table class="table">
+                                        <tr>
+                                            <td>NAME</td>
+                                            <td><pr:inputText style="width: 400px;" id="subcatName" value="#{subcategoryBean.objSubCat.subcatName}" validatorMessage="Name cannot be blank!">
+                                                    <f:validateRequired/>
+                                                </pr:inputText>
+                                                <h:message style="color: red" for="subcatName"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>CATEGORY</td>
+                                            <td>
+                                                <pr:selectOneMenu style="width: 400px;" value="#{subcategoryBean.categoryId}" filter="true" effect="fold" title="Select Category">
+                                                    <f:selectItems value="#{categoryBean.listCategory}" var="c" itemValue="#{c.categoryId}" itemLabel="#{c.categoryName}"></f:selectItems>
+                                                </pr:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center">
+                                                <h:commandButton class="button" action="#{subcategoryBean.addNewCategory()}" value="Submit"></h:commandButton>
+                                                <h:commandButton class="button" action="#{subcategoryBean.reset()}" value="Reset"></h:commandButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:form>
+                                </div>
                             </div>
                         </div>
                             
@@ -65,47 +93,14 @@
                             <div class="shop-widget">
                                 <h3 class="shop-title">Search by</h3>
                                 <h:form class="shop-search">
-                                    <h:inputText p:placeholder="Your keyword...." value="#{subcategoryBean.searchStr}"/>
+                                    <pr:inputText p:placeholder="Your keyword...." value="#{subcategoryBean.searchStr}">
+                                        <f:ajax event="change" listener="#{subcategoryBean.search()}"/>
+                                    </pr:inputText>
                                     <button onclick="#{subcategoryBean.search()}"><i class="fa fa-search"></i></button>
                                     
                                 </h:form>
                             </div>
-<!-- 
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Filter selection</h3>
-                                <div class="price-filter">
-                                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-                                    <input type="text" id="amount">
-                                </div>
-                            </div> -->
-
-                            <div class="shop-widget">
-                                <h3 class="shop-title">UPDATE SUBCATEGORY COLLECTION</h3>
-                                <h:form>
-                                    <table class="table">
-                                        <tr>
-                                            <td>NAME</td>
-                                            <td><h:inputText value="#{subcategoryBean.objSubCat.subcatName}"></h:inputText></td>
-                                        </tr>
-                                        <tr>
-                                            <td>CATEGORY</td>
-                                            <td>
-                                                <h:selectOneMenu value="#{subcategoryBean.categoryId}">
-                                                    <f:selectItems value="#{categoryBean.listCategory}" var="c" itemValue="#{c.categoryId}" itemLabel="#{c.categoryName}"></f:selectItems>
-                                                </h:selectOneMenu>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="text-align: center">
-                                                <h:commandButton class="button" action="#{subcategoryBean.addNewCategory()}" value="Submit"></h:commandButton>
-                                                <h:commandButton class="button" action="#{subcategoryBean.reset()}" value="Reset"></h:commandButton>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    
-                                </h:form>
-                            </div>
-                            
+          
                         </div>
                     </div>
                     <!-- /SideBar -->

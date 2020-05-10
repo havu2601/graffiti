@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SubCategory.findAll", query = "SELECT s FROM SubCategory s"),
     @NamedQuery(name = "SubCategory.findBySubcatId", query = "SELECT s FROM SubCategory s WHERE s.subcatId = :subcatId"),
-    @NamedQuery(name = "SubCategory.findBySubcatName", query = "SELECT s FROM SubCategory s WHERE s.subcatName = :subcatName")})
+    @NamedQuery(name = "SubCategory.findByCategory", query = "SELECT s FROM SubCategory s WHERE s.categoryId.categoryId = :categoryId"),
+    @NamedQuery(name = "SubCategory.findBySubcatName", query = "SELECT s FROM SubCategory s WHERE s.subcatName LIKE :subcatName")})
 public class SubCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;

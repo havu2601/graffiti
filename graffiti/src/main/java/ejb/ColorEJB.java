@@ -21,8 +21,16 @@ public class ColorEJB {
         return em.find(Color.class, id);
     }
     
-    public Color findByName(String searchStr){
-        return (Color) em.createNamedQuery("Color.findByColorName").setParameter("colorName", searchStr).getSingleResult();
+    public List<Color> findByName(String searchStr){
+        return em.createNamedQuery("Color.findByColorName").setParameter("colorName", searchStr).getResultList();
+    }
+    
+    public List<Color> findSortedColor(){
+        return em.createNamedQuery("Color.findAllSort").getResultList();
+    }
+    
+    public List<Color> findByAny(String searchStr){
+        return em.createNamedQuery("Color.findByAny").setParameter("searchStr", searchStr).getResultList();
     }
     
     public void addColor(Color color){

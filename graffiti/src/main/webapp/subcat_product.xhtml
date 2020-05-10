@@ -28,6 +28,13 @@
         <link rel="stylesheet" href="./assets/css/responsive.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
         <link rel="stylesheet" href="assets/css/vycss.css"/>
+        <style>
+            .colorbox:hover{
+                transform: scale(1.1);
+                box-shadow: 0px 12px 24px 0px rgba(254, 69, 54, 0.5);
+                z-index:#{colorBean.listColor.size()};
+            }
+        </style>
     </h:head>
     <h:body>
         <!-- header start -->
@@ -189,9 +196,13 @@
             
         </header>
         <!-- header end -->
+ 
 
         <main>
-            
+            <f:metadata>
+                <f:viewParam name="id" value="#{subproductBean.cateId}"></f:viewParam>
+                <f:viewAction action="#{subproductBean.loadSubCat()}"/>
+            </f:metadata>
         <!-- shop-area start -->
         <section class="shop-area pt-150 pb-100">
             <div class="container">
@@ -201,7 +212,7 @@
                         <div class="row mb-10">
                             <div class="col-xl-5 col-lg-6 col-md-6">
                                 <div class="product-showing mb-40">
-                                    <p>Showing #{indexViewdBean.listProduct.size()} results</p>
+                                    <p>Showing #{subproductBean.listProduct.size()} results</p>
                                 </div>
                             </div>
                         </div>
@@ -210,9 +221,9 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
                                     <!-- ProductItem -->
-                                        <c:forEach items="#{indexViewdBean.listProduct}" var="p">
+                                    <c:forEach items="#{subproductBean.listProduct}" var="p">
                                             <div class="col-xl-4 col-lg-6 col-md-6">
-                                                <div class="product-wrapper mb-50">
+                                            <div class="product-wrapper mb-50">
                                                 <div class="product-img mb-25" style="opacity: #{p.productStock == 0 ? 0.3 : 1}">
                                                     <a href="detail.html">
                                                         <img src="./assets/images/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
@@ -229,14 +240,14 @@
                                                 </div>
                                                 <div class="product-content pr-0">
                                                     <div class="pro-cat mb-10">
-                                                        <a href="subcat_product.xhtml?id=#{p.subcatId.categoryId.categoryId}">#{p.subcatId.categoryId.categoryName}</a>
+                                                        <a href="#">#{p.subcatId.categoryId.categoryName}</a>
                                                     </div>
                                                     <h4>
                                                         <a href="product_detail.xhtml?pid=#{p.productId}">#{p.productName}</a>
                                                     </h4>
                                                     <div class="product-meta">
                                                         <div class="pro-price">
-                                                            <span>$#{p.productPrice} USD</span> <span style="color: red">#{p.productStock == 0 ? 'Sold Out' : 'In Stock'}</span>
+                                                            <span>$#{p.productPrice} USD</span><span style="color: red">#{p.productStock == 0 ? 'Sold Out' : 'In Stock'}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -253,63 +264,49 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="sidebar-shop">
                             <div class="shop-widget">
-                                <h3 class="shop-title">Search by</h3>
+                                <h3 class="shop-title" style="text-align: right;"> #{subproductBean.objCategory.categoryName}</h3>
                                 <h:form class="shop-search">
-                                    <pr:inputText type="text" placeholder="Your keyword...." value="#{indexViewdBean.searchStr}">
-                                        <f:ajax event="change" listener="#{indexViewdBean.search()}"/>
-                                    </pr:inputText>
-                                    <button onclick="#{indexViewdBean.search()}"><i class="fa fa-search"></i></button>
-                                </h:form>
-                            </div>
-                            <h:form>
-                            <div class="shop-widget">
-                                <h3 class="shop-title">SORT BY</h3>
-                                <ul class="shop-link">
-                                    <li><h:commandButton class="sortBtn" value="Name: A-Z" action="#{indexViewdBean.sortNameAsc()}">
-                                        </h:commandButton></li>
-                                    <li><h:commandButton class="sortBtn" value="Name: Z-A" action="#{indexViewdBean.sortNameDesc()}">
-                                        </h:commandButton></li>
-                                    <li><h:commandButton class="sortBtn" value="Price: Low to High" action="#{indexViewdBean.sortPriceAsc()}">
-                                        </h:commandButton></li>
-                                    <li><h:commandButton class="sortBtn" value="Name: High to Low" action="#{indexViewdBean.sortPriceDesc()}">
-                                        </h:commandButton></li>
-                                </ul>
-                            </div>
-                            </h:form>
-                            <div class="shop-widget">
-                                <h3 class="shop-title">Recent Product</h3>
-                                <ul class="shop-sidebar-product">
-                                    
-                                    <li>
-                                        <div class="side-pro-img">
-                                            <a href="#"><img src="./assets/images/EMC7060_1024x1024.jpg" alt=""/></a>
-                                        </div>
-                                        <div class="side-pro-content">
-                                            <div class="side-pro-rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h5><a href="#">Montana</a></h5>
-                                            <div class="side-pro-price">
-                                                <span>$119.00 USD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                            <div class="shop-widget">
-                                <div class="shop-sidebar-banner">
-                                    <a href="#"><img src="./assets/images/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/></a>
-                                </div>
+                                    <ul class="sidemenu">
+                                        <c:forEach items="#{subproductBean.listSubcat}" var="sc">
+                                            <li>
+                                                <h:commandButton class="btnSC" action="#{subproductBean.loadProductBySubcat(sc.subcatId)}" value="#{sc.subcatName}">
+                                                </h:commandButton>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </h:form>    
                             </div>
                         </div>
                     </div>
                     <!-- /SideBar -->
+                </div>
+                <div class="row" style="margin-top: 300px">
+                    <div class="row mb-12">
+                        <div class="col-xl-6 col-lg-6 col-md-6">
+                            <div class="product-showing mb-40">
+                                <p>COLOR COllECTION</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h:form>
+                    <div class="col-xl-12 col-lg-12" style="overflow-y: scroll; height: 910px;">
+                        <div class="row mb-12">
+                            <c:forEach items="#{colorViewBean.listColor}" var="c">
+                                <div class="col-xl-4 col-lg-6 col-md-6 colorbox" style="background-color: #{c.colorHexcode};">
+                                    <div class="colorbox-panel">
+                                        <span>#{c.colorName}</span><br/>
+                                        #{c.colorHexcode}<br/>
+                                        <h:commandButton class="btnCl" action="#{subproductBean.loadProductByColor(c.colorId)}" value="Get Product >>">
+<!--                                            <i class="fas fa-info-circle"></i>
+                                            Get Product
+                                            <i class="fas fa-play"></i>-->
+                                        </h:commandButton>>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                    </h:form>
                 </div>
             </div>
         </section>
@@ -403,4 +400,3 @@
 
     </h:body>
 </html>
-

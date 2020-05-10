@@ -33,21 +33,27 @@ public class ProductEJB {
         return (Product) em.createNamedQuery("Product.findByProductName").setParameter("productName", searchStr).getSingleResult();
     }
     
-    public Product findByBrand(String searchStr){
-        return (Product) em.createNamedQuery("Product.findByBrandId").setParameter("brandId", searchStr).getSingleResult();
+    public List<Product> findByBrand(int id){
+        return em.createNamedQuery("Product.findByBrandId").setParameter("brandId", id).getResultList();
+    }
+    
+    public List<Product> findByCate(int id){
+        return em.createNamedQuery("Product.findByCateId").setParameter("categoryId", id).getResultList();
     }
     
     public List<Product> findByAny(String searchStr){
         return em.createNamedQuery("Product.findByAny").setParameter("searchStr", searchStr).getResultList();
     }
     
-    public Product findBySubCat(String searchStr){
-        return (Product) em.createNamedQuery("Product.findBySubCatId").setParameter("subcatId", searchStr).getSingleResult();
+    public List<Product> findBySubCat(int id){
+        return em.createNamedQuery("Product.findBySubCatId").setParameter("subcatId", id).getResultList();
     }
     
-    public Product findByColor(String searchStr){
-        return (Product) em.createNamedQuery("Product.findByColorId").setParameter("colorId", searchStr).getSingleResult();
+    public List<Product> findByColor(int id){
+        return em.createNamedQuery("Product.findByColorId").setParameter("colorId", id).getResultList();
     }
+    
+    
     
     public void addProduct(Product product){
         em.merge(product);
@@ -61,4 +67,43 @@ public class ProductEJB {
         em.remove(em.merge(product));
     }
     
+    //Client
+    public List<Product> findProductAscByName(){
+        return em.createNamedQuery("Product.findProductAscByName").getResultList();
+    }
+    
+    public List<Product> findProductDescByName(){
+        return em.createNamedQuery("Product.findProductDescByName").getResultList();
+    }
+    
+    public List<Product> findProductAscByPrice(){
+        return em.createNamedQuery("Product.findProductAscByPrice").getResultList();
+    }
+    
+    public List<Product> findProductDescByPrice(){
+        return em.createNamedQuery("Product.findProductDescByPrice").getResultList();
+    }
+    
+    public List<Product> findProductAscByCategory(){
+        return em.createNamedQuery("Product.findProductAscByCategory").getResultList();
+    }
+    public List<Product> findByAnyClient(String searchStr){
+        return em.createNamedQuery("Product.findByAnyClient").setParameter("searchStr", searchStr).getResultList();
+    }
+    
+    public List<Product> findBySubCatClient(int id){
+        return em.createNamedQuery("Product.findBySubCatClient").setParameter("subcatId", id).getResultList();
+    }
+    
+    public List<Product> findByColorClient(int id){
+        return em.createNamedQuery("Product.findByColorClient").setParameter("colorId", id).getResultList();
+    }
+    
+    public List<Product> findByBrandClient(int id){
+        return em.createNamedQuery("Product.findByBrandClient").setParameter("brandId", id).getResultList();
+    }
+    
+    public List<Product> findByCateClient(int id){
+        return em.createNamedQuery("Product.findByCateClient").setParameter("categoryId", id).getResultList();
+    }
 }

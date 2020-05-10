@@ -7,17 +7,195 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:pr="http://primefaces.org/ui">
-    <ui:composition template="/WEB-INF/templates/clienttemplate.xhtml">
-        <ui:define name="content"> 
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <title>Graffiti</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<main>
-    <style>
+        <link rel="manifest" href="./site.webmanifest"/>
+        <link rel="shortcut icon" type="image/x-icon" href="./assets/logo_shop.png"/>
+        
+        <!-- Place favicon.ico in the root directory -->
 
-    </style>
-    <f:metadata>
-        <f:viewParam name="pid" value="#{productBean.productId}"/>
-        <f:viewAction action="#{productBean.showDetail()}"/>
-    </f:metadata>
+        <!-- CSS here -->
+        <link rel="stylesheet" href="./assets/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./assets/css/animate.min.css"/>
+        <link rel="stylesheet" href="./assets/css/default.css"/>
+        <link rel="stylesheet" href="./assets/css/style.css"/>
+        <link rel="stylesheet" href="./assets/css/responsive.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
+        <link rel="stylesheet" href="assets/css/vycss.css"/>
+    </h:head>
+    <h:body>
+        <!-- header start -->
+        <header>
+            <div id="header-sticky" class="header-area box-90 sticky-header">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
+                            <div class="logo">
+                                <a href="#"><img style="width: 100px;height: 100px;"  src="./assets/logo_shop.png" alt=""/></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-6 col-md-8 col-8 d-none d-xl-block">
+                                <div class="main-menu text-center">
+                                    <nav id="mobile-menu" style="display: block;">
+                                        <ul>
+                                            <li>
+                                                <a href="./index.xhtml">Home</a>
+                                            </li>
+                                            <c:forEach items="#{categoryBean.listCategory}" var="c">
+                                                <li>
+                                                    <a href="subcat_product.xhtml?id=#{c.categoryId}">#{c.categoryName.toUpperCase()}</a>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                    </nav>
+                                </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
+                            <div class="header-right f-right">
+                                <ul>
+                                    <li class="search-btn">
+                                        <a class="search-btn nav-search search-trigger" href="#"><i class="fas fa-search"></i></a>
+                                    </li>
+                                    <li class="login-btn"><a href="#"><i class="far fa-user"></i></a>
+                                        <h:panelGroup rendered="#{not userBean.isLoggedin}">
+                                            <ul class="minicart" style="width: 150px;margin-top: 5px">
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <a href="./login.xhtml">Log In</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <a href="./register.xhtml">Register</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{userBean.isLoggedin}">
+                                            <ul class="minicart" style="width: 150px;margin-top: 5px">
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <a class="cart-product-name" href="#"><h:outputText value="Hello, #{userBean.acc.userName}" /></a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <h:commandButton action="#{userBean.doLogout()}" value="Log out"/>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </h:panelGroup>
+                                    </li>
+                                    <li class="d-shop-cart"><a href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">3</span></a>
+                                        <!-- <ul class="minicart">
+                                            <li>
+                                                <div class="cart-img">
+                                                    <a href="#">
+                                                        <img src="./assets/pro1.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-content">
+                                                    <h3>
+                                                        <a href="#">Black &amp; White Shoes</a>
+                                                    </h3>
+                                                    <div class="cart-price">
+                                                        <span class="new">$ 229.9</span>
+                                                        <span>
+                                                            <del>$239.9</del>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="del-icon">
+                                                    <a href="#">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="cart-img">
+                                                    <a href="#">
+                                                        <img src="./assets/pro2.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-content">
+                                                    <h3>
+                                                        <a href="#">Black &amp; White Shoes</a>
+                                                    </h3>
+                                                    <div class="cart-price">
+                                                        <span class="new">$ 229.9</span>
+                                                        <span>
+                                                            <del>$239.9</del>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="del-icon">
+                                                    <a href="#">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="cart-img">
+                                                    <a href="#">
+                                                        <img src="./assets/pro3.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-content">
+                                                    <h3>
+                                                        <a href="#">Black &amp; White Shoes</a>
+                                                    </h3>
+                                                    <div class="cart-price">
+                                                        <span class="new">$ 229.9</span>
+                                                        <span>
+                                                            <del>$239.9</del>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="del-icon">
+                                                    <a href="#">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="total-price">
+                                                    <span class="f-left">Total:</span>
+                                                    <span class="f-right">$300.0</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="checkout-link">
+                                                    <a href="#">Shopping Cart</a>
+                                                    <a class="red-color" href="#">Checkout</a>
+                                                </div>
+                                            </li>
+                                        </ul> -->
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-12 d-xl-none">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+        <!-- header end -->
+
+    <main>
+    
+        <f:metadata>
+            <f:viewParam name="pid" value="#{productBean.productId}"/>
+            <f:viewAction action="#{productBean.showDetail()}"/>
+        </f:metadata>
         <!-- breadcrumb-area-start -->
         <section class="breadcrumb-area" style="background-image: url('./assets/page-title.png'); height: 300px;">
             <div class="container">
@@ -40,20 +218,12 @@
         <section class="shop-details-area pt-55">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-2 col-lg-4">
-                        <div class="shop-thumb-tab" style="overflow:auto; width: 200px; height:400px;">
-                            
-                            <pr:dataTable class="table" value="#{productBean.listImage}" var="img">
-                                <pr:column>
-                                    <img src="#{img.imagePath}" alt="" style="max-width: 100px; max-height: 100px;" onclick="showImage(this);"/>
-                                </pr:column>
-                            </pr:dataTable>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4">
-                        <div class="product-details-img mb-10">
-                            <img id="imageShow" style="width: 400px; height: 400px;" src="#{productBean.objImage.imagePath}"/>
-                        </div>
+                    <div class="col-xl-6 col-lg-6">
+                            <h:form id="form">
+                                <pr:galleria value="#{productBean.listImage}" var="img" style="font-size: 40px" panelWidth="560" panelHeight="480" frameHeight="100" frameWidth="85" effect="slide" >
+                                    <pr:graphicImage style="height: 480px; width: 560px;" value="#{img.imagePath}"/> 
+                                </pr:galleria>
+                            </h:form>
                     </div>
                     <div class="col-xl-6 col-lg-8">
                         <div class="product-details mb-30 pl-30">
@@ -76,16 +246,16 @@
                                         <li><span>Brands:</span> #{productBean.objProduct.brandId.brandName}</li>
                                         <!--<li><span>Product Code:</span> d12</li>-->
                                         <li><span>Reward Points:</span> 100</li>
-                                        <li><span>Color:</span> <span style="background-color: #{productBean.objProduct.colorId.colorHexcode}; color: #{productBean.objProduct.colorId.colorHexcode};">color</span></li>
+                                        <li><span>Color:</span> <button class="btnColor" style="background-color: #{productBean.objProduct.colorId.colorHexcode};"></button></li>
                                         <li><span>Hexcode:</span> #{productBean.objProduct.colorId.colorHexcode}</li>
                                         <li><span>Pigment:</span> #{productBean.objProduct.colorId.colorPigment}</li>
                                         <li><span>Coverage:</span> #{productBean.objProduct.colorId.colorCoverage}</li>
                                         <li><span>Lightfastness:</span> #{productBean.objProduct.colorId.colorLightfastness}</li>
-                                        <li><span>Stock:</span> <span class="in-stock">#{productBean.status}</span></li>
+                                        <li><span>Stock:</span> <span class="in-stock">#{productBean.objProduct.productStock == 0 ? 'Out Of Stock' : 'In Stock'}</span></li>
                                     </ul>
                                 </div>
 
-                                <div class="product-action-details variant-item" style="display: #{productBean.buyState}">
+                                <div class="product-action-details variant-item" style="display: #{productBean.objProduct.productStock == 0 ? 'none' : 'block'}">
                                     <div class="product-details-action">
                                         <form action="#">
                                             <div class="plus-minus">
@@ -406,16 +576,96 @@
                         </div>
                     </div>
             </section>
-            <!-- product-area end -->
-            
-            <script>
-                function showImage(img){
-                    var image = document.getElementById("imageShow");
-                    image.src = img.src;
-                }
-            </script>
         </main>        
-        </ui:define>
-    </ui:composition>
+        <footer class="footer-area pl-100 pr-100">
+            <div class="footer-area box-90 pt-100 pb-60" data-background="img/bg/footer.jpg" style="background-image: url(&quot;img/bg/footer.jpg&quot;);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-6 col-md-6 ">
+                            <div class="footer-widget mb-40 pr-70">
+                                <div class="footer-logo">
+                                    <a href="#"><img src="./assets/logo_shop.png" alt=""/></a>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                    ut labore et dolore mag na
+                                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                    ex ea commodo consequat.
+                                </p>
+                                <div class="footer-time d-flex mt-30">
+                                    <div class="time-icon">
+                                        <img src="./assets/time.png" alt=""/>
+                                    </div>
+                                    <div class="time-text">
+                                        <span>Got Questions ? Call us 24/7!</span>
+                                        <h2>(0600) 874 548</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-3">
+                            <div class="footer-widget mb-40">
+                                <h3>Social Media</h3>
+                                <ul class="footer-link">
+                                    <li><a href="#">Facebook</a></li>
+                                    <li><a href="#">Twitter</a></li>
+                                    <li><a href="#">Behance</a></li>
+                                    <li><a href="#"> Dribbble</a></li>
+                                    <li><a href="#">Linkedin</a></li>
+                                    <li><a href="#">Youtube</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-2 col-md-3 d-md-none d-xl-block">
+                            <div class="footer-widget pl-50 mb-40">
+                                <h3>Location</h3>
+                                <ul class="footer-link">
+                                    <li><a href="#">New York</a></li>
+                                    <li><a href="#">Tokyo</a></li>
+                                    <li><a href="#">Dhaka</a></li>
+                                    <li><a href="#">Chittagong</a></li>
+                                    <li><a href="#">China</a></li>
+                                    <li><a href="#">Japan</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-3">
+                            <div class="footer-widget mb-40">
+                                <h3>About</h3>
+                                <ul class="footer-link">
+                                    <li><a href="#">Terms &amp; Conditions</a></li>
+                                    <li><a href="#"> Privacy Policy</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Wholesale</a></li>
+                                    <li><a href="#">Direction</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer end -->
+
+        <!-- Fullscreen search -->
+        <div class="search-wrap">
+            <div class="search-inner">
+                <i class="fas fa-times search-close" id="search-close"></i>
+                <div class="search-cell">
+                    <form method="get">
+                        <div class="search-field-holder">
+                            <input type="search" class="main-search-input" placeholder="Search Entire Store..."/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- end fullscreen search -->
+        <script>
+            function showImage(img){
+                var image = document.getElementById("imageShow");
+                image.src = img.src;
+            }
+        </script>
+    </h:body>
 </html>
 

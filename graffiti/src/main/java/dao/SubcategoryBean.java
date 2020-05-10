@@ -5,6 +5,7 @@
  */
 package dao;
 
+import ejb.ProductEJB;
 import ejb.SubcategoryEJB;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class SubcategoryBean implements Serializable{
     @EJB
     private SubcategoryEJB ejb;
     
+    @EJB
+    private ProductEJB ejbProduct;
+    
     List<SubCategory> listSubCat;
     SubCategory objSubCat;
 //    List<Category> listCategory;
@@ -49,11 +53,11 @@ public class SubcategoryBean implements Serializable{
             rs = ejb.findAll();
             show(rs,"");
         }else{
-            if(null!=ejb.findByName(searchStr)){
-                SubCategory ct = ejb.findByName(searchStr);
+            if(null!=ejb.findByName("%"+searchStr+"%")){
+                List<SubCategory> ct = ejb.findByName("%"+searchStr+"%");
                 List<SubCategory> rs = new ArrayList<>();
-                rs.add(ct);
-                String msg = "Cannot find Brand with name " + searchStr;
+                rs.addAll(ct);
+                String msg = "Cannot find Subcategory with name " + searchStr;
                 show(rs,msg);
             }
         }
@@ -92,7 +96,9 @@ public class SubcategoryBean implements Serializable{
     
     public String remove(int id){
         try {
-            ejb.delete(ejb.findById(id));
+            if(ejbProduct.findBySubCat(id)==null || ejbProduct.findBySubCat(id).isEmpty()){
+                ejb.delete(ejb.findById(id));
+            }
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
         }
