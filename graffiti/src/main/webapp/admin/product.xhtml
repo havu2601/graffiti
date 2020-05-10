@@ -54,6 +54,7 @@
                                         </pr:column>
                                         <pr:column headerText="ACTION">
                                             <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(pr.productId)}"></h:commandLink> | 
+                                            <h:commandLink class="button" value="Remove" action="#{productBean.reset()}"></h:commandLink> |
                                             <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(pr.productId)}"></h:commandLink>
                                         </pr:column>
                                     </pr:dataTable>
