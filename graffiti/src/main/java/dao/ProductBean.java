@@ -8,18 +8,12 @@ package dao;
 import ejb.ImageEJB;
 import ejb.ProductEJB;
 import java.io.Serializable;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.DataModel;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import model.Brand;
@@ -47,8 +41,6 @@ public class ProductBean implements Serializable{
     SubCategory objSubCat;
     Color objColor;
     Image objImage;
-    
-    DataModel<Product> products;
     
     String productId;
     String brandId;
@@ -126,11 +118,17 @@ public class ProductBean implements Serializable{
     }
     
     public String addNewProduct(){
+        updateProduct();
         if(null==objProduct.getProductId()){
-            updateProduct();
-            ejbProduct.addProduct(objProduct);
+            if(checkProductExist())ejbProduct.addProduct(objProduct);
+                
+        }else if(!checkProductExist()){
+            Product check = ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId)).get(0);
+            if(check.getProductId() == objProduct.getProductId()){
+                ejbProduct.updateProduct(objProduct);
+            }
+            reset();
         }else{
-            updateProduct();
             ejbProduct.updateProduct(objProduct);
             reset();
         }
@@ -150,6 +148,13 @@ public class ProductBean implements Serializable{
         updateSubCat();
         objProduct.setSubcatId(objSubCat);
     }
+    public boolean checkProductExist(){
+        if(ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId))==null || 
+                ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId)).isEmpty()){
+            return true;
+        }
+        return false;
+    }
     public void updateBrand(){
         objBrand = new Brand();
         objBrand.setBrandId(Integer.parseInt(brandId));
@@ -168,7 +173,7 @@ public class ProductBean implements Serializable{
     public String moveToImage(int id){
         return "image.xhtml?pid="+id+"&faces-redirect=true";
     }
-    
+    //SORT
     public void sortNameAsc(){
         listProduct = ejbProduct.findProductAscByName();
     }
@@ -185,7 +190,7 @@ public class ProductBean implements Serializable{
         listProduct = ejbProduct.findProductAscByCategory();
     }
         
- 
+    //GETTER SETTER
     public List<Product> getListProduct() {
         return listProduct;
     }
@@ -322,13 +327,4 @@ public class ProductBean implements Serializable{
         this.objImage = objImage;
     }
 
-    public DataModel<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(DataModel<Product> products) {
-        this.products = products;
-    }
-
-    
 }

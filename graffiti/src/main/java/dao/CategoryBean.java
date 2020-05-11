@@ -66,13 +66,24 @@ public class CategoryBean implements Serializable{
     
     public String addNewCategory(){
         if(null==objCategory.getCategoryId()){
-            ejbCate.addCategory(objCategory);
+            if(checkValid()){
+            ejbCate.addCategory(objCategory);}
+        }else if(!checkValid()){
+            if(ejbCate.checkName(objCategory.getCategoryName()).get(0).getCategoryId()==objCategory.getCategoryId())
+            {
+            ejbCate.updateCategory(objCategory);}
         }else{
             ejbCate.updateCategory(objCategory);
         }
         return "category.xhtml?faces-redirect=true";
     }
     
+    public boolean checkValid(){
+        if(null==ejbCate.checkName(objCategory.getCategoryName()) || ejbCate.checkName(objCategory.getCategoryName()).isEmpty()){
+            return true;
+        }
+        return false;
+    }
     public void reset(){
         objCategory = new Category();
     }

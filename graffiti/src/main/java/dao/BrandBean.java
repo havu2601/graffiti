@@ -6,6 +6,7 @@
 package dao;
 
 import ejb.BrandEJB;
+import ejb.ProductEJB;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,9 @@ public class BrandBean implements Serializable{
 
     @EJB
     private BrandEJB ejb;
+    
+    @EJB 
+    private ProductEJB ejbproduct;
     
     List<Brand> listBrand;
     Brand objBrand;
@@ -68,19 +72,33 @@ public class BrandBean implements Serializable{
     
     public String addNewBrand(){
         if(objBrand.getBrandId()==null){
-            ejb.addBrand(objBrand);
+            if(checkValid()){
+                ejb.addBrand(objBrand);
+            }
+        }else if(!checkValid()){
+            if(ejb.findByName(objBrand.getBrandName()).get(0).getBrandId()==objBrand.getBrandId()){
+                ejb.updateBrand(objBrand);
+            }
         }else{
             ejb.updateBrand(objBrand);
         }
         return "brand.xhtml?faces-redirect=true";
     }
-    
+    public boolean checkValid(){
+        if(null==ejb.findByName(objBrand.getBrandName()) || ejb.findByName(objBrand.getBrandName()).isEmpty()){
+            return true;
+        }
+        return false;
+    }
     public void reset(){
         objBrand = new Brand();
     }
     public String remove(int id){
         try {
-            ejb.delete(ejb.findById(id));
+            if(ejbproduct.findByBrand(id)==null || ejbproduct.findByBrand(id).isEmpty()){
+                ejb.delete(ejb.findById(id));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
+            }
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
         }

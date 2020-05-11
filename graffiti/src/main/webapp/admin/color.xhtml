@@ -41,7 +41,7 @@
                                             <f:facet name="header">NAME</f:facet>
                                             <h:outputText value="#{c.colorName}"/>
                                         </pr:column>
-                                        <pr:column>
+                                        <pr:column sortBy="#{c.colorHexcode}">
                                             <f:facet name="header">HEXCODE</f:facet>
                                             <h:outputText value="#{c.colorHexcode}"/>
                                         </pr:column>
@@ -49,40 +49,21 @@
                                             <f:facet name="header">LIGHTFASTNESS</f:facet>
                                             <h:outputText value="#{c.colorLightfastness}"/>
                                         </pr:column>
-<!--                                        <pr:column>
-                                            <f:facet name="header">PIGMENT</f:facet>
-                                            <h:outputText value=""/>
-                                        </pr:column>-->
-<!--                                        <pr:column>
-                                            <f:facet name="header">COVERAGE</f:facet>
-                                            <h:outputText value=""/>
-                                        </pr:column>-->
                                         <pr:column>
                                             <f:facet name="header">RGB</f:facet>
                                             <h:outputText value="#{c.colorRGB}"/>
                                         </pr:column>
                                         <pr:column>
                                             <f:facet name="header">ACTION</f:facet>
-                                            <h:commandLink class="button" value="Edit" action="#{colorBean.loadColor(c.colorId)}"></h:commandLink> |
-                                            <h:commandLink class="button" value="Remove" action="#{colorBean.remove(c.colorId)}"></h:commandLink>
+                                            <h:commandLink class="btn-link" value="Edit" action="#{colorBean.loadColor(c.colorId)}"></h:commandLink> |
+                                            <h:commandLink class="btn-link" value="Remove" action="#{colorBean.remove(c.colorId)}"></h:commandLink>
                                         </pr:column>
                                     </pr:dataTable>
-                                    
-                                    
                                     <!-- Product list -->
-                                    
                                 </div>
                                 </h:form>
                             </div>
                         </div>
-<!--                        <div class="row mb-10">
-                            <div class="col-xl-5 col-lg-6 col-md-6">
-                                <div class="product-showing mb-40">
-                                    <p>UPDATE COLOR COLLECTION</p>
-                                </div>
-                            </div>
-                        </div>-->
-                        <!-- tab content -->
                         
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="edit" role="tabpanel" aria-labelledby="home-tab">
@@ -132,8 +113,8 @@
                                         
                                         <tr>
                                             <td colspan="2" style="text-align: center">
-                                                <h:commandButton class="button" action="#{colorBean.addNewColor()}" value="Submit"></h:commandButton>
-                                                <h:commandButton class="button" action="#{colorBean.reset()}" value="Reset"></h:commandButton>
+                                                <h:commandButton class="btn btn-info" action="#{colorBean.addNewColor()}" value="Submit"></h:commandButton>
+                                                <h:commandButton class="btn btn-info" action="#{colorBean.reset()}" value="Reset"></h:commandButton>
                                             </td>
                                         </tr>
                                     </table>

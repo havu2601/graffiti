@@ -106,4 +106,9 @@ public class ProductEJB {
     public List<Product> findByCateClient(int id){
         return em.createNamedQuery("Product.findByCateClient").setParameter("categoryId", id).getResultList();
     }
+    
+    //Find to check exist
+    public List<Product> findCheckExist(String name, int bid, int cid){
+        return em.createNamedQuery("Product.findExist").setParameter("productName", name).setParameter("brandId", bid).setParameter("colorId", cid).getResultList();
+    }
 }

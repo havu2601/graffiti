@@ -6,6 +6,7 @@
 package dao;
 
 import ejb.ColorEJB;
+import ejb.ProductEJB;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,8 @@ public class ColorBean implements Serializable{
 
     @EJB
     private ColorEJB ejb;
+    @EJB
+    private ProductEJB ejbProduct;
     
     List<Color> listColor;
     Color objColor;
@@ -65,7 +68,12 @@ public class ColorBean implements Serializable{
     
     public String addNewColor(){
         if(null==objColor.getColorId()){
+            if(checkValid())
             ejb.addColor(objColor);
+        }else if(!checkValid()){
+            if(ejb.findByName(objColor.getColorName()).get(0).getColorId()==objColor.getColorId() && ejb.findByHexcode(objColor.getColorHexcode()).get(0).getColorId()==objColor.getColorId()){
+                ejb.updateColor(objColor);
+            }
         }else{
             ejb.updateColor(objColor);
         }
@@ -78,13 +86,25 @@ public class ColorBean implements Serializable{
     
     public String remove(int id){
         try {
-            ejb.delete(ejb.findById(id));
+            if(null== ejbProduct.findByColor(id) || ejbProduct.findByColor(id).isEmpty()){
+                ejb.delete(ejb.findById(id));
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
+            }
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
         }
         return "color.xhtml?faces-redirect=true";
     }
     
+    public boolean checkValid(){
+        if((ejb.findByName(objColor.getColorName()).isEmpty() || ejb.findByName(objColor.getColorName())==null)
+                && (ejb.findByHexcode(objColor.getColorHexcode())==null || ejb.findByHexcode(objColor.getColorHexcode()).isEmpty())){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public void loadColor(int id){
         objColor = ejb.findById(id);
     }
