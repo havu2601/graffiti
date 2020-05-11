@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pr="http://primefaces.org/ui">
+    <ui:composition template="/templates/admintemplate.xhtml">
+        <ui:define name="content"> 
+            <main>
+                <!-- shop-area start -->
+                <section class="shop-area pt-150 pb-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-9 col-lg-8">
+                                <!-- tab filter -->
+                                <div class="row mb-10">
+                                    <div class="col-xl-5 col-lg-6 col-md-6">
+                                        <div class="product-showing mb-40">
+                                            <p>ADD FEEDBACK</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- tab content -->
+
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <h:form>
+                                            <div class="row">
+                                                <h:dataTable class="table table-hover" value="#{feedBackBean.listFeedback}" var="f">
+                                                    <h:column>
+                                                        <f:facet name="header">DATE FEEDBACK</f:facet>
+                                                        <h:outputText value="#{f.feedbackDate}"/>                                      
+                                                    </h:column>             
+                                                    <h:column>
+                                                        <f:facet name="header">NAME</f:facet>
+                                                        <h:outputText value="#{f.userId.userName}"/>
+                                                    </h:column>>
+                                                    <h:column>
+                                                        <f:facet name="header">YOUR COMMENT</f:facet>
+                                                        <h:outputText value="#{f.feedbackContent}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">ACTION</f:facet>
+                                                        <h:commandButton action="#{feedBackBean.loadFeedbackContent(f.feedbackId)}" value="Reply"/>
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <h:form>
+                                            <table class="table" id="repContent">
+
+                                                <tr>  
+                                                    <td>Date</td>
+                                                    <td class="date" align="center"><h:inputTextarea value="#{feedBackBean.feedbackDate}" disabled="true"></h:inputTextarea>>
+                                                    </td>
+                                                </tr>  
+
+                                                <tr>   
+                                                    <td>Feedback content</td>
+                                                    <td class="fb" align="center"><h:inputTextarea value="#{feedBackBean.newFeedback.feedbackContent}"></h:inputTextarea>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                     <td>Reply content</td>
+                                                     <td class="fb" align="center"><h:inputTextarea value="#{feedBackBean.repContent}"></h:inputTextarea>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align: center">
+                                                        <h:commandButton class="button" action="#{feedBackBean.addNewRep()}" value="Add Feedback"></h:commandButton>
+                                                        <h:commandButton class="button" action="#{feedBackBean.reset()}" value="Reset"></h:commandButton>
+                                                   </td>
+                                                </tr>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+
+                </section>
+
+                <section>
+                </section>
+            </main>
+        </ui:define>
+    </ui:composition>
+</html>
+

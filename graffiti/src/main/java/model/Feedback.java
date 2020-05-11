@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Feedback.findAll", query = "SELECT f FROM Feedback f"),
     @NamedQuery(name = "Feedback.findByFeedbackId", query = "SELECT f FROM Feedback f WHERE f.feedbackId = :feedbackId"),
+    @NamedQuery(name = "Feedback.findByUserId", query = "SELECT f FROM Feedback f WHERE f.userId.userId = :userId"),
     @NamedQuery(name = "Feedback.findByFeedbackDate", query = "SELECT f FROM Feedback f WHERE f.feedbackDate = :feedbackDate"),
     @NamedQuery(name = "Feedback.findByFeedbackContent", query = "SELECT f FROM Feedback f WHERE f.feedbackContent = :feedbackContent")})
 public class Feedback implements Serializable {
