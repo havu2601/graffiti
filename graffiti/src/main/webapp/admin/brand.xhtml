@@ -30,7 +30,7 @@
                                     <!-- Product list -->
                                     
                                     
-                                        <pr:dataTable class="table table-hover" value="#{brandBean.listBrand}" var="b">
+                                        <pr:dataTable class="table table-hover" style="text-align: center;" value="#{brandBean.listBrand}" var="b">
                                             <pr:column>
                                                 <f:facet name="header">ID</f:facet>
                                                 <h:outputText value="#{b.brandId}"/>
@@ -45,7 +45,8 @@
                                             </pr:column>
                                             <pr:column>
                                                 <f:facet name="header">ACTION</f:facet>
-                                                <h:commandLink value="Edit" action="#{brandBean.loadBrand(b.brandId)}"></h:commandLink>
+                                                <h:commandLink value="Edit" action="#{brandBean.loadBrand(b.brandId)}"></h:commandLink> |
+                                                <h:commandLink value="Remove" action="#{brandBean.loadBrand(b.brandId)}"></h:commandLink>
                                             </pr:column>
                                         </pr:dataTable>
                                     <!-- Product list -->
