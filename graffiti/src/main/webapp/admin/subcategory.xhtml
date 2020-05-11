@@ -5,7 +5,7 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:pr="http://primefaces.org/ui">    
-    <ui:composition template="/WEB-INF/templates/admintemplate.xhtml">
+    <ui:composition template="/templates/admintemplate.xhtml">
     <ui:define name="content"> 
 
     <main>
@@ -29,7 +29,7 @@
                                 <h:form>
                                 <div class="row">
                                     <!-- Product list -->
-                                    <pr:dataTable class="table table-hover" value="#{subcategoryBean.listSubCat}" var="sc">
+                                    <pr:dataTable class="table table-hover" style="text-align: center;" value="#{subcategoryBean.listSubCat}" var="sc">
                                         <pr:column>
                                             <f:facet name="header">ID</f:facet>
                                             <h:outputText value="#{sc.subcatId}"/>

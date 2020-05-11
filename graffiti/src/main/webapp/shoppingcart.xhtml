@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pr="http://primefaces.org/ui">
+    <ui:composition template="/templates/clienttemplate.xhtml">
+        <ui:define name="content">
+            <main>
+                <!-- breadcrumb-area-start -->
+                <section class="breadcrumb-area" style="background-image: url('./assets/page-title.png'); height: 300px;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="breadcrumb-text text-center">
+                                    <h1>Our Shop</h1>
+                                    <ul class="breadcrumb-menu">
+                                        <li><a href="index.xhtml">home</a></li>
+                                        <li><span>Shopping Cart</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- breadcrumb-area-end -->
+                <!-- User Area Strat-->
+                <section class="cart-area pt-10">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h:form>
+                                    <div class="table-content table-responsive">
+                                        <c:forEach items="${shoppingCart.cart.item}" var="it">
+                                            <c:set value="${it.value}" var="item">
+                                                ${it.productId.productName}
+                                            </c:set>
+                                        </c:forEach>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Cart Area End-->
+            </main>
+        </ui:define>
+    </ui:composition>
+</html>

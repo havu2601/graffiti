@@ -68,6 +68,16 @@
             <version>8.0</version>
         </dependency>
         <dependency>
+            <groupId>br.com.damsete</groupId>
+            <artifactId>ireport</artifactId>
+            <version>0.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>cz.i24.util</groupId>
+            <artifactId>jasper-utils</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>

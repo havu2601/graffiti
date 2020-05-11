@@ -54,7 +54,6 @@
                                         </pr:column>
                                         <pr:column headerText="ACTION">
                                             <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(pr.productId)}"></h:commandLink> | 
-                                            <h:commandLink class="button" value="Remove" action="#{productBean.reset()}"></h:commandLink> |
                                             <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(pr.productId)}"></h:commandLink>
                                         </pr:column>
                                     </pr:dataTable>
@@ -157,7 +156,7 @@
                                             <pr:selectOneRadio style="width: 400px;" value="#{productBean.status}">
                                                 <f:selectItem itemValue="1" itemLabel="For Sale"/>
                                                 <f:selectItem itemValue="0" itemLabel="Not For Sale"/>
-                                            </pr:selectOneRadio>>
+                                            </pr:selectOneRadio>
                                         </td>
                                     </tr>
                                     <tr>

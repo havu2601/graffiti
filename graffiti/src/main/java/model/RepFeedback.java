@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "RepFeedback.findAll", query = "SELECT r FROM RepFeedback r"),
     @NamedQuery(name = "RepFeedback.findByRepId", query = "SELECT r FROM RepFeedback r WHERE r.repId = :repId"),
+    @NamedQuery(name = "RepFeedback.findByFeedbackId", query = "SELECT r FROM RepFeedback r WHERE r.feedbackId.feedbackId = :feedbackId"),
     @NamedQuery(name = "RepFeedback.findByRepDate", query = "SELECT r FROM RepFeedback r WHERE r.repDate = :repDate"),
     @NamedQuery(name = "RepFeedback.findByRepContent", query = "SELECT r FROM RepFeedback r WHERE r.repContent = :repContent")})
 public class RepFeedback implements Serializable {
