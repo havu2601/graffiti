@@ -29,7 +29,6 @@ public class IndexViewdBean implements Serializable{
     private ProductEJB ejbProduct;
     
     List<Product> listProduct;
-    
     String searchStr;
     
     @PostConstruct
@@ -93,6 +92,5 @@ public class IndexViewdBean implements Serializable{
     public void setSearchStr(String searchStr) {
         this.searchStr = searchStr;
     }
-    
     
 }

@@ -16,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import model.Brand;
 import model.Color;
 import model.Image;
@@ -55,6 +56,9 @@ public class ProductBean implements Serializable{
     String searchType;
     String msg;
     Boolean radState;
+    
+    private List<HistoryItem> listHisItem = new ArrayList<>();
+    private Boolean isEmpty;
     
     @PostConstruct
     public void init(){
@@ -371,5 +375,36 @@ public class ProductBean implements Serializable{
 
     public void setRadState(Boolean radState) {
         this.radState = radState;
+    }
+    
+    public String addToHisItem(){
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        if(session.getAttribute("historyproduct")!=null){
+        listHisItem = (List<HistoryItem>) session.getAttribute("historyproduct");}
+        if(listHisItem.size()>=4){
+            listHisItem.remove(0);
+        }
+        HistoryItem item = new HistoryItem();
+        Product pItem = ejbProduct.findById(Integer.parseInt(productId));
+        item.setProduct(pItem);
+        listHisItem.add(item);
+        session.setAttribute("historyproduct", listHisItem);
+        return null;
+    }
+
+    public List<HistoryItem> getListHisItem() {
+        return listHisItem;
+    }
+
+    public void setListHisItem(List<HistoryItem> listHisItem) {
+        this.listHisItem = listHisItem;
+    }
+
+    public Boolean getIsEmpty() {
+        return isEmpty;
+    }
+
+    public void setIsEmpty(Boolean isEmpty) {
+        this.isEmpty = isEmpty;
     }
 }

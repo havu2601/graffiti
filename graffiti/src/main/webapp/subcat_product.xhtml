@@ -39,14 +39,14 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
                                     <!-- ProductItem -->
-                                    <c:forEach items="#{subproductBean.listProduct}" var="p">
+                                    <c:forEach items="#{indexViewdBean.listProduct}" var="p">
                                             <div class="col-xl-4 col-lg-6 col-md-6">
-                                            <div class="product-wrapper mb-50">
+                                                <div class="product-wrapper mb-50">
                                                 <div class="product-img mb-25" style="opacity: #{p.productStock == 0 ? 0.3 : 1}">
-                                                    <a href="detail.html">
+                                                    <h:outputLink value="product_detail.xhtml?pid=#{p.productId}">
                                                         <img src="./assets/images/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
                                                         <img class="secondary-img" src="./assets/images/EMC7060_1024x1024.jpg" alt=""/>
-                                                    </a>
+                                                    </h:outputLink>
                                                     <div class="product-action text-center">
                                                         <a href="#" title="Shoppingb Cart">
                                                             <i class="fas fa-shopping-cart"></i>
@@ -58,22 +58,24 @@
                                                 </div>
                                                 <div class="product-content pr-0">
                                                     <div class="pro-cat mb-10">
-                                                        <a href="#">#{p.subcatId.categoryId.categoryName}</a>
+                                                        <a href="subcat_product.xhtml?id=#{p.subcatId.categoryId.categoryId}">#{p.subcatId.categoryId.categoryName}</a>
                                                     </div>
                                                     <h4>
                                                         <a href="product_detail.xhtml?pid=#{p.productId}">#{p.productName}</a>
                                                     </h4>
                                                     <div class="product-meta">
                                                         <div class="pro-price">
-                                                            <span>$#{p.productPrice} USD</span><span style="color: red">#{p.productStock == 0 ? 'Sold Out' : 'In Stock'}</span>
+                                                            <span>#{p.colorId.colorName} </span><button class="btnColor" style="background-color: #{p.colorId.colorHexcode};"></button>
+                                                        </div>
+                                                        <div class="pro-price">
+                                                            <span>$#{p.productPrice} USD</span> <span style="color: red">#{p.productStock == 0 ? 'Sold Out' : 'In Stock'}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        </c:forEach>
+                                    </c:forEach>
                                 </div>
-
                                 </div>
                             </div>
                         </div>

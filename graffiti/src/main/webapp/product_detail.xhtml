@@ -12,6 +12,7 @@
     <main>
         <f:metadata>
             <f:viewParam name="pid" value="#{productBean.productId}"/>
+            <f:viewAction action="#{productBean.addToHisItem()}"/>
             <f:viewAction action="#{productBean.showDetail()}"/>
         </f:metadata>
         <!-- breadcrumb-area-start -->
@@ -115,6 +116,40 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6" style="margin-top: 50px;">
+                    <h3>RECENT PRODUCT</h3>
+                    <div class="row" style="margin-top: 50px;">
+                        <c:forEach items="#{productBean.listHisItem}" var="ph">
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="product-wrapper mb-50">
+                                <div class="product-img mb-25" style="opacity: #{ph.product.productStock == 0 ? 0.3 : 1}">
+                                <h:outputLink value="product_detail.xhtml?pid=#{ph.product.productId}">
+                                    <f:param name="productId" value="#{ph.product.productId}"/>
+                                    <img src="./assets/images/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
+                                    <img class="secondary-img" src="./assets/images/EMC7060_1024x1024.jpg" alt=""/>
+                                </h:outputLink>
+                            </div>
+                            <div class="product-content pr-0">
+                                <div class="pro-cat mb-10">
+                                    <a href="subcat_product.xhtml?id=#{ph.product.subcatId.categoryId.categoryId}">#{ph.product.subcatId.categoryId.categoryName}</a>
+                                </div>
+                                <h4>
+                                    <a href="product_detail.xhtml?pid=#{ph.product.productId}">#{ph.product.productName}</a>
+                                </h4>
+                                <div class="product-meta">
+                                    <div class="pro-price">
+                                        <span>#{ph.product.colorId.colorName} </span><button class="btnColor" style="background-color: #{ph.product.colorId.colorHexcode};"></button>
+                                    </div>
+                                    <div class="pro-price">
+                                        <span>$#{ph.product.productPrice} USD</span> <span style="color: red">#{ph.product.productStock == 0 ? 'Sold Out' : 'In Stock'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </c:forEach>
                     </div>
                 </div>
             </div>
