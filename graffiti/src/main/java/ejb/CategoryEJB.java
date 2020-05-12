@@ -33,6 +33,10 @@ public class CategoryEJB {
         return em.createNamedQuery("Category.findByCategoryName").setParameter("categoryName", searchStr).getResultList();
     }
     
+    public List<Category> checkName(String searchStr){
+        return em.createNamedQuery("Category.findByName").setParameter("categoryName", searchStr).getResultList();
+    }
+    
     public void addCategory(Category category){
         em.merge(category);
     }

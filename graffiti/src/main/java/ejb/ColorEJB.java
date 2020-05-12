@@ -32,7 +32,9 @@ public class ColorEJB {
     public List<Color> findByAny(String searchStr){
         return em.createNamedQuery("Color.findByAny").setParameter("searchStr", searchStr).getResultList();
     }
-    
+    public List<Color> findByHexcode(String searchStr){
+        return em.createNamedQuery("Color.findByColorHexcode").setParameter("colorHexcode", searchStr).getResultList();
+    }
     public void addColor(Color color){
         em.merge(color);
     }

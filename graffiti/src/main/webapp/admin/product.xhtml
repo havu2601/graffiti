@@ -37,24 +37,23 @@
                                             <h:outputText value="#{pr.productId}"></h:outputText>
                                         </pr:column>
                                         <pr:column headerText="NAME" sortBy="#{pr.productName}">
-                                                   <h:outputText value="#{pr.productName}"></h:outputText>
+                                            <h:outputText value="#{pr.productName}"></h:outputText>
                                         </pr:column>
                                         <pr:column headerText="CAPACITY" style="width: 100px">
                                             <h:outputText value="#{pr.productCapacity}"></h:outputText>
                                         </pr:column>
                                         <pr:column style="width: 150px" headerText="PRICE" sortBy="#{pr.productPrice}">
-                                                   <h:outputText value="#{pr.productPrice} USD"></h:outputText>
+                                            <h:outputText value="#{pr.productPrice} USD"></h:outputText>
                                         </pr:column>
                                         <pr:column headerText="STOCK" style="width: 100px;" sortBy="#{pr.productStock}">
-                                                   <h:outputText value="#{pr.productStock}"></h:outputText>
+                                            <h:outputText value="#{pr.productStock}"></h:outputText>
                                         </pr:column>
                                         <pr:column headerText="STATUS" sortBy="#{pr.productStock}">
                                             <h:outputText value="#{pr.productStatus == 1 ? 'For Sale' : 'Not For Sale'}"></h:outputText>
-                                            
                                         </pr:column>
                                         <pr:column headerText="ACTION">
-                                            <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(pr.productId)}"></h:commandLink> | 
-                                            <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(pr.productId)}"></h:commandLink>
+                                            <h:commandLink class="btn-link" value="Edit" action="#{productBean.loadProduct(pr.productId)}"></h:commandLink> | 
+                                            <h:commandLink class="btn-link" value="View Image" action="#{productBean.moveToImage(pr.productId)}"></h:commandLink>
                                         </pr:column>
                                     </pr:dataTable>
                                     <!-- Product list -->
@@ -109,7 +108,7 @@
                                         <td>STOCK</td>
                                         <td><pr:inputText style="width: 400px;" id="stock" type="number" value="#{productBean.stock}" validatorMessage="Stock invalid">
                                                 <f:validateRequired/>
-                                                <f:validateDoubleRange minimum="1"/>
+                                                <f:validateDoubleRange minimum="#{productBean.stock}"/>
                                             </pr:inputText>
                                         </td>
                                         <td>
@@ -161,8 +160,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="text-align: center">
-                                            <h:commandButton action="#{productBean.addNewProduct()}" value="Submit"></h:commandButton>
-                                            <h:commandButton action="#{productBean.reset()}" value="Reset"></h:commandButton>
+                                            <h:commandButton class="btn btn-info" action="#{productBean.addNewProduct()}" value="Submit"></h:commandButton>
+                                            <h:commandButton class="btn btn-info" action="#{productBean.reset()}" value="Reset"></h:commandButton>
                                         </td>
                                     </tr>
                                     </h:form>

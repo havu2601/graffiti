@@ -34,7 +34,7 @@
                                             <f:facet name="header">ID</f:facet>
                                             <h:outputText value="#{sc.subcatId}"/>
                                         </pr:column>
-                                        <pr:column>
+                                        <pr:column sortBy="#{sc.subcatName}">
                                             <f:facet name="header">NAME</f:facet>
                                             <h:outputText value="#{sc.subcatName}"/>
                                         </pr:column>
@@ -44,8 +44,8 @@
                                         </pr:column>
                                         <pr:column>
                                             <f:facet name="header">ACTION</f:facet>
-                                            <h:commandLink class="button" value="Edit" action="#{subcategoryBean.loadCategory(sc.subcatId)}"></h:commandLink> |
-                                            <h:commandLink class="button" value="Remove" action="#{subcategoryBean.remove(sc.subcatId)}"></h:commandLink>
+                                            <h:commandLink class="btn-link" value="Edit" action="#{subcategoryBean.loadCategory(sc.subcatId)}"></h:commandLink> |
+                                            <h:commandLink class="btn-link" value="Remove" action="#{subcategoryBean.remove(sc.subcatId)}"></h:commandLink>
                                         </pr:column>
                                     </pr:dataTable>
                                     <!-- Product list -->
@@ -76,8 +76,8 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" style="text-align: center">
-                                                <h:commandButton class="button" action="#{subcategoryBean.addNewCategory()}" value="Submit"></h:commandButton>
-                                                <h:commandButton class="button" action="#{subcategoryBean.reset()}" value="Reset"></h:commandButton>
+                                                <h:commandButton class="btn btn-info" action="#{subcategoryBean.addNewCategory()}" value="Submit"></h:commandButton>
+                                                <h:commandButton class="btn btn-info" action="#{subcategoryBean.reset()}" value="Reset"></h:commandButton>
                                             </td>
                                         </tr>
                                     </table>

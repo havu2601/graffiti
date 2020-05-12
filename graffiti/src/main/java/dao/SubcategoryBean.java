@@ -35,7 +35,6 @@ public class SubcategoryBean implements Serializable{
     
     List<SubCategory> listSubCat;
     SubCategory objSubCat;
-//    List<Category> listCategory;
     Category objCategory;
     String searchStr;
     String categoryId;
@@ -73,13 +72,17 @@ public class SubcategoryBean implements Serializable{
     }
     
     public String addNewCategory(){
+        updateCategory();
+        objSubCat.setCategoryId(objCategory);
         if(null==objSubCat.getSubcatId()){
-            updateCategory();
-            objSubCat.setCategoryId(objCategory);
-            ejb.addSubCat(objSubCat);
+            if(checkValid()){
+                ejb.addSubCat(objSubCat);
+            }
+        }else if(!checkValid()){
+            if(ejb.findByName(objSubCat.getSubcatName()).get(0).getSubcatId()==objSubCat.getSubcatId()){
+                ejb.updateSubCat(objSubCat);
+            }
         }else{
-            updateCategory();
-            objSubCat.setCategoryId(objCategory);
             ejb.updateSubCat(objSubCat);
         }
         return "subcategory.xhtml?faces-redirect=true";
@@ -89,7 +92,12 @@ public class SubcategoryBean implements Serializable{
         objCategory = new Category();
         objCategory.setCategoryId(Integer.parseInt(categoryId));
     }
-    
+    public boolean checkValid(){
+        if(null==ejb.findByName(objSubCat.getSubcatName()) || ejb.findByName(objSubCat.getSubcatName()).isEmpty()){
+            return true;
+        }
+        return false;
+    }
     public void reset(){
         objSubCat = new SubCategory();
     }

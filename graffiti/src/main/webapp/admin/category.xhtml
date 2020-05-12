@@ -31,18 +31,18 @@
                                 <div class="row">
                                     <!-- Product list -->
                                     <pr:dataTable class="table table-hover" style="text-align: center;" value="#{categoryBean.listCategory}" var="c">
-                                            <pr:column>
+                                        <pr:column style="width: 20%;">
                                                 <f:facet name="header">ID</f:facet>
                                                 <h:outputText value="#{c.categoryId}"/>
                                             </pr:column>
-                                            <pr:column>
+                                        <pr:column style="width: 40%;" sortBy="#{c.categoryName}">
                                                 <f:facet name="header">NAME</f:facet>
                                                 <h:outputText value="#{c.categoryName}"/>
                                             </pr:column>
                                             <pr:column>
                                                 <f:facet name="header">ACTION</f:facet>
-                                                <h:commandLink class="button" value="Edit" action="#{categoryBean.loadCategory(c.categoryId)}"></h:commandLink> |
-                                                <h:commandLink class="button" value="Remove" action="#{categoryBean.remove(c.categoryId)}"></h:commandLink>
+                                                <h:commandLink class="btn-link" value="Edit" action="#{categoryBean.loadCategory(c.categoryId)}"></h:commandLink> |
+                                                <h:commandLink class="btn-link" value="Remove" action="#{categoryBean.remove(c.categoryId)}"></h:commandLink>
                                             </pr:column>
                                         </pr:dataTable>
                                     
@@ -78,8 +78,8 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" style="text-align: center">
-                                                <h:commandButton class="button" action="#{categoryBean.addNewCategory()}" value="Submit"></h:commandButton>
-                                                <h:commandButton class="button" action="#{categoryBean.reset()}" value="Reset"></h:commandButton>
+                                                <h:commandButton class="btn btn-info" action="#{categoryBean.addNewCategory()}" value="Submit"></h:commandButton>
+                                                <h:commandButton class="btn btn-info" action="#{categoryBean.reset()}" value="Reset"></h:commandButton>
                                             </td>
                                         </tr>
                                     </table>

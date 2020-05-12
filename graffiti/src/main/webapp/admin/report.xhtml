@@ -49,11 +49,6 @@
                                             <h:outputText value="#{pr.productStatus == 1 ? 'For Sale' : 'Not For Sale'}"></h:outputText>
                                             
                                         </pr:column>
-                                        <pr:column headerText="ACTION">
-                                            <h:commandLink class="button" value="Edit" action="#{productBean.loadProduct(pr.productId)}"></h:commandLink> | 
-                                            <h:commandLink class="button" value="Remove" action="#{productBean.reset()}"></h:commandLink> |
-                                            <h:commandLink class="button" value="View Image" action="#{productBean.moveToImage(pr.productId)}"></h:commandLink>
-                                        </pr:column>
                                     </pr:dataTable>
                                     <!-- Product list -->
                                 </div>
@@ -69,11 +64,11 @@
                                 <h3 class="shop-title">EXPORT TO</h3>
                                 <h:form>
                                     <ul class="shop-link">
-                                        <li><h:commandButton class="sortBtn" value="Product PDF" actionListener="#{productReportBean.PDF()}">
+                                        <li><h:commandButton class="btn-lg btn-success" style="width: 100px" value="PDF" actionListener="#{productReportBean.PDF()}">
                                             </h:commandButton></li>
-                                        <li><h:commandButton class="sortBtn" value="Product XLSX" actionListener="#{productReportBean.exportarExcel()}">
+                                        <li><h:commandButton class="btn-lg btn-warning" style="width: 100px" value="XLSX" actionListener="#{productReportBean.exportarExcel()}">
                                             </h:commandButton></li>
-                                        <li><h:commandButton class="sortBtn" value="Product DOCX" actionListener="#{productReportBean.exportarDOCX()}">
+                                        <li><h:commandButton class="btn-lg btn-danger" style="width: 100px" value="DOCX" actionListener="#{productReportBean.exportarDOCX()}">
                                             </h:commandButton></li>
                                     </ul>
                                 </h:form>
