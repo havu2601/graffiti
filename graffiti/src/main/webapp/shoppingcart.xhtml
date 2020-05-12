@@ -27,18 +27,21 @@
                     </div>
                 </section>
                 <!-- breadcrumb-area-end -->
-                <!-- User Area Strat-->
+                <!-- User Area Start-->
                 <section class="cart-area pt-10">
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
                                 <h:form>
                                     <div class="table-content table-responsive">
-                                        <c:forEach items="${shoppingCart.cart.item}" var="it">
-                                            <c:set value="${it.value}" var="item">
-                                                ${it.productId.productName}
-                                            </c:set>
-                                        </c:forEach>
+                                        <h:dataTable value="${shoppingCart.itemInCart}" var="item">
+                                            <h:column>
+                                                <h:outputText value="${item.product.productName}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <h:outputText value="${item.quantity}"/>
+                                            </h:column>
+                                        </h:dataTable>
                                     </div>
                                 </h:form>
                             </div>

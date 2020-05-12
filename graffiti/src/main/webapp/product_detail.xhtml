@@ -80,7 +80,8 @@
                                             </div>
                                             <!--<button class="details-action-icon" type="submit"><i class="fas fa-heart"></i></button>-->
                                             <div class="details-cart mt-40">
-                                                <h:commandButton class="btn theme-btn" value="add to cart" action="#{shoppingCart.addToCart(1)}"/>
+                                                <!--<f:param name="productId" value="" />-->
+                                                <h:commandButton class="btn theme-btn" value="add to cart" action="#{shoppingCart.addToCart(productBean.objProduct.productId)}"/>
                                             </div>
                                         </h:form>
                                     </div>

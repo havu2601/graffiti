@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import model.Product;
 
 /**
  *
@@ -36,9 +37,32 @@ public class ShoppingCart implements Serializable {
         isEmpty = true;
     }
     
-    public String addToCart(){
-        
+    public String addToCart(int productId){
+//        Map<String, String> params = FacesContext.getCurrentInstance()
+//				.getExternalContext().getRequestParameterMap();
+//        Integer productId = Integer.parseInt(params.get("productId"));
+        CartItem item = new CartItem();
+        Product product = productEJB.findById(productId);
+        item.setProduct(product);
+        item.setQuantity(1);
+        itemInCart.add(item);
         return null;
+    }
+
+    public List<CartItem> getItemInCart() {
+        return itemInCart;
+    }
+
+    public void setItemInCart(List<CartItem> itemInCart) {
+        this.itemInCart = itemInCart;
+    }
+
+    public boolean isIsEmpty() {
+        return isEmpty;
+    }
+
+    public void setIsEmpty(boolean isEmpty) {
+        this.isEmpty = isEmpty;
     }
     
 }
