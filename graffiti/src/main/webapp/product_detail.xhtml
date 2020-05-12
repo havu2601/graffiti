@@ -74,15 +74,16 @@
 
                                 <div class="product-action-details variant-item" style="display: #{productBean.objProduct.productStock == 0 ? 'none' : 'block'}">
                                     <div class="product-details-action">
-                                        <form action="#">
+                                        <h:form>
                                             <div class="plus-minus">
                                                 <div class="cart-plus-minus"><input type="text" value="1"/><div class="dec qtybutton">-</div><div class="inc qtybutton">+</div></div>
                                             </div>
                                             <!--<button class="details-action-icon" type="submit"><i class="fas fa-heart"></i></button>-->
                                             <div class="details-cart mt-40">
-                                                <button class="btn theme-btn">add to cart</button>
+                                                <!--<f:param name="productId" value="" />-->
+                                                <h:commandButton class="btn theme-btn" value="add to cart" action="#{shoppingCart.addToCart(productBean.objProduct.productId)}"/>
                                             </div>
-                                        </form>
+                                        </h:form>
                                     </div>
                                 </div>
                             </div>
