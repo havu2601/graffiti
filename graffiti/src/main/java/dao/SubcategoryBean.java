@@ -38,15 +38,16 @@ public class SubcategoryBean implements Serializable{
     Category objCategory;
     String searchStr;
     String categoryId;
-    
+    String msg;
     @PostConstruct
     public void init(){
         objCategory = new Category();
         objSubCat = new SubCategory();
+        msg = "";
         search();
     }
 
-        public void search(){
+    public void search(){
         if(null==searchStr || searchStr.isEmpty()){
             List<SubCategory> rs = new ArrayList<>();
             rs = ejb.findAll();
@@ -56,7 +57,7 @@ public class SubcategoryBean implements Serializable{
                 List<SubCategory> ct = ejb.findByName("%"+searchStr+"%");
                 List<SubCategory> rs = new ArrayList<>();
                 rs.addAll(ct);
-                String msg = "Cannot find Subcategory with name " + searchStr;
+                msg = "Cannot find Subcategory with name " + searchStr;
                 show(rs,msg);
             }
         }
@@ -71,16 +72,22 @@ public class SubcategoryBean implements Serializable{
         }
     }
     
-    public String addNewCategory(){
+    public String addNewSubCategory(){
         updateCategory();
         objSubCat.setCategoryId(objCategory);
         if(null==objSubCat.getSubcatId()){
             if(checkValid()){
                 ejb.addSubCat(objSubCat);
+            }else{
+                msg = "Subcategory already exists!";
+                return null;
             }
         }else if(!checkValid()){
             if(ejb.findByName(objSubCat.getSubcatName()).get(0).getSubcatId()==objSubCat.getSubcatId()){
                 ejb.updateSubCat(objSubCat);
+            }else{
+                msg = "Subcategory name already exists!";
+                return null;
             }
         }else{
             ejb.updateSubCat(objSubCat);
@@ -100,12 +107,16 @@ public class SubcategoryBean implements Serializable{
     }
     public void reset(){
         objSubCat = new SubCategory();
+        msg = "";
     }
     
     public String remove(int id){
         try {
             if(ejbProduct.findBySubCat(id)==null || ejbProduct.findBySubCat(id).isEmpty()){
                 ejb.delete(ejb.findById(id));
+            }else{
+                msg = "Cannot remove!";
+                return null;
             }
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
@@ -113,7 +124,8 @@ public class SubcategoryBean implements Serializable{
         return "subcategory.xhtml?faces-redirect=true";
     }
     
-    public void loadCategory(int id){
+    public void loadSubCategory(int id){
+        msg = "";
         objSubCat = ejb.findById(id);
         categoryId = objSubCat.getCategoryId().getCategoryId().toString();
     }
@@ -156,6 +168,14 @@ public class SubcategoryBean implements Serializable{
 
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
 

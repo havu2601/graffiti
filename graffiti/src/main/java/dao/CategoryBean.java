@@ -32,10 +32,12 @@ public class CategoryBean implements Serializable{
     List<Category> listCategory;
     Category objCategory;
     String searchStr;
+    String msg;
     
     @PostConstruct
     public void init(){
         objCategory = new Category();
+        msg = "";
         search();
     }
     
@@ -49,7 +51,7 @@ public class CategoryBean implements Serializable{
                 List<Category> ct = ejbCate.findByName("%"+searchStr+"%");
                 List<Category> rs = new ArrayList<>();
                 rs.addAll(ct);
-                String msg = "Cannot find Category with name " + searchStr;
+                msg = "Cannot find Category with name " + searchStr;
                 show(rs,msg);
             }
         }
@@ -67,11 +69,20 @@ public class CategoryBean implements Serializable{
     public String addNewCategory(){
         if(null==objCategory.getCategoryId()){
             if(checkValid()){
-            ejbCate.addCategory(objCategory);}
+                ejbCate.addCategory(objCategory);
+            }
+            else{
+                msg = "Category already exists!";
+                return null;
+            }
         }else if(!checkValid()){
             if(ejbCate.checkName(objCategory.getCategoryName()).get(0).getCategoryId()==objCategory.getCategoryId())
             {
-            ejbCate.updateCategory(objCategory);}
+                ejbCate.updateCategory(objCategory);
+            }else{
+                msg = "Category name already exists!";
+                return null;
+            }
         }else{
             ejbCate.updateCategory(objCategory);
         }
@@ -86,23 +97,27 @@ public class CategoryBean implements Serializable{
     }
     public void reset(){
         objCategory = new Category();
+        msg = "";
     }
     
     public String remove(int id){
+        msg = "";
         try {
             if(ejbSubcat.findByCategory(id)==null || ejbSubcat.findByCategory(id).isEmpty()){
             ejbCate.delete(ejbCate.findById(id));
             }else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
+                msg = "Cannot remove!";
+                return null;
             }
             
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,msg,msg));
         }
         return "category.xhtml?faces-redirect=true";
     }
     
     public void loadCategory(int id){
+        msg = "";
         objCategory = ejbCate.findById(id);
     }
 
@@ -129,5 +144,14 @@ public class CategoryBean implements Serializable{
     public void setSearchStr(String searchStr) {
         this.searchStr = searchStr;
     }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+    
 
 }

@@ -38,10 +38,11 @@ public class BrandBean implements Serializable{
     String name;
     String description;
     String searchStr;
-
+    String msg;
     @PostConstruct
     public void init(){
         objBrand = new Brand();
+        msg = "";
         search();
     }
     
@@ -55,7 +56,7 @@ public class BrandBean implements Serializable{
                 List<Brand> br = ejb.findByName("%"+searchStr+"%");
                 List<Brand> rs = new ArrayList<>();
                 rs.addAll(br);
-                String msg = "Cannot find Brand with name " + searchStr;
+                msg = "Cannot find Brand with name " + searchStr;
                 show(rs,msg);
             }
         }
@@ -74,10 +75,16 @@ public class BrandBean implements Serializable{
         if(objBrand.getBrandId()==null){
             if(checkValid()){
                 ejb.addBrand(objBrand);
+            }else{
+                msg = "Brand already exists!";
+                return null;
             }
         }else if(!checkValid()){
             if(ejb.findByName(objBrand.getBrandName()).get(0).getBrandId()==objBrand.getBrandId()){
                 ejb.updateBrand(objBrand);
+            }else{
+                msg = "Brand name already exists!";
+                return null;
             }
         }else{
             ejb.updateBrand(objBrand);
@@ -92,12 +99,16 @@ public class BrandBean implements Serializable{
     }
     public void reset(){
         objBrand = new Brand();
+        msg = "";
     }
     public String remove(int id){
         try {
             if(ejbproduct.findByBrand(id)==null || ejbproduct.findByBrand(id).isEmpty()){
                 ejb.delete(ejb.findById(id));
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
+            }else{
+                msg = "Cannot remove!";
+                return null;
             }
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
@@ -106,6 +117,7 @@ public class BrandBean implements Serializable{
     }
     
     public void loadBrand(int id){
+        msg = "";
         objBrand = ejb.findById(id);
     }
     
@@ -155,6 +167,14 @@ public class BrandBean implements Serializable{
 
     public void setSearchStr(String searchStr) {
         this.searchStr = searchStr;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
     
     

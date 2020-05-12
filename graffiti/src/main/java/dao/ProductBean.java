@@ -53,11 +53,15 @@ public class ProductBean implements Serializable{
     
     String searchStr;
     String searchType;
+    String msg;
+    Boolean radState;
     
     @PostConstruct
     public void init(){
         objProduct = new Product();
-        status = "1";
+        msg = "";
+        radState = true;
+        status = "0";
         search();
     }
     
@@ -71,7 +75,7 @@ public class ProductBean implements Serializable{
                 List<Product> p = ejbProduct.findByAny("%"+searchStr+"%");
                 List<Product> rs = new ArrayList<>();
                 rs.addAll(p);
-                String msg = "Cannot find Product with name " + searchStr;
+                msg = "Cannot find Product with keyword " + searchStr;
                 show(rs,msg);
             }
         }
@@ -103,6 +107,8 @@ public class ProductBean implements Serializable{
         price = String.valueOf(objProduct.getProductPrice());
         stock = String.valueOf(objProduct.getProductStock());
         status = String.valueOf(objProduct.getProductStatus());
+        msg = "";
+        radState = false;
     }
     
     public void reset(){
@@ -114,26 +120,49 @@ public class ProductBean implements Serializable{
         capacity = "";
         price = "";
         stock = "";
-        status = "1";
+        status = "0";
+        msg = "";
+        radState = true;
     }
     
     public String addNewProduct(){
         updateProduct();
         if(null==objProduct.getProductId()){
-            if(checkProductExist())ejbProduct.addProduct(objProduct);
-                
+            if(checkProductExist()){
+                ejbProduct.addProduct(objProduct);
+            }else{
+                msg = "Product already exists!";
+                return null;
+            }
         }else if(!checkProductExist()){
             Product check = ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId)).get(0);
             if(check.getProductId() == objProduct.getProductId()){
+                if(!checkHaveImage() && objProduct.getProductStatus()==1){
+                    objProduct.setProductStatus(0);
+                    msg = "Product have no image for active!";
+                    return null;
+                }
                 ejbProduct.updateProduct(objProduct);
+            }else{
+                msg = "Product already exists!";
             }
-            reset();
         }else{
+            if(!checkHaveImage() && objProduct.getProductStatus()==1){
+                objProduct.setProductStatus(0);
+                msg = "Product have no image for active!";
+                return null;
+            }
             ejbProduct.updateProduct(objProduct);
-            reset();
         }
-        
         return "product.xhtml";
+    }
+    
+    public boolean checkHaveImage(){
+        if(ejbImage.findByProduct(objProduct.getProductId()).isEmpty() || ejbImage.findByProduct(objProduct.getProductId())==null){
+            return false;
+        }else{
+            return true;
+        }
     }
     
     public void updateProduct(){
@@ -155,6 +184,7 @@ public class ProductBean implements Serializable{
         }
         return false;
     }
+    
     public void updateBrand(){
         objBrand = new Brand();
         objBrand.setBrandId(Integer.parseInt(brandId));
@@ -327,4 +357,19 @@ public class ProductBean implements Serializable{
         this.objImage = objImage;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Boolean getRadState() {
+        return radState;
+    }
+
+    public void setRadState(Boolean radState) {
+        this.radState = radState;
+    }
 }

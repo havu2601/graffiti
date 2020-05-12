@@ -5,7 +5,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:pr="http://primefaces.org/ui">
+      xmlns:pr="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="/templates/admintemplate.xhtml">
     <ui:define name="content">
 
@@ -70,6 +71,15 @@
                                 <div class="row">
                                     <h:form>
                                     <table class="table">
+                                        <tr>
+                                            <td colspan="2">
+                                                <c:choose>
+                                                    <c:when test="${colorBean.msg!=null}">
+                                                        <p class="mx-auto" style="color: red; font-size: 18px;">${colorBean.msg}</p>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>COLOR</td>
                                             <td><button style="background-color: #{colorBean.objColor.colorHexcode}; width: 400px; height: 30px" disabled="true"/></td>
