@@ -16,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import model.Brand;
 import model.Color;
 import model.Image;
@@ -53,11 +54,19 @@ public class ProductBean implements Serializable{
     
     String searchStr;
     String searchType;
+    String msg;
+    Boolean radState;
+    
+    private List<HistoryItem> listHisItem = new ArrayList<>();
+    private List<HistoryItem> listShowHis = new ArrayList<>();
+    private Boolean isEmpty;
     
     @PostConstruct
     public void init(){
         objProduct = new Product();
-        status = "1";
+        msg = "";
+        radState = true;
+        status = "0";
         search();
     }
     
@@ -71,7 +80,7 @@ public class ProductBean implements Serializable{
                 List<Product> p = ejbProduct.findByAny("%"+searchStr+"%");
                 List<Product> rs = new ArrayList<>();
                 rs.addAll(p);
-                String msg = "Cannot find Product with name " + searchStr;
+                msg = "Cannot find Product with keyword " + searchStr;
                 show(rs,msg);
             }
         }
@@ -103,6 +112,8 @@ public class ProductBean implements Serializable{
         price = String.valueOf(objProduct.getProductPrice());
         stock = String.valueOf(objProduct.getProductStock());
         status = String.valueOf(objProduct.getProductStatus());
+        msg = "";
+        radState = false;
     }
     
     public void reset(){
@@ -114,26 +125,49 @@ public class ProductBean implements Serializable{
         capacity = "";
         price = "";
         stock = "";
-        status = "1";
+        status = "0";
+        msg = "";
+        radState = true;
     }
     
     public String addNewProduct(){
         updateProduct();
         if(null==objProduct.getProductId()){
-            if(checkProductExist())ejbProduct.addProduct(objProduct);
-                
+            if(checkProductExist()){
+                ejbProduct.addProduct(objProduct);
+            }else{
+                msg = "Product already exists!";
+                return null;
+            }
         }else if(!checkProductExist()){
             Product check = ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId)).get(0);
             if(check.getProductId() == objProduct.getProductId()){
+                if(!checkHaveImage() && objProduct.getProductStatus()==1){
+                    objProduct.setProductStatus(0);
+                    msg = "Product have no image for active!";
+                    return null;
+                }
                 ejbProduct.updateProduct(objProduct);
+            }else{
+                msg = "Product already exists!";
             }
-            reset();
         }else{
+            if(!checkHaveImage() && objProduct.getProductStatus()==1){
+                objProduct.setProductStatus(0);
+                msg = "Product have no image for active!";
+                return null;
+            }
             ejbProduct.updateProduct(objProduct);
-            reset();
         }
-        
         return "product.xhtml";
+    }
+    
+    public boolean checkHaveImage(){
+        if(ejbImage.findByProduct(objProduct.getProductId()).isEmpty() || ejbImage.findByProduct(objProduct.getProductId())==null){
+            return false;
+        }else{
+            return true;
+        }
     }
     
     public void updateProduct(){
@@ -155,6 +189,7 @@ public class ProductBean implements Serializable{
         }
         return false;
     }
+    
     public void updateBrand(){
         objBrand = new Brand();
         objBrand.setBrandId(Integer.parseInt(brandId));
@@ -327,4 +362,62 @@ public class ProductBean implements Serializable{
         this.objImage = objImage;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Boolean getRadState() {
+        return radState;
+    }
+
+    public void setRadState(Boolean radState) {
+        this.radState = radState;
+    }
+    
+    public String addToHisItem(){
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        if(session.getAttribute("historyproduct")!=null){
+        listHisItem = (List<HistoryItem>) session.getAttribute("historyproduct");}
+        if(listHisItem.size()>=5){
+            listHisItem.remove(0);
+        }
+        HistoryItem item = new HistoryItem();
+        Product pItem = ejbProduct.findById(Integer.parseInt(productId));
+        item.setProduct(pItem);
+        listHisItem.add(item);
+        session.setAttribute("historyproduct", listHisItem);
+        for (int i = 0; i < listHisItem.size()-1; i++) {
+            listShowHis.add(listHisItem.get(i));
+        }
+        return null;
+    }
+
+    public List<HistoryItem> getListHisItem() {
+        return listHisItem;
+    }
+
+    public void setListHisItem(List<HistoryItem> listHisItem) {
+        this.listHisItem = listHisItem;
+    }
+
+    public Boolean getIsEmpty() {
+        return isEmpty;
+    }
+
+    public void setIsEmpty(Boolean isEmpty) {
+        this.isEmpty = isEmpty;
+    }
+
+    public List<HistoryItem> getListShowHis() {
+        return listShowHis;
+    }
+
+    public void setListShowHis(List<HistoryItem> listShowHis) {
+        this.listShowHis = listShowHis;
+    }
+    
 }

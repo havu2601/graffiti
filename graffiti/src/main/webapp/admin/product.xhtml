@@ -72,98 +72,107 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <table class="table">
                                     <h:form>
-                                    <tr>
-                                        <td>NAME</td>
-                                        <td><pr:inputText style="width: 400px;" id="pName" value="#{productBean.objProduct.productName}" validatorMessage="Name cannot be blank!">
-                                                <f:validateRequired/>
-                                            </pr:inputText>
-                                        </td>
-                                        <td>
-                                            <h:message style="color: red" for="pName"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>CAPACITY</td>
-                                        <td><pr:inputText style="width: 400px;" id="capacity" type="number" value="#{productBean.capacity}" validatorMessage="Capacity invalid!">
-                                                <f:validateRequired/>
-                                                <f:validateDoubleRange minimum="10"/>
-                                            </pr:inputText>
-                                        </td>
-                                        <td>
-                                            <h:message style="color: red" for="capacity"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>PRICE</td>
-                                        <td><pr:inputText style="width: 400px;" id="price" type="number" value="#{productBean.price}" validatorMessage="Price invalid">
-                                                <f:validateRequired/>
-                                                <f:validateDoubleRange minimum="1"/>
-                                            </pr:inputText>
-                                        </td>
-                                        <td>
-                                            <h:message style="color: red" for="price"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>STOCK</td>
-                                        <td><pr:inputText style="width: 400px;" id="stock" type="number" value="#{productBean.stock}" validatorMessage="Stock invalid">
-                                                <f:validateRequired/>
-                                                <f:validateDoubleRange minimum="#{productBean.stock}"/>
-                                            </pr:inputText>
-                                        </td>
-                                        <td>
-                                            <h:message style="color: red" for="stock"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>DESCRIPTION</td>
-                                        <td><pr:inputTextarea style="width: 400px;" id="desc" value="#{productBean.objProduct.productDesc}" validatorMessage="Description cannot be blank!">
-                                                <f:validateRequired/>
-                                            </pr:inputTextarea>
-                                        </td>
-                                        <td>
-                                            <h:message style="color: red" for="desc"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>SUBCATEGORY</td>
-                                        <td>
-                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.subcatId}" filter="true" effect="fold" title="Select SubCategory">
-                                                <f:selectItems value="#{subcategoryBean.listSubCat}" var="sc" itemValue="#{sc.subcatId}" itemLabel="#{sc.subcatName}"/>
-                                            </pr:selectOneMenu>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>BRAND</td>
-                                        <td>
-                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.brandId}" filter="true" effect="fold" title="Select Brand">
-                                                <f:selectItems value="#{brandBean.listBrand}" var="b" itemValue="#{b.brandId}" itemLabel="#{b.brandName}"/>
-                                            </pr:selectOneMenu>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>COLOR</td>
-                                        <td>
-                                            <pr:selectOneMenu style="width: 400px;" value="#{productBean.colorId}" filter="true" effect="fold" title="Select Color">
-                                                <f:selectItems value="#{colorBean.listColor}" var="c" itemValue="#{c.colorId}" itemLabel="#{c.colorName}"/>
-                                            </pr:selectOneMenu>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>STATUS</td>
-                                        <td>
-                                            <pr:selectOneRadio style="width: 400px;" value="#{productBean.status}">
-                                                <f:selectItem itemValue="1" itemLabel="For Sale"/>
-                                                <f:selectItem itemValue="0" itemLabel="Not For Sale"/>
-                                            </pr:selectOneRadio>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="text-align: center">
-                                            <h:commandButton class="btn btn-info" action="#{productBean.addNewProduct()}" value="Submit"></h:commandButton>
-                                            <h:commandButton class="btn btn-info" action="#{productBean.reset()}" value="Reset"></h:commandButton>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <c:choose>
+                                                    <c:when test="${productBean.msg!=null}">
+                                                        <p class="mx-auto" style="color: red; font-size: 18px;">${productBean.msg}</p>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>NAME</td>
+                                            <td><pr:inputText style="width: 400px;" id="pName" value="#{productBean.objProduct.productName}" validatorMessage="Name cannot be blank!">
+                                                    <f:validateRequired/>
+                                                </pr:inputText>
+                                            </td>
+                                            <td>
+                                                <h:message style="color: red" for="pName"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>CAPACITY</td>
+                                            <td><pr:inputText style="width: 400px;" id="capacity" type="number" value="#{productBean.capacity}" validatorMessage="Capacity invalid!">
+                                                    <f:validateRequired/>
+                                                    <f:validateDoubleRange minimum="10"/>
+                                                </pr:inputText>
+                                            </td>
+                                            <td>
+                                                <h:message style="color: red" for="capacity"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>PRICE</td>
+                                            <td><pr:inputText style="width: 400px;" id="price" type="number" value="#{productBean.price}" validatorMessage="Price invalid">
+                                                    <f:validateRequired/>
+                                                    <f:validateDoubleRange minimum="1"/>
+                                                </pr:inputText>
+                                            </td>
+                                            <td>
+                                                <h:message style="color: red" for="price"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>STOCK</td>
+                                            <td><pr:inputText style="width: 400px;" id="stock" type="number" value="#{productBean.stock}" validatorMessage="Stock invalid">
+                                                    <f:validateRequired/>
+                                                    <f:validateDoubleRange minimum="#{productBean.stock}"/>
+                                                </pr:inputText>
+                                            </td>
+                                            <td>
+                                                <h:message style="color: red" for="stock"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>DESCRIPTION</td>
+                                            <td><pr:inputTextarea style="width: 400px;" id="desc" value="#{productBean.objProduct.productDesc}" validatorMessage="Description cannot be blank!">
+                                                    <f:validateRequired/>
+                                                </pr:inputTextarea>
+                                            </td>
+                                            <td>
+                                                <h:message style="color: red" for="desc"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>SUBCATEGORY</td>
+                                            <td>
+                                                <pr:selectOneMenu style="width: 400px;" value="#{productBean.subcatId}" filter="true" effect="fold" title="Select SubCategory">
+                                                    <f:selectItems value="#{subcategoryBean.listSubCat}" var="sc" itemValue="#{sc.subcatId}" itemLabel="#{sc.subcatName}"/>
+                                                </pr:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>BRAND</td>
+                                            <td>
+                                                <pr:selectOneMenu style="width: 400px;" value="#{productBean.brandId}" filter="true" effect="fold" title="Select Brand">
+                                                    <f:selectItems value="#{brandBean.listBrand}" var="b" itemValue="#{b.brandId}" itemLabel="#{b.brandName}"/>
+                                                </pr:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>COLOR</td>
+                                            <td>
+                                                <pr:selectOneMenu style="width: 400px;" value="#{productBean.colorId}" filter="true" effect="fold" title="Select Color">
+                                                    <f:selectItems value="#{colorBean.listColor}" var="c" itemValue="#{c.colorId}" itemLabel="#{c.colorName}"/>
+                                                </pr:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>STATUS</td>
+                                            <td>
+                                                <pr:selectOneRadio style="width: 400px;" value="#{productBean.status}" disabled="#{productBean.radState}">
+                                                    <f:selectItem itemValue="1" itemLabel="For Sale"/>
+                                                    <f:selectItem itemValue="0" itemLabel="Not For Sale"/>
+                                                </pr:selectOneRadio>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center">
+                                                <h:commandButton class="btn btn-info" action="#{productBean.addNewProduct()}" value="Submit"></h:commandButton>
+                                                <h:commandButton class="btn btn-info" action="#{productBean.reset()}" value="Reset"></h:commandButton>
+                                            </td>
+                                        </tr>
                                     </h:form>
                                 </table>
                             </div>

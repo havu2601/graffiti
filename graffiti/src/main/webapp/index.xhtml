@@ -24,6 +24,7 @@
                             </div>
                         </div>
                         <!-- tab content -->
+                        
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
@@ -33,10 +34,9 @@
                                                 <div class="product-wrapper mb-50">
                                                 <div class="product-img mb-25" style="opacity: #{p.productStock == 0 ? 0.3 : 1}">
                                                     <h:outputLink value="product_detail.xhtml?pid=#{p.productId}">
-                                                        <f:param name="productId" value="#{p.productId}"/>
                                                         <img src="./assets/images/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
                                                         <img class="secondary-img" src="./assets/images/EMC7060_1024x1024.jpg" alt=""/>
-                                                    </h:outputLink>>
+                                                    </h:outputLink>
                                                     <div class="product-action text-center">
                                                         <a href="#" title="Shoppingb Cart">
                                                             <i class="fas fa-shopping-cart"></i>
@@ -69,6 +69,7 @@
 
                                 </div>
                             </div>
+                        
                         </div>
                     <!--</div>-->
                     <!--SideBar -->

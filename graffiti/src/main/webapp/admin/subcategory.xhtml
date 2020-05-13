@@ -4,7 +4,8 @@
         xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
-        xmlns:pr="http://primefaces.org/ui">    
+        xmlns:pr="http://primefaces.org/ui"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">    
     <ui:composition template="/templates/admintemplate.xhtml">
     <ui:define name="content"> 
 
@@ -44,7 +45,7 @@
                                         </pr:column>
                                         <pr:column>
                                             <f:facet name="header">ACTION</f:facet>
-                                            <h:commandLink class="btn-link" value="Edit" action="#{subcategoryBean.loadCategory(sc.subcatId)}"></h:commandLink> |
+                                            <h:commandLink class="btn-link" value="Edit" action="#{subcategoryBean.loadSubCategory(sc.subcatId)}"></h:commandLink> |
                                             <h:commandLink class="btn-link" value="Remove" action="#{subcategoryBean.remove(sc.subcatId)}"></h:commandLink>
                                         </pr:column>
                                     </pr:dataTable>
@@ -58,6 +59,15 @@
                                 <div class="row">
                                     <h:form>
                                     <table class="table">
+                                        <tr>
+                                            <td colspan="2">
+                                                <c:choose>
+                                                    <c:when test="${subcategoryBean.msg!=null}">
+                                                        <p class="mx-auto" style="color: red; font-size: 18px;">${subcategoryBean.msg}</p>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>NAME</td>
                                             <td><pr:inputText style="width: 400px;" id="subcatName" value="#{subcategoryBean.objSubCat.subcatName}" validatorMessage="Name cannot be blank!">
@@ -76,7 +86,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" style="text-align: center">
-                                                <h:commandButton class="btn btn-info" action="#{subcategoryBean.addNewCategory()}" value="Submit"></h:commandButton>
+                                                <h:commandButton class="btn btn-info" action="#{subcategoryBean.addNewSubCategory()}" value="Submit"></h:commandButton>
                                                 <h:commandButton class="btn btn-info" action="#{subcategoryBean.reset()}" value="Reset"></h:commandButton>
                                             </td>
                                         </tr>

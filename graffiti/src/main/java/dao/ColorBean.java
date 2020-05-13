@@ -34,6 +34,7 @@ public class ColorBean implements Serializable{
     List<Color> listColor;
     Color objColor;
     String searchStr;
+    String msg;
     
     @PostConstruct
     public void init(){
@@ -45,13 +46,14 @@ public class ColorBean implements Serializable{
         if(null==searchStr || searchStr.isEmpty()){
             List<Color> rs = new ArrayList<>();
             rs = ejb.findAll();
+            msg = "";
             show(rs,"");
         }else{
             if(null!=ejb.findByAny("%"+searchStr+"%")){
                 List<Color> ct = ejb.findByAny("%"+searchStr+"%");
                 List<Color> rs = new ArrayList<>();
                 rs.addAll(ct);
-                String msg = "Cannot find Brand with name " + searchStr;
+                msg = "Cannot find Brand with name " + searchStr;
                 show(rs,msg);
             }
         }
@@ -68,11 +70,18 @@ public class ColorBean implements Serializable{
     
     public String addNewColor(){
         if(null==objColor.getColorId()){
-            if(checkValid())
-            ejb.addColor(objColor);
+            if(checkValid()){
+                ejb.addColor(objColor);
+            }else{
+                msg = "Color already exists!";
+                return null;
+            }
         }else if(!checkValid()){
             if(ejb.findByName(objColor.getColorName()).get(0).getColorId()==objColor.getColorId() && ejb.findByHexcode(objColor.getColorHexcode()).get(0).getColorId()==objColor.getColorId()){
                 ejb.updateColor(objColor);
+            }else{
+                msg = "Color name or hexcode already exists!";
+                return null;
             }
         }else{
             ejb.updateColor(objColor);
@@ -82,6 +91,7 @@ public class ColorBean implements Serializable{
     
     public void reset(){
         objColor = new Color();
+        msg = "";
     }
     
     public String remove(int id){
@@ -89,7 +99,8 @@ public class ColorBean implements Serializable{
             if(null== ejbProduct.findByColor(id) || ejbProduct.findByColor(id).isEmpty()){
                 ejb.delete(ejb.findById(id));
             }else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
+                msg = "Cannot remove!";
+                return null;
             }
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Cannot remove!","Cannot remove!"));
@@ -107,6 +118,7 @@ public class ColorBean implements Serializable{
     }
     public void loadColor(int id){
         objColor = ejb.findById(id);
+        msg = "";
     }
 
     public List<Color> getListColor() {
@@ -131,6 +143,14 @@ public class ColorBean implements Serializable{
 
     public void setSearchStr(String searchStr) {
         this.searchStr = searchStr;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     
