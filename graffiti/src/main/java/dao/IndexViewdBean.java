@@ -35,7 +35,7 @@ public class IndexViewdBean implements Serializable{
     
     List<Product> listProduct;
     String searchStr;
-    List<Image> objImage;
+    List<Image> listImage;
     @PostConstruct
     public void init(){
         listProduct = ejbProduct.findProductAscByCategory();
@@ -43,17 +43,14 @@ public class IndexViewdBean implements Serializable{
 
     public List<Image> getTwoImage(int id){
         List<Image> rs = new ArrayList<>();
-        objImage = ejbImage.findByProduct(id);
+        listImage = ejbImage.findByProduct(id);
         for (int i = 0; i < 1; i++) {
-            rs.add(objImage.get(i));
+            rs.add(listImage.get(i));
         }
         return rs;
     }
     public void search(){
-        if(null==searchStr || searchStr.isEmpty()){
-            List<Product> rs = new ArrayList<>();
-            rs = ejbProduct.findAll();
-            show(rs,"");
+        if(null==searchStr){
         }else{
             if(null!=ejbProduct.findByAnyClient("%"+searchStr+"%")){
                 List<Product> p = ejbProduct.findByAnyClient("%"+searchStr+"%");
@@ -106,12 +103,13 @@ public class IndexViewdBean implements Serializable{
         this.searchStr = searchStr;
     }
 
-    public List<Image> getObjImage() {
-        return objImage;
+    public List<Image> getListImage() {
+        return listImage;
     }
 
-    public void setObjImage(List<Image> objImage) {
-        this.objImage = objImage;
+    public void setListImage(List<Image> listImage) {
+        this.listImage = listImage;
     }
+
     
 }

@@ -39,8 +39,8 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6">
                             <h:form id="form">
-                                <pr:galleria value="#{productBean.listImage}" var="img" style="font-size: 40px" panelWidth="560" panelHeight="480" frameHeight="100" frameWidth="85" effect="slide" >
-                                    <pr:graphicImage style="height: 480px; width: 560px;" value="#{img.imagePath}"/> 
+                                <pr:galleria value="#{productBean.listImage}" var="img" style="font-size: 40px" panelWidth="500" panelHeight="650" frameHeight="100" frameWidth="85" effect="slide" >
+                                    <pr:graphicImage style="height: 650px; width: 500px;" value="#{img.imagePath}"/> 
                                 </pr:galleria>
                             </h:form>
                     </div>
@@ -120,17 +120,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6" style="margin-top: 50px;">
+                <div class="col-xl-9 col-lg-6" style="margin-top: 50px;">
                     <h3>RECENT PRODUCT</h3>
                     <div class="row" style="margin-top: 50px;">
+                        <c:when test="#{productBean.listHisItem!=null}">
                         <c:forEach items="#{productBean.listShowHis}" var="ph">
                         <div class="col-xl-3 col-lg-6 col-md-6">
                             <div class="product-wrapper mb-50">
                                 <div class="product-img mb-25" style="opacity: #{ph.product.productStock == 0 ? 0.3 : 1}">
                                 <h:outputLink value="product_detail.xhtml?pid=#{ph.product.productId}">
-                                    <f:param name="productId" value="#{ph.product.productId}"/>
-                                    <img src="./assets/images/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
-                                    <img class="secondary-img" src="./assets/images/EMC7060_1024x1024.jpg" alt=""/>
+                                    
+                                    <c:forEach items="#{productBean.getTwoImage(ph.product.productId)}" var="img">
+                                        <img style="width: 100%; height: 250px;" src="#{img.imagePath}" alt=""/>
+                                        <!--<img class="secondary-img" src="" alt=""/>-->
+                                    </c:forEach>
                                 </h:outputLink>
                             </div>
                             <div class="product-content pr-0">
@@ -152,6 +155,7 @@
                         </div>
                     </div>
                     </c:forEach>
+                        </c:when>
                     </div>
                 </div>
             </div>

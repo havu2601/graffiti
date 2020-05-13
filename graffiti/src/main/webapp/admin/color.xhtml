@@ -33,7 +33,7 @@
                                     <!-- Product list -->
                                     
                                     
-                                    <pr:dataTable style="text-align: center" class="table table-hover" value="#{colorBean.listColor}" var="c">
+                                    <pr:dataTable style="text-align: center" class="table table-hover" scrollable="true" scrollHeight="600" value="#{colorBean.listColor}" var="c">
                                         <pr:column style="width: 70px;">
                                             <f:facet name="header">ID</f:facet>
                                             <h:outputText value="#{c.colorId}"/>

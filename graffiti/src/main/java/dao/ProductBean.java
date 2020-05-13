@@ -36,7 +36,7 @@ public class ProductBean implements Serializable{
     
     List<Product> listProduct;
     List<Image> listImage;
-    
+    List<Image> listHisImage;
     Product objProduct;
     Brand objBrand;
     SubCategory objSubCat;
@@ -69,7 +69,14 @@ public class ProductBean implements Serializable{
         status = "0";
         search();
     }
-    
+    public List<Image> getTwoImage(int id){
+        List<Image> rs = new ArrayList<>();
+        listHisImage = ejbImage.findByProduct(id);
+        for (int i = 0; i < 1; i++) {
+            rs.add(listImage.get(i));
+        }
+        return rs;
+    }
     public void search(){
         if(null==searchStr || searchStr.isEmpty()){
             List<Product> rs = new ArrayList<>();
