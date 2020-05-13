@@ -33,12 +33,7 @@ public class UserBean implements Serializable{
     String email;
     String password;
     UserAccount acc;
-    
-    @PostConstruct
-    public void init(){
-        acc = new UserAccount();
-    }
-
+   
     public UserBean() {
         super();
         isLoggedin = false;

@@ -38,4 +38,7 @@ public class OrderEJB {
         em.merge(order);
     }
     
+    public List<Orders> getLatest(Integer id){
+        return em.createNamedQuery("Orders.findLastest").setParameter("userId", id).getResultList();
+    }
 }
