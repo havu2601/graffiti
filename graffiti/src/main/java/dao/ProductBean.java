@@ -58,6 +58,7 @@ public class ProductBean implements Serializable{
     Boolean radState;
     
     private List<HistoryItem> listHisItem = new ArrayList<>();
+    private List<HistoryItem> listShowHis = new ArrayList<>();
     private Boolean isEmpty;
     
     @PostConstruct
@@ -381,7 +382,7 @@ public class ProductBean implements Serializable{
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         if(session.getAttribute("historyproduct")!=null){
         listHisItem = (List<HistoryItem>) session.getAttribute("historyproduct");}
-        if(listHisItem.size()>=4){
+        if(listHisItem.size()>=5){
             listHisItem.remove(0);
         }
         HistoryItem item = new HistoryItem();
@@ -389,6 +390,9 @@ public class ProductBean implements Serializable{
         item.setProduct(pItem);
         listHisItem.add(item);
         session.setAttribute("historyproduct", listHisItem);
+        for (int i = 0; i < listHisItem.size()-1; i++) {
+            listShowHis.add(listHisItem.get(i));
+        }
         return null;
     }
 
@@ -407,4 +411,13 @@ public class ProductBean implements Serializable{
     public void setIsEmpty(Boolean isEmpty) {
         this.isEmpty = isEmpty;
     }
+
+    public List<HistoryItem> getListShowHis() {
+        return listShowHis;
+    }
+
+    public void setListShowHis(List<HistoryItem> listShowHis) {
+        this.listShowHis = listShowHis;
+    }
+    
 }
