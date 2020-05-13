@@ -5,6 +5,7 @@
  */
 package dao;
 
+import ejb.ImageEJB;
 import ejb.ProductEJB;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import model.Image;
 import model.Product;
 
 /**
@@ -28,14 +30,25 @@ public class IndexViewdBean implements Serializable{
     @EJB
     private ProductEJB ejbProduct;
     
+    @EJB
+    private ImageEJB ejbImage;
+    
     List<Product> listProduct;
     String searchStr;
-    
+    List<Image> objImage;
     @PostConstruct
     public void init(){
         listProduct = ejbProduct.findProductAscByCategory();
     }
 
+    public List<Image> getTwoImage(int id){
+        List<Image> rs = new ArrayList<>();
+        objImage = ejbImage.findByProduct(id);
+        for (int i = 0; i < 1; i++) {
+            rs.add(objImage.get(i));
+        }
+        return rs;
+    }
     public void search(){
         if(null==searchStr || searchStr.isEmpty()){
             List<Product> rs = new ArrayList<>();
@@ -91,6 +104,14 @@ public class IndexViewdBean implements Serializable{
 
     public void setSearchStr(String searchStr) {
         this.searchStr = searchStr;
+    }
+
+    public List<Image> getObjImage() {
+        return objImage;
+    }
+
+    public void setObjImage(List<Image> objImage) {
+        this.objImage = objImage;
     }
     
 }

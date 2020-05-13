@@ -34,8 +34,11 @@
                                                 <div class="product-wrapper mb-50">
                                                 <div class="product-img mb-25" style="opacity: #{p.productStock == 0 ? 0.3 : 1}">
                                                     <h:outputLink value="product_detail.xhtml?pid=#{p.productId}">
-                                                        <img src="./assets/images/montana-black-6-pack-infra-p2553-7665_image.jpg" alt=""/>
-                                                        <img class="secondary-img" src="./assets/images/EMC7060_1024x1024.jpg" alt=""/>
+                                                        <c:forEach items="#{indexViewdBean.getTwoImage(p.productId)}" var="img">
+                                                            <img style="width: 100%; height: 400px;" src="#{img.imagePath}" alt=""/>
+                                                            <!--<img class="secondary-img" src="" alt=""/>-->
+                                                        </c:forEach>
+                                                        
                                                     </h:outputLink>
                                                     <div class="product-action text-center">
                                                         <a href="#" title="Shoppingb Cart">
