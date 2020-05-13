@@ -61,9 +61,8 @@
 
                                 <div class="product-info-list variant-item">
                                     <ul>
+                                        <li><span>Capacity:</span>#{productBean.objProduct.productCapacity}ML</li>
                                         <li><span>Brands:</span> #{productBean.objProduct.brandId.brandName}</li>
-                                        <!--<li><span>Product Code:</span> d12</li>-->
-                                        <li><span>Reward Points:</span> 100</li>
                                         <li><span>Color:</span> <button class="btnColor" style="background-color: #{productBean.objProduct.colorId.colorHexcode};"></button></li>
                                         <li><span>Hexcode:</span> #{productBean.objProduct.colorId.colorHexcode}</li>
                                         <li><span>Pigment:</span> #{productBean.objProduct.colorId.colorPigment}</li>
@@ -123,13 +122,11 @@
                 <div class="col-xl-9 col-lg-6" style="margin-top: 50px;">
                     <h3>RECENT PRODUCT</h3>
                     <div class="row" style="margin-top: 50px;">
-                        <c:when test="#{productBean.listHisItem!=null}">
                         <c:forEach items="#{productBean.listShowHis}" var="ph">
                         <div class="col-xl-3 col-lg-6 col-md-6">
                             <div class="product-wrapper mb-50">
                                 <div class="product-img mb-25" style="opacity: #{ph.product.productStock == 0 ? 0.3 : 1}">
                                 <h:outputLink value="product_detail.xhtml?pid=#{ph.product.productId}">
-                                    
                                     <c:forEach items="#{productBean.getTwoImage(ph.product.productId)}" var="img">
                                         <img style="width: 100%; height: 250px;" src="#{img.imagePath}" alt=""/>
                                         <!--<img class="secondary-img" src="" alt=""/>-->
@@ -155,7 +152,6 @@
                         </div>
                     </div>
                     </c:forEach>
-                        </c:when>
                     </div>
                 </div>
             </div>

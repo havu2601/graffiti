@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByBrandId", query = "SELECT p FROM Product p WHERE p.brandId.brandId = :brandId"),
     @NamedQuery(name = "Product.findBySubCatId", query = "SELECT p FROM Product p WHERE p.subcatId.subcatId = :subcatId"),
     @NamedQuery(name = "Product.findByCateId", query = "SELECT p FROM Product p WHERE p.subcatId.categoryId.categoryId = :categoryId"),
-    @NamedQuery(name = "Product.findExist", query = "SELECT p FROM Product p WHERE p.productName = :productName AND p.brandId.brandId = :brandId AND p.colorId.colorId = :colorId"),
+    @NamedQuery(name = "Product.findExist", query = "SELECT p FROM Product p WHERE p.productName = :productName AND p.brandId.brandId = :brandId AND p.colorId.colorId = :colorId AND p.productCapacity = :capacity"),
     @NamedQuery(name = "Product.findByAnyClient", query = "SELECT p FROM Product p WHERE (p.productName LIKE :searchStr OR p.brandId.brandName LIKE :searchStr OR p.subcatId.subcatName LIKE :searchStr OR p.subcatId.categoryId.categoryName LIKE :searchStr OR p.colorId.colorName LIKE :searchStr OR p.colorId.colorHexcode LIKE :searchStr) AND p.productStatus > 0"),
     @NamedQuery(name = "Product.findByColorClient", query = "SELECT p FROM Product p WHERE p.colorId.colorId = :colorId AND p.productStatus > 0"),
     @NamedQuery(name = "Product.findByBrandClient", query = "SELECT p FROM Product p WHERE p.brandId.brandId = :brandId AND p.productStatus > 0"),

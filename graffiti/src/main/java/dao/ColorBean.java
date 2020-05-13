@@ -53,7 +53,7 @@ public class ColorBean implements Serializable{
                 List<Color> ct = ejb.findByAny("%"+searchStr+"%");
                 List<Color> rs = new ArrayList<>();
                 rs.addAll(ct);
-                msg = "Cannot find Brand with name " + searchStr;
+                msg = "";
                 show(rs,msg);
             }
         }

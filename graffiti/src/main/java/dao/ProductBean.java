@@ -73,7 +73,7 @@ public class ProductBean implements Serializable{
         List<Image> rs = new ArrayList<>();
         listHisImage = ejbImage.findByProduct(id);
         for (int i = 0; i < 1; i++) {
-            rs.add(listImage.get(i));
+            rs.add(listHisImage.get(i));
         }
         return rs;
     }
@@ -87,7 +87,7 @@ public class ProductBean implements Serializable{
                 List<Product> p = ejbProduct.findByAny("%"+searchStr+"%");
                 List<Product> rs = new ArrayList<>();
                 rs.addAll(p);
-                msg = "Cannot find Product with keyword " + searchStr;
+                msg = "";
                 show(rs,msg);
             }
         }
@@ -147,7 +147,7 @@ public class ProductBean implements Serializable{
                 return null;
             }
         }else if(!checkProductExist()){
-            Product check = ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId)).get(0);
+            Product check = ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId),Integer.parseInt(capacity)).get(0);
             if(check.getProductId() == objProduct.getProductId()){
                 if(!checkHaveImage() && objProduct.getProductStatus()==1){
                     objProduct.setProductStatus(0);
@@ -190,8 +190,8 @@ public class ProductBean implements Serializable{
         objProduct.setSubcatId(objSubCat);
     }
     public boolean checkProductExist(){
-        if(ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId))==null || 
-                ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId)).isEmpty()){
+        if(ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId),Integer.parseInt(capacity))==null || 
+                ejbProduct.findCheckExist(objProduct.getProductName(), Integer.parseInt(brandId), Integer.parseInt(colorId),Integer.parseInt(capacity)).isEmpty()){
             return true;
         }
         return false;
