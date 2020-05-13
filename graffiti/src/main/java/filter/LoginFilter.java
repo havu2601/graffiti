@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author havu2601
  */
-@WebFilter(filterName = "LoginFilter", urlPatterns = {"/index.xhtml"})
+@WebFilter(filterName = "LoginFilter", urlPatterns = {"/checkout.xhtml"})
 public class LoginFilter implements Filter {
     
     @Override

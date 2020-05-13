@@ -5,10 +5,13 @@
  */
 package dao;
 
+import ejb.AccountEJB;
 import ejb.OrderDetailEJB;
 import ejb.OrderEJB;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -16,6 +19,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import model.OrderDetail;
 import model.Orders;
+import model.UserAccount;
 
 /**
  *
@@ -29,6 +33,10 @@ public class OrderBean implements Serializable{
     OrderEJB ejb;
     @EJB
     OrderDetailEJB detailEJB;
+    
+    @EJB
+    AccountEJB ejbAccount;
+    
     private Orders order;
     private List<Orders> list;
     private String oID;
@@ -47,6 +55,26 @@ public class OrderBean implements Serializable{
         order = ejb.findByID(Integer.parseInt(oID));
     }
 
+    public String placeOrder(Integer id){
+        UserAccount user = new UserAccount();
+        user.setUserId(id);
+        ShoppingCart cart = new ShoppingCart();
+        Date date = Date.from(Instant.now());
+        order = new Orders();
+        order.setUserId(user);
+        order.setOrderDate(date);
+        order.setStatus("Paid");
+        ejb.createOrder(order);
+        order =  ejb.getLatest(id).get(0);
+        for (CartItem item : cart.getItemInCart()) {
+            OrderDetail detail = new OrderDetail();
+            detail.setOrderId(order);
+            detail.setProductId(item.getProduct());
+            detail.setProductQty(item.getQuantity());
+            detailEJB.createOrderDetail(detail);
+        }
+        return null;
+    }
     public String getoID() {
         return oID;
     }
