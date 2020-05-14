@@ -6,15 +6,18 @@
 package dao;
 
 import ejb.CategoryEJB;
+import ejb.ImageEJB;
 import ejb.ProductEJB;
 import ejb.SubcategoryEJB;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import model.Category;
+import model.Image;
 import model.Product;
 import model.SubCategory;
 
@@ -35,10 +38,13 @@ public class SubProductBean implements Serializable{
     @EJB
     private CategoryEJB ejbCate;
     
+    @EJB
+    private ImageEJB ejbImage;
+    
     List<Product> listProduct;
     List<SubCategory> listSubcat;
     List<Category> listCate;
-    
+    List<Image> objImage;
     Category objCategory;
     
     String cateId;
@@ -48,6 +54,15 @@ public class SubProductBean implements Serializable{
     public void init(){
         
 //        listCate = ejbCate.findAll();
+    }
+    
+    public List<Image> getTwoImage(int id){
+        List<Image> rs = new ArrayList<>();
+        objImage = ejbImage.findByProduct(id);
+        for (int i = 0; i < 1; i++) {
+            rs.add(objImage.get(i));
+        }
+        return rs;
     }
     
     public void loadSubCat(){
@@ -106,6 +121,14 @@ public class SubProductBean implements Serializable{
 
     public void setObjCategory(Category objCategory) {
         this.objCategory = objCategory;
+    }
+
+    public List<Image> getObjImage() {
+        return objImage;
+    }
+
+    public void setObjImage(List<Image> objImage) {
+        this.objImage = objImage;
     }
     
     

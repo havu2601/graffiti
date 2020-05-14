@@ -108,7 +108,7 @@ public class ProductEJB {
     }
     
     //Find to check exist
-    public List<Product> findCheckExist(String name, int bid, int cid){
-        return em.createNamedQuery("Product.findExist").setParameter("productName", name).setParameter("brandId", bid).setParameter("colorId", cid).getResultList();
+    public List<Product> findCheckExist(String name, int bid, int cid, int capacity){
+        return em.createNamedQuery("Product.findExist").setParameter("productName", name).setParameter("brandId", bid).setParameter("colorId", cid).setParameter("capacity", capacity).getResultList();
     }
 }

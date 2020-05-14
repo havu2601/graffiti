@@ -33,7 +33,7 @@
                                     <!-- Product list -->
                                     
                                     
-                                    <pr:dataTable style="text-align: center" class="table table-hover" value="#{colorBean.listColor}" var="c">
+                                    <pr:dataTable style="text-align: center" class="table table-hover" scrollable="true" scrollHeight="600" value="#{colorBean.listColor}" var="c">
                                         <pr:column style="width: 70px;">
                                             <f:facet name="header">ID</f:facet>
                                             <h:outputText value="#{c.colorId}"/>
@@ -45,10 +45,6 @@
                                         <pr:column sortBy="#{c.colorHexcode}">
                                             <f:facet name="header">HEXCODE</f:facet>
                                             <h:outputText value="#{c.colorHexcode}"/>
-                                        </pr:column>
-                                        <pr:column sortBy="#{c.colorLightfastness}">
-                                            <f:facet name="header">LIGHTFASTNESS</f:facet>
-                                            <h:outputText value="#{c.colorLightfastness}"/>
                                         </pr:column>
                                         <pr:column>
                                             <f:facet name="header">RGB</f:facet>

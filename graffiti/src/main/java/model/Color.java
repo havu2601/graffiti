@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Color.findAll", query = "SELECT c FROM Color c"),
-    @NamedQuery(name = "Color.findAllSort", query = "SELECT c FROM Color c ORDER BY c.colorHexcode DESC"),
+    @NamedQuery(name = "Color.findAllSort", query = "SELECT c FROM Color c"),
     @NamedQuery(name = "Color.findByColorId", query = "SELECT c FROM Color c WHERE c.colorId = :colorId"),
     @NamedQuery(name = "Color.findByColorHexcode", query = "SELECT c FROM Color c WHERE c.colorHexcode = :colorHexcode"),
     @NamedQuery(name = "Color.findByColorName", query = "SELECT c FROM Color c WHERE c.colorName LIKE :colorName"),

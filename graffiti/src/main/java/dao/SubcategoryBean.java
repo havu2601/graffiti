@@ -57,7 +57,7 @@ public class SubcategoryBean implements Serializable{
                 List<SubCategory> ct = ejb.findByName("%"+searchStr+"%");
                 List<SubCategory> rs = new ArrayList<>();
                 rs.addAll(ct);
-                msg = "Cannot find Subcategory with name " + searchStr;
+                msg = "";
                 show(rs,msg);
             }
         }
