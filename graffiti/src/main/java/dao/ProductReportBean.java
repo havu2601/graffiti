@@ -6,17 +6,20 @@
 package dao;
 
 import ejb.ProductEJB;
+import ejb.SubcategoryEJB;
 import java.io.IOException;
-import javax.inject.Named;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import model.Product;
+import model.SubCategory;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -25,6 +28,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+
+
 
 /**
  *
@@ -35,18 +40,17 @@ import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 public class ProductReportBean implements Serializable {
 
     @EJB private ProductEJB ejbProduct;
-    
     List<Product> listProduct;
     JasperPrint jasperPrint;
     public void init() throws JRException{
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(listProduct);
-        jasperPrint = JasperFillManager.fillReport("C:\\Users\\DELL\\reportGra.jasper", new HashMap(), beanCollectionDataSource);
+        jasperPrint = JasperFillManager.fillReport("D:\\PRJ4\\finalCode\\graffiti\\graffiti\\src\\main\\webapp\\WEB-INF\\report1.jasper", new HashMap(), beanCollectionDataSource);
     }
     
     public void PDF() throws JRException, IOException{
         init();
         HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportGra.pdf");
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportProduct.pdf");
         try(ServletOutputStream outStream = httpServletResponse.getOutputStream()) {
             JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
             outStream.flush();
@@ -57,10 +61,10 @@ public class ProductReportBean implements Serializable {
     public void exportarExcel() throws JRException, IOException{
         init();
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        response.addHeader("Content-disposition","attachment; filename=jsfReporte.xlsx");
+        response.addHeader("Content-disposition","attachment; filename=reportProduct.xlsx");
     try (ServletOutputStream outStream = response.getOutputStream()) {
         JRXlsxExporter exporter = new JRXlsxExporter();
-        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.CHARACTER_ENCODING.JASPER_PRINT, jasperPrint);
         exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outStream);
         exporter.exportReport();
 
@@ -73,7 +77,7 @@ public class ProductReportBean implements Serializable {
         init();
         
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        response.addHeader("Content-disposition","attachment; filename=jsfReporte.docx");
+        response.addHeader("Content-disposition","attachment; filename=reportProduct.docx");
         ServletOutputStream outStream = response.getOutputStream();
 
         JRDocxExporter exporter = new JRDocxExporter();
@@ -94,6 +98,5 @@ public class ProductReportBean implements Serializable {
     public void setListProduct(List<Product> listProduct) {
         this.listProduct = listProduct;
     }
-    
     
 }
