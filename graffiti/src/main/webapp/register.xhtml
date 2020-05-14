@@ -34,17 +34,17 @@
                                     <h3 class="text-center mb-60">Signup From Here</h3>
                                     <h:form>
                                         <label for="name">Username <span>**</span></label>
-                                        <h:inputText p:placeholder="Enter Username" value="#{registerBean.name}"/>
+                                        <h:inputText required="true" p:placeholder="Enter Username" value="#{registerBean.name}"/>
                                         <label for="name">Email <span>**</span></label>
-                                        <h:inputText p:placeholder="Enter Email address" value="#{registerBean.email}"/>
+                                        <h:inputText required="true" requiredMessage="Email can not be blanked" p:placeholder="Enter Email address" value="#{registerBean.email}"/>
                                         <label for="name">Password <span>**</span></label>
-                                        <h:inputSecret p:placeholder="Enter Password" value="#{registerBean.password}"/>
+                                        <h:inputSecret required="true" p:placeholder="Enter Password" value="#{registerBean.password}"/>
                                         <label for="name">Password <span>**</span></label>
-                                        <h:inputSecret p:placeholder="Re-Enter Password" value="#{registerBean.rePassword}"/>
+                                        <h:inputSecret required="true" p:placeholder="Re-Enter Password" value="#{registerBean.rePassword}"/>
                                         <label for="name">Phone <span>**</span></label>
-                                        <h:inputText p:placehholder="Enter Phone No." value="#{registerBean.phone}"/>
+                                        <h:inputText required="true" p:placehholder="Enter Phone No." value="#{registerBean.phone}"/>
                                         <label for="name">Address <span>**</span></label>
-                                        <h:inputText p:placehholder="Enter Address" value="#{registerBean.address}"/>
+                                        <h:inputText required="true" p:placehholder="Enter Address" value="#{registerBean.address}"/>
                                         <div class="mt-10"></div>
                                         <h:commandButton class="btn theme-btn-2 w-100" action="#{registerBean.register()}" value="Register Now"/>
                                         <div class="or-divide"><span>or</span></div>

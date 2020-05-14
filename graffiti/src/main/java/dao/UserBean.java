@@ -8,7 +8,6 @@ package dao;
 import ejb.AccountEJB;
 import java.io.Serializable;
 import java.sql.SQLException;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -47,10 +46,13 @@ public class UserBean implements Serializable{
             acc = accEJB.findByEmail(email.toLowerCase());
             if (null!=acc && password.equals(acc.getPassword()) && acc.getRoleId().getRoleId()!=4){
                 isLoggedin = true;
-                if (acc.getRoleId().getRoleId()==1 || acc.getRoleId().getRoleId()==2){
+                if (acc.getRoleId().getRoleId()==1 || acc.getRoleId().getRoleId()==2)
                     isAdmin = true;
+                if (isAdmin){
+                    return "admin/admin_homepage.xhtml?faces-redirect=true";
+                } else {
+                    return "index.xhtml";
                 }
-                return "index.xhtml";
             }
             else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error","Error"));
