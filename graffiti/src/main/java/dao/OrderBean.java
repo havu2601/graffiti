@@ -40,6 +40,7 @@ public class OrderBean implements Serializable{
     private Orders order;
     private List<Orders> list;
     private String oID;
+    private String uID;
     private List<OrderDetail> listDetail;
     ShoppingCart cart = new ShoppingCart();
 
@@ -49,6 +50,11 @@ public class OrderBean implements Serializable{
         order = new Orders();
         list = new ArrayList<>();
         list = ejb.findAll();
+    }
+    
+    public void getByUID(){
+        list = new ArrayList<>();
+        list = ejb.findByUserID(uID);
     }
     
     public void getDetail(){
@@ -95,6 +101,14 @@ public class OrderBean implements Serializable{
 
     public void setCart(ShoppingCart cart) {
         this.cart = cart;
+    }
+
+    public String getuID() {
+        return uID;
+    }
+
+    public void setuID(String uID) {
+        this.uID = uID;
     }
     
 

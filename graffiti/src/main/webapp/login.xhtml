@@ -35,9 +35,9 @@
                         <h3 class="text-center mb-60">Login From Here</h3>
                         <h:form>
                             <h:outputText value="Email Address"/>
-                            <h:inputText p:placeholder="Enter Username or Email address..." value="#{userBean.email}"></h:inputText>
+                            <h:inputText required="true" p:placeholder="Enter Username or Email address..." value="#{userBean.email}"></h:inputText>
                             <h:outputText value="Password"/>
-                            <h:inputSecret p:placeholder="Enter password" value="#{userBean.password}"></h:inputSecret>
+                            <h:inputSecret required="true" p:placeholder="Enter password" value="#{userBean.password}"></h:inputSecret>
                             <h:commandButton class="btn theme-btn-2 w-100" action="#{userBean.doLogin()}" value="Log in"></h:commandButton>
                             <div class="or-divide"><span>or</span></div>
                             <h:link class="btn theme-btn w-100" value="Register Now" outcome="/register.xhtml"/>

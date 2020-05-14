@@ -8,7 +8,8 @@ and open the template in the editor.
 <html   xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:pr="http://primefaces.org/ui">
     <ui:composition template="/templates/admintemplate.xhtml">
         <ui:define name="content">
             <main>
@@ -37,20 +38,20 @@ and open the template in the editor.
                             <div class="col-12">
                                 <h:form>
                                 <div class="table-content table-responsive">
-                                    <h:dataTable class="table" value="#{orderBean.listDetail}" var="detail">
-                                        <h:column>
-                                            <f:facet name="header" class="cart-product-name">Product Name</f:facet>
+                                    <pr:dataTable class="table" value="#{orderBean.listDetail}" var="detail">
+                                        <pr:column headerText="Product Name" sortBy="#{detail.productId.productName}">
                                             <h:outputText class="cart-product-name" value="${detail.productId.productName}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header" class="cart-product-name">Price</f:facet>
+                                        </pr:column>
+                                        <pr:column headerText="Price" sortBy="#{detail.productId.productPrice}">
                                             <h:outputText class="cart-product-name" value="${detail.productId.productPrice}$"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header" class="cart-product-name">Quantity</f:facet>
+                                        </pr:column>
+                                        <pr:column headerText="Quantity" sortBy="#{detail.productQty}">
                                             <h:outputText class="cart-product-name" value="${detail.productQty}"/>
-                                        </h:column>
-                                    </h:dataTable>
+                                        </pr:column>
+                                        <pr:column headerText="Total" sortBy="${detail.productQty*detail.productId.productPrice}">
+                                            <h:outputText class="cart-product-name" value="${detail.productQty*detail.productId.productPrice}"/>$
+                                        </pr:column>
+                                    </pr:dataTable>
                                 </div>
                             </h:form>
                             </div>

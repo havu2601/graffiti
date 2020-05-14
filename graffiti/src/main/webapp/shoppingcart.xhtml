@@ -36,28 +36,25 @@
                                     <c:when test="${!shoppingCart.isEmpty}">
                                         <h:form>
                                             <div class="table-content table-responsive">
-                                                <h:dataTable value="${shoppingCart.itemInCart}" var="item">
-                                                    <h:column>
-                                                        <f:facet name="header">Product Name</f:facet>
+                                                <pr:dataTable value="${shoppingCart.itemInCart}" var="item">
+                                                    <pr:column headerText="Product Name" sortBy="${item.product.productName}">
                                                         <h:outputText value="${item.product.productName}"/>
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">Quantity</f:facet>
+                                                    </pr:column>
+                                                    <pr:column headerText="Quantity" sortBy="${item.quantity}">
                                                         <div class="plus-minus">
                                                             <div class="cart-plus-minus">
                                                                 <input id="qty#{item.product.productId}" value="${item.quantity}"/><h:commandButton action="${shoppingCart.reduce(item)}" class="dec qtybutton" value="-"/><h:commandButton action="#{shoppingCart.increase(item)}" class="inc qtybutton" value="+"/>
                                                             </div>
                                                         </div>
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">Price</f:facet>
+                                                    </pr:column>
+                                                    <pr:column headerText="Price" sortBy="${item.product.producPrice}">
                                                         <h:outputText id="price#{item.product.productId}" value="${item.product.productPrice}$"/>
-                                                    </h:column>
-                                                    <h:column>
+                                                    </pr:column>
+                                                    <pr:column headerText="Action">
                                                         <f:facet name="header">Remove</f:facet>
                                                         <h:commandButton class="btn theme-btn" action="#{shoppingCart.remove(item)}" value="Remove"/>
-                                                    </h:column>
-                                                </h:dataTable>
+                                                    </pr:column>
+                                                </pr:dataTable>
                                             </div>
                                         </h:form>
                                     </c:when>

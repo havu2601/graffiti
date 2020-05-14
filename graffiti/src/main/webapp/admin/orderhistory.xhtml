@@ -14,7 +14,7 @@
                         <div class="col-xl-12">
                             <div class="breadcrumb-text text-center">
                                 <ul class="breadcrumb-menu">
-                                    <li><span><h3>user list</h3></span></li>
+                                    <li><span><h3>order history</h3></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -23,28 +23,34 @@
             </section>
             <!-- breadcrumb-area-end -->
             <!-- User Area Strat-->
+            <f:metadata>
+                <f:viewParam name="uID" value="#{orderBean.uID}"/>
+                <f:viewAction action="#{orderBean.getByUID()}"/>
+            </f:metadata>
             <section class="cart-area pt-10">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <h:form>
                                 <div class="table-content table-responsive">
-                                    <h:dataTable class="table" value="#{manageUserBean.userList}" var="user">
+                                    <h:dataTable class="table" value="#{orderBean.list}" var="order">
                                         <h:column>
                                             <f:facet name="header" class="cart-product-name">Username</f:facet>
-                                            <h:outputText class="cart-product-name" value="${user.userName}"/>
+                                            <h:outputText class="cart-product-name" value="${order.userId.userName}"/>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header" class="cart-product-name">Email</f:facet>
-                                            <h:outputText class="cart-product-name" value="${user.userEmail}"/>
+                                            <f:facet name="header" class="cart-product-name">Order Date</f:facet>
+                                            <h:outputText class="cart-product-name" value="${order.orderDate}">
+                                                <f:convertDateTime pattern="HH:mm dd-MM-yyyy" timeZone="GMT+7"/>
+                                            </h:outputText>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header" class="cart-product-name">Role</f:facet>
-                                            <h:outputText class="cart-product-name" value="${user.roleId.roleName}"/>
+                                            <f:facet name="header" class="cart-product-name">Status</f:facet>
+                                            <h:outputText class="cart-product-name" value="${order.status}"/>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header" class="product-thumbnail">More</f:facet>
-                                            <h:link class="product-thumbnail" outcome="userdetail.xhtml?uID=${user.userId}" value="View Detail"/>
+                                            <f:facet name="header" class="cart-product-name">More</f:facet>
+                                            <h:link class="cart-product-name" outcome="orderdetail.xhtml?oID=${order.orderId}" value="View Detail"/>
                                         </h:column>
                                     </h:dataTable>
                                 </div>

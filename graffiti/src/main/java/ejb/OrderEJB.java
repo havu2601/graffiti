@@ -31,7 +31,7 @@ public class OrderEJB {
     
     public List<Orders> findByUserID(String userID){
         return em.createNamedQuery("Orders.findByUserId")
-                .setParameter("userId", userID).getResultList();
+                .setParameter("userId", Integer.parseInt(userID)).getResultList();
     }
     
     public void createOrder(Orders order){
