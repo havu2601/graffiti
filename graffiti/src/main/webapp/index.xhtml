@@ -30,49 +30,50 @@
                                 <div class="row">
                                     <!-- ProductItem -->
                                         <c:forEach items="#{indexViewdBean.listProduct}" var="p">
-                                            <div class="col-xl-4 col-lg-6 col-md-6">
-                                                <div class="product-wrapper mb-50">
-                                                <div class="product-img mb-25" style="opacity: #{p.productStock == 0 ? 0.3 : 1}">
-                                                    <h:outputLink value="product_detail.xhtml?pid=#{p.productId}">
-                                                        <c:forEach items="#{indexViewdBean.getTwoImage(p.productId)}" var="img">
-                                                            <img style="width: 100%; height: 400px;" src="#{img.imagePath}" alt=""/>
-                                                            <!--<img class="secondary-img" src="" alt=""/>-->
-                                                        </c:forEach>
-                                                        
-                                                    </h:outputLink>
-                                                    <div class="product-action text-center">
-                                                        <a href="#" title="Shoppingb Cart">
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </a>
-                                                        <a href="product_detail.xhtml?pid=#{p.productId}" title="View Detail">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
+                                            <c:choose>
+                                                <c:when test="#{p.imageList.size()>0}">
+                                                <div class="col-xl-4 col-lg-6 col-md-6">
+                                                    <div class="product-wrapper mb-50">
+                                                        <div class="product-img mb-25" style="opacity: #{p.productStock == 0 ? 0.3 : 1}">
+                                                            <h:outputLink value="product_detail.xhtml?pid=#{p.productId}">
+                                                                <c:forEach items="#{indexViewdBean.getTwoImage(p.productId)}" var="img">
+                                                                    <img style="width: 100%; height: 400px;" src="#{img.imagePath}" alt=""/>
+                                                                    <!--<img class="secondary-img" src="" alt=""/>-->
+                                                                </c:forEach>
+                                                            </h:outputLink>
+                                                            <div class="product-action text-center">
+                                                                <a href="#" title="Shoppingb Cart">
+                                                                    <i class="fas fa-shopping-cart"></i>
+                                                                </a>
+                                                                <a href="product_detail.xhtml?pid=#{p.productId}" title="View Detail">
+                                                                    <i class="fas fa-search"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="product-content pr-0">
+                                                            <div class="pro-cat mb-10">
+                                                                <a href="subcat_product.xhtml?id=#{p.subcatId.categoryId.categoryId}">#{p.subcatId.categoryId.categoryName}</a>
+                                                            </div>
+                                                            <h4>
+                                                                <a href="product_detail.xhtml?pid=#{p.productId}">#{p.productName}</a>
+                                                            </h4>
+                                                            <div class="product-meta">
+                                                                <div class="pro-price">
+                                                                    <span>#{p.colorId.colorName} </span><button class="btnColor" style="background-color: #{p.colorId.colorHexcode};"></button>
+                                                                </div>
+                                                                <div class="pro-price">
+                                                                    <span>$#{p.productPrice} USD</span> <span style="color: red">#{p.productStock == 0 ? 'Sold Out' : 'In Stock'}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="product-content pr-0">
-                                                    <div class="pro-cat mb-10">
-                                                        <a href="subcat_product.xhtml?id=#{p.subcatId.categoryId.categoryId}">#{p.subcatId.categoryId.categoryName}</a>
-                                                    </div>
-                                                    <h4>
-                                                        <a href="product_detail.xhtml?pid=#{p.productId}">#{p.productName}</a>
-                                                    </h4>
-                                                    <div class="product-meta">
-                                                        <div class="pro-price">
-                                                            <span>#{p.colorId.colorName} </span><button class="btnColor" style="background-color: #{p.colorId.colorHexcode};"></button>
-                                                        </div>
-                                                        <div class="pro-price">
-                                                            <span>$#{p.productPrice} USD</span> <span style="color: red">#{p.productStock == 0 ? 'Sold Out' : 'In Stock'}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                </c:when>
+                                            </c:choose>
                                         </c:forEach>
-                                </div>
-
+                                    </div>
                                 </div>
                             </div>
-                        
                         </div>
                     <!--</div>-->
                     <!--SideBar -->

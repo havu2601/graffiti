@@ -40,6 +40,8 @@
                                 <div class="row">
                                     <!-- ProductItem -->
                                     <c:forEach items="#{subproductBean.listProduct}" var="p">
+                                        <c:choose>
+                                            <c:when test="#{p.imageList.size()>0}">
                                             <div class="col-xl-4 col-lg-6 col-md-6">
                                                 <div class="product-wrapper mb-50">
                                                 <div class="product-img mb-25" style="opacity: #{p.productStock == 0 ? 0.3 : 1}">
@@ -76,6 +78,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </c:when>
+                                        </c:choose>
                                     </c:forEach>
                                 </div>
                                 </div>
