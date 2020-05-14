@@ -123,7 +123,7 @@ public class ShoppingCart implements Serializable {
             detailEJB.createOrderDetail(detail);
         }
         resetCart();
-        return null;
+        return "./orderhistory.xhtml?uID="+userId+"&&faces-redirect=true";
     }
     
     public void resetCart(){

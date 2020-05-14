@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/templates/admintemplate.xhtml">
+        <ui:define name="content"> 
+        <main>
+            <!-- breadcrumb-area-start -->
+            <section class="breadcrumb-area" style="height: 100px; background-image: url('./assets/page-title.png');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="breadcrumb-text text-center">
+                                <ul class="breadcrumb-menu">
+                                    <li><span><h3>order history</h3></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- breadcrumb-area-end -->
+            <!-- User Area Strat-->
+            <f:metadata>
+                <f:viewParam name="uID" value="#{orderBean.uID}"/>
+                <f:viewAction action="#{orderBean.getByUID()}"/>
+            </f:metadata>
+            <section class="cart-area pt-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h:form>
+                                <div class="table-content table-responsive">
+                                    <h:dataTable class="table" value="#{orderBean.list}" var="order">
+                                        <h:column>
+                                            <f:facet name="header" class="cart-product-name">Username</f:facet>
+                                            <h:outputText class="cart-product-name" value="${order.userId.userName}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header" class="cart-product-name">Order Date</f:facet>
+                                            <h:outputText class="cart-product-name" value="${order.orderDate}">
+                                                <f:convertDateTime pattern="HH:mm dd-MM-yyyy" timeZone="GMT+7"/>
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header" class="cart-product-name">Status</f:facet>
+                                            <h:outputText class="cart-product-name" value="${order.status}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header" class="cart-product-name">More</f:facet>
+                                            <h:link class="cart-product-name" outcome="orderdetail.xhtml?oID=${order.orderId}" value="View Detail"/>
+                                        </h:column>
+                                    </h:dataTable>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Cart Area End-->
+        </main>
+        </ui:define>
+    </ui:composition>
+</html>
