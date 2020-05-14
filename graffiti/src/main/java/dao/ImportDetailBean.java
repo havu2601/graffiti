@@ -47,66 +47,50 @@ public class ImportDetailBean implements Serializable{
     Import newImport;
             
     private Integer importDetailId;
-    private int productQty;
+    private String productQty;
     private String importId;
-    private String productId;
-    
+    String searchStr;
     
     @PostConstruct
     public void init() {
         newImportDetail = new ImportDetail();
         newImport = new Import();
         newProduct = new Product();
-        listImportDetail = importDetailELB.findAll();
+        listImportDetail = new ArrayList<>();
+        listProduct = productEJB.findAll();
     }
     
-     public void showDetail(List<ImportDetail> rs, String msg) {
-        listImportDetail = new ArrayList<>();
-        if (rs.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
-        } else {
-            listImportDetail.add((ImportDetail) rs);
+     public void search(){
+        if(null==searchStr || searchStr.isEmpty()){
+            List<Product> rs = new ArrayList<>();
+            rs = productEJB.findAll();
+            listProduct = new ArrayList<>();
+            listProduct.addAll(rs);
+        }else{
+            if(null!=productEJB.findByAny("%"+searchStr+"%")){
+                List<Product> p = productEJB.findByAny("%"+searchStr+"%");
+                List<Product> rs = new ArrayList<>();
+                rs.addAll(p);
+                listProduct = new ArrayList<>();
+                listProduct.addAll(rs);
+            }
         }
     }
      
-     public String addNewImportDetail() {
-
-        if (null == newImportDetail.getImportDetailId()) {
-            updateImportDetail();
-            newImportDetail.setImportDetailId(importDetailId);
-            newImportDetail.setImportId(newImport);
-            newImportDetail.setProductId(newProduct);           
-            importDetailELB.AddNewDetail(newImportDetail);
-        } else {
-            updateImportDetail();
-            newImportDetail.setImportDetailId(importDetailId);
-            newImportDetail.setImportId(newImport);
-            newImportDetail.setProductId(newProduct);
-            importDetailELB.updateImportDetail(newImportDetail);
-        }
-        importDetailELB.AddNewDetail(newImportDetail);
-
-        return "importdetail.xhtml?faces-redirect=true";
-    }
-       private void updateImportDetail() {
-        newProduct = new Product();
-        newProduct.setProductId(productQty);
-        newImport = new Import();
-        newImport.setImportId(importDetailId);
-    }
-    
-       public void reset(){
-           newImportDetail = new ImportDetail();
-       }
-    public ImportDetailELB getImportDetailELB() {
-        return importDetailELB;
+     
+     public void addToListDetail(int id) {
+       newProduct = productEJB.findById(id);
+       newImportDetail.setProductId(newProduct);
+//       newImportDetail.setProductQty(Integer.parseInt(qty));
+       listImportDetail.add(newImportDetail);
     }
 
-    public void setImportDetailELB(ImportDetailELB importDetailELB) {
-        this.importDetailELB = importDetailELB;
-    }
-
+     public void removeItem(int id){
+          newProduct = productEJB.findById(id);
+          newImportDetail.setProductId(newProduct);
+          listImportDetail.remove(newImportDetail);
+     }
+     
     public List<ImportDetail> getListImportDetail() {
         return listImportDetail;
     }
@@ -121,14 +105,6 @@ public class ImportDetailBean implements Serializable{
 
     public void setNewImportDetail(ImportDetail newImportDetail) {
         this.newImportDetail = newImportDetail;
-    }
-
-    public ProductEJB getProductEJB() {
-        return productEJB;
-    }
-
-    public void setProductEJB(ProductEJB productEJB) {
-        this.productEJB = productEJB;
     }
 
     public List<Product> getListProduct() {
@@ -147,47 +123,6 @@ public class ImportDetailBean implements Serializable{
         this.newProduct = newProduct;
     }
 
-    public Integer getImportDetailId() {
-        return importDetailId;
-    }
-
-    public void setImportDetailId(Integer importDetailId) {
-        this.importDetailId = importDetailId;
-    }
-
-    public int getProductQty() {
-        return productQty;
-    }
-
-    public void setProductQty(int productQty) {
-        this.productQty = productQty;
-    }
-
-    public String getImportId() {
-        return importId;
-    }
-
-    public void setImportId(String importId) {
-        this.importId = importId;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-  
-    public ImportEJB getImportEJB() {
-        return importEJB;
-    }
-
-    public void setImportEJB(ImportEJB importEJB) {
-        this.importEJB = importEJB;
-    }
-
     public List<Import> getListImport() {
         return listImport;
     }
@@ -203,7 +138,39 @@ public class ImportDetailBean implements Serializable{
     public void setNewImport(Import newImport) {
         this.newImport = newImport;
     }
-    
-  
+
+    public Integer getImportDetailId() {
+        return importDetailId;
+    }
+
+    public void setImportDetailId(Integer importDetailId) {
+        this.importDetailId = importDetailId;
+    }
+
+    public String getProductQty() {
+        return productQty;
+    }
+
+    public void setProductQty(String productQty) {
+        this.productQty = productQty;
+    }
+
+    public String getImportId() {
+        return importId;
+    }
+
+    public void setImportId(String importId) {
+        this.importId = importId;
+    }
+
+    public String getSearchStr() {
+        return searchStr;
+    }
+
+    public void setSearchStr(String searchStr) {
+        this.searchStr = searchStr;
+    }
+   
+
     
 }
