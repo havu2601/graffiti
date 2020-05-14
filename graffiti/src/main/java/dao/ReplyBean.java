@@ -52,6 +52,7 @@ public class ReplyBean implements Serializable{
     public void init() {
         getUserSession();
         newReply = new RepFeedback();
+        newFeedback = new Feedback();
         newUserAccount = new UserAccount();
         listFeedback = feedbackEJB.findByUser(Integer.parseInt(userId));
     }
@@ -101,8 +102,10 @@ public class ReplyBean implements Serializable{
         return "feedback.xhtml?faces-redirect=true";
     }
 
-    public void reset() {
-        newReply = new RepFeedback();
+    public String reset() {
+        newFeedback = new Feedback();
+        repContent = "";
+        return "feedback.xhtml?faces-redirect=true";
     }
 
     public List<RepFeedback> getListReply() {

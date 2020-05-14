@@ -77,7 +77,7 @@ public class FeedBackBean implements Serializable{
          }
      }
      
-     public void addNewRep(){
+     public String addNewRep(){
          getUserSession();
          objReply = new RepFeedback();
          repDate = Date.from(Instant.now());
@@ -86,7 +86,7 @@ public class FeedBackBean implements Serializable{
          objReply.setRepDate(repDate);
          objReply.setRepContent(repContent);
          replyEJB.AddNew(objReply);
-         
+         return "adminfeedback.xhtml?faces-redirect=true";
      }
      public void getUserSession(){
         FacesContext req = FacesContext.getCurrentInstance();
@@ -113,8 +113,10 @@ public class FeedBackBean implements Serializable{
         return "feedback.xhtml?faces-redirect=true";
     }
 
-    public void reset() {
-        newFeedback = new Feedback();
+    public String reset() {
+        objReply = new RepFeedback();
+        repContent= "";
+        return "adminfeedback.xhtml?faces-redirect=true";
     }
 
     public List<Feedback> getListFeedback() {
