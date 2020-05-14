@@ -63,9 +63,6 @@ and open the template in the editor.
                         <div class="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
                             <div class="header-right f-right">
                                 <ul>
-<!--                                    <li class="search-btn">
-                                        <a class="search-btn nav-search search-trigger" href="#"><i class="fas fa-search"></i></a>
-                                    </li>-->
                                     <li class="login-btn"><a href="#"><i class="far fa-user"></i></a>
                                         <h:panelGroup rendered="#{not userBean.isLoggedin}">
                                             <ul class="minicart" style="width: 150px;margin-top: 5px">
@@ -85,12 +82,12 @@ and open the template in the editor.
                                             <ul class="minicart" style="width: 150px;margin-top: 5px">
                                                 <li>
                                                     <div class="cart-content">
-                                                        <a class="cart-product-name" href="#"><h:outputText value="Hello, #{userBean.acc.userName}" /></a>
+                                                        <h6>Hello, ${userBean.acc.userName}</h6>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="cart-content">
-                                                        <h:commandButton action="#{userBean.doLogout()}" value="Log out"/>
+                                                        <h:commandButton class="btn-sm theme-btn" action="#{userBean.doLogout()}" value="Log out"/>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -126,9 +123,9 @@ and open the template in the editor.
                                              </c:choose>
                                             <li>
                                                 <div class="total-price">
-                                                                <span class="f-left">Total:</span>
-                                                                <span class="f-right"><h:outputText value="${shoppingCart.total}"/>$</span>
-                                                            </div>
+                                                    <span class="f-left">Total:</span>
+                                                    <span class="f-right"><h:outputText value="${shoppingCart.total}"/>$</span>
+                                                </div>
                                                 <div class="checkout-link">
                                                     <a href="shoppingcart.xhtml">Shopping Cart</a>
                                                     <a class="red-color" href="checkout.xhtml">Checkout</a>

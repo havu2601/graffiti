@@ -5,17 +5,24 @@
  */
 package dao;
 
+import ejb.AccountEJB;
 import ejb.OrderDetailEJB;
+import ejb.OrderEJB;
 import ejb.ProductEJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import model.OrderDetail;
+import model.Orders;
 import model.Product;
+import model.UserAccount;
 
 /**
  *
@@ -28,6 +35,10 @@ public class ShoppingCart implements Serializable {
     ProductEJB productEJB;
     @EJB
     OrderDetailEJB detailEJB;
+    @EJB
+    OrderEJB ejb;
+    @EJB
+    AccountEJB accEJB;
     private List<CartItem> itemInCart;
     private List<String> payment;
     private boolean isEmpty;
@@ -39,6 +50,8 @@ public class ShoppingCart implements Serializable {
         itemInCart = new ArrayList<>();
         productEJB = new ProductEJB();
         detailEJB = new OrderDetailEJB();
+        ejb = new OrderEJB();
+        accEJB = new AccountEJB();
         payment = new ArrayList<>();
         payment.add("COD");
         isEmpty = true;
@@ -91,6 +104,34 @@ public class ShoppingCart implements Serializable {
         total -= item.getQuantity()*item.getProduct().getProductPrice();
         return null;
     }
+    
+    public String placeOrder(Integer userId){
+        UserAccount user = new UserAccount();
+        user = accEJB.findByID(userId);
+        Date date = Date.from(Instant.now());
+        Orders order = new Orders();
+        order.setUserId(user);
+        order.setOrderDate(date);
+        order.setStatus("Paid");
+        ejb.createOrder(order);
+        order =  ejb.getLatest(user.getUserId()).get(0);
+        for (CartItem cartItem : itemInCart) {
+            OrderDetail detail = new OrderDetail();
+            detail.setOrderId(order);
+            detail.setProductId(cartItem.getProduct());
+            detail.setProductQty(cartItem.getQuantity());
+            detailEJB.createOrderDetail(detail);
+        }
+        resetCart();
+        return null;
+    }
+    
+    public void resetCart(){
+        itemInCart = new ArrayList<>();
+        isEmpty = true;
+        cartQuantity = 0;
+        total = 0;
+    }
     public List<CartItem> getItemInCart() {
         return itemInCart;
     }
@@ -137,7 +178,5 @@ public class ShoppingCart implements Serializable {
 
     public void setCartQuantity(int cartQuantity) {
         this.cartQuantity = cartQuantity;
-    }
-    
-    
+    }   
 }

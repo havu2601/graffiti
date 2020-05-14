@@ -25,7 +25,7 @@ import model.UserAccount;
 @SessionScoped
 public class UserBean implements Serializable{
 
-@EJB
+    @EJB
     private AccountEJB accEJB;
     
     boolean isLoggedin;
@@ -65,7 +65,10 @@ public class UserBean implements Serializable{
     public String doLogout(){
         ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
 				.getSession(true)).invalidate();
-        return "index.xhtml";
+        isAdmin = false;
+        isLoggedin = false;
+        acc = new UserAccount();
+        return "index.xhtml?faces-redirect=true";
     }
 
     public UserAccount getAcc() {

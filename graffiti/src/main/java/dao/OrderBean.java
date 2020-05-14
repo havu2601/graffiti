@@ -41,6 +41,8 @@ public class OrderBean implements Serializable{
     private List<Orders> list;
     private String oID;
     private List<OrderDetail> listDetail;
+    ShoppingCart cart = new ShoppingCart();
+
     
     @PostConstruct
     public void init(){
@@ -55,26 +57,6 @@ public class OrderBean implements Serializable{
         order = ejb.findByID(Integer.parseInt(oID));
     }
 
-    public String placeOrder(Integer id){
-        UserAccount user = new UserAccount();
-        user.setUserId(id);
-        ShoppingCart cart = new ShoppingCart();
-        Date date = Date.from(Instant.now());
-        order = new Orders();
-        order.setUserId(user);
-        order.setOrderDate(date);
-        order.setStatus("Paid");
-        ejb.createOrder(order);
-        order =  ejb.getLatest(id).get(0);
-        for (CartItem item : cart.getItemInCart()) {
-            OrderDetail detail = new OrderDetail();
-            detail.setOrderId(order);
-            detail.setProductId(item.getProduct());
-            detail.setProductQty(item.getQuantity());
-            detailEJB.createOrderDetail(detail);
-        }
-        return null;
-    }
     public String getoID() {
         return oID;
     }
@@ -106,5 +88,14 @@ public class OrderBean implements Serializable{
     public void setList(List<Orders> list) {
         this.list = list;
     }
+
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
+    public void setCart(ShoppingCart cart) {
+        this.cart = cart;
+    }
+    
 
 }

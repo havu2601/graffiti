@@ -47,7 +47,7 @@
                                                             </h:selectOneMenu>
                                                         </span>Payment Method:</li>
                                                     <li><span><h:outputText value="#{shoppingCart.total}"/>$</span>Total:</li>
-                                                    <li><h:commandButton class="btn theme-btn" action="#{orderBean.placeOrder(userBean.acc.userId)}" value="Place Order"/></li>
+                                                    <li><h:commandButton class="btn theme-btn" action="#{shoppingCart.placeOrder(userBean.acc.userId)}" value="Place Order"/></li>
                                                 </ul>
                                             </div>
                                         </div>
