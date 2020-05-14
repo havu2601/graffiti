@@ -13,7 +13,7 @@
                 <section class="shop-area pt-150 pb-100">
                     <div class="container">
                         <div class="row">
-                            <div class="col-xl-9 col-lg-8">
+                            <div class="col-xl-12 col-lg-8">
                                 <!-- tab filter -->
                                 <div class="row mb-10">
                                     <div class="col-xl-5 col-lg-6 col-md-6">
@@ -27,25 +27,32 @@
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <h:form>
+                                            <f:facet name="header">
+                                                <pr:outputPanel>
+                                                    <h:outputText value="Search by Date"/>
+                                                    <pr:inputText id="globalFilter" onkeyup="PF ('feedbackBean').filter()" style="width: 150px" placeholder="Enter Keyword"></pr:inputText>
+                                                </pr:outputPanel>
+                                                  
+                                            </f:facet>
                                             <div class="row">
-                                                <h:dataTable class="table table-hover" value="#{feedBackBean.listFeedback}" var="f">
-                                                    <h:column>
+                                                <pr:dataTable class="table table-hover" value="#{feedBackBean.listFeedback}" var="f">
+                                                    <pr:column style="width: 150px" sortBy="#{f.feedbackDate}" filterBy="#{f.feedbackDate}">
                                                         <f:facet name="header">DATE FEEDBACK</f:facet>
                                                         <h:outputText value="#{f.feedbackDate}"/>                                      
-                                                    </h:column>             
-                                                    <h:column>
+                                                    </pr:column>             
+                                                    <pr:column style="width: 150px">
                                                         <f:facet name="header">NAME</f:facet>
                                                         <h:outputText value="#{f.userId.userName}"/>
-                                                    </h:column>>
-                                                    <h:column>
+                                                    </pr:column>>
+                                                    <pr:column>
                                                         <f:facet name="header">YOUR COMMENT</f:facet>
                                                         <h:outputText value="#{f.feedbackContent}"/>
-                                                    </h:column>
-                                                    <h:column>
+                                                    </pr:column>
+                                                    <pr:column style="width: 80px">
                                                         <f:facet name="header">ACTION</f:facet>
-                                                        <h:commandButton action="#{feedBackBean.loadFeedbackContent(f.feedbackId)}" value="Reply"/>
-                                                    </h:column>
-                                                </h:dataTable>
+                                                        <h:commandButton action="#{feedBackBean.loadFeedbackContent(f.feedbackId)}" value="Reply" style="margin-right:20px;" styleClass="ui-priority-primary"/>
+                                                    </pr:column>
+                                                </pr:dataTable>
                                             </div>
                                         </h:form>
                                     </div>
@@ -53,29 +60,25 @@
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <h:form>
-                                            <table class="table" id="repContent">
-
-                                                <tr>  
-                                                    <td>Date</td>
-                                                    <td class="date" align="center"><h:inputTextarea value="#{feedBackBean.feedbackDate}" disabled="true"></h:inputTextarea>>
-                                                    </td>
-                                                </tr>  
-
+                                            <table class="table" id="repContent">  
+                                           
                                                 <tr>   
                                                     <td>Feedback content</td>
-                                                    <td class="fb" align="center"><h:inputTextarea value="#{feedBackBean.newFeedback.feedbackContent}"></h:inputTextarea>
-                                                    </td>
-                                                </tr>
-                                                 <tr>
-                                                     <td>Reply content</td>
-                                                     <td class="fb" align="center"><h:inputTextarea value="#{feedBackBean.repContent}"></h:inputTextarea>
+                                                    <td class="fb"><h:inputTextarea value="#{feedBackBean.newFeedback.feedbackContent}" style="width: 500px; height: 100px"></h:inputTextarea>
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Reply content</td>
+                                                    <td>
+                                                        <pr:editor id="editor" widgetVar="editorWidget" value="#{feedBackBean.repContent}" width="500" />
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
                                                     <td colspan="2" style="text-align: center">
-                                                        <h:commandButton class="button" action="#{feedBackBean.addNewRep()}" value="Add Feedback"></h:commandButton>
-                                                        <h:commandButton class="button" action="#{feedBackBean.reset()}" value="Reset"></h:commandButton>
-                                                   </td>
+                                                        <h:commandButton class="button" action="#{feedBackBean.addNewRep()}" value="Add Feedback" style="margin-right:20px;"/>
+                                                        <h:commandButton class="button" action="#{feedBackBean.reset()}" value="Reset" style="margin-right:20px;"/>
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </h:form>
