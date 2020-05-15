@@ -82,7 +82,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>NAME</td>
+                                            <td>NAME <span style="color: red;">**</span></td>
                                             <td><pr:inputText style="width: 400px;" id="pName" value="#{productBean.objProduct.productName}" validatorMessage="Name invalid! Pls re-enter!">
                                                     <f:validateRequired/>
                                                     <f:validateLength minimum="1" maximum="50"/>
@@ -93,7 +93,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>CAPACITY</td>
+                                            <td>CAPACITY <span style="color: red;">**</span></td>
                                             <td><pr:inputText style="width: 400px;" id="capacity" type="number" value="#{productBean.capacity}" validatorMessage="Capacity invalid! Pls re-enter!">
                                                     <f:validateRequired/>
                                                     <f:validateDoubleRange minimum="1" maximum="1000" />
@@ -104,7 +104,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>PRICE</td>
+                                            <td>PRICE <span style="color: red;">**</span></td>
                                             <td><pr:inputText style="width: 400px;" id="price" type="number" value="#{productBean.price}" validatorMessage="Price invalid! Pls re-enter!">
                                                     <f:validateRequired/>
                                                     <f:validateDoubleRange minimum="1"/>
@@ -115,7 +115,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>STOCK</td>
+                                            <td>STOCK <span  style="color: red;">**</span></td>
                                             <td><pr:inputText style="width: 400px;" id="stock" type="number" value="#{productBean.stock}" validatorMessage="Stock invalid! Pls re-enter!">
                                                     <f:validateRequired/>
                                                     <f:validateDoubleRange minimum="#{productBean.stock}" maximum="10000"/>
@@ -126,7 +126,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>DESCRIPTION</td>
+                                            <td>DESCRIPTION <span style="color: red;">**</span></td>
                                             <td><pr:inputTextarea style="width: 400px;" id="desc" value="#{productBean.objProduct.productDesc}" validatorMessage="Description cannot be blank! Pls re-enter!">
                                                     <f:validateRequired/>
                                                     <f:validateLength minimum="1" maximum="250"/>

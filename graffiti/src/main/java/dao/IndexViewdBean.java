@@ -65,7 +65,6 @@ public class IndexViewdBean implements Serializable{
     public void show(List<Product> rs, String msg){
         listProduct = new ArrayList<>();
         if(rs.isEmpty() || rs==null){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,msg,msg));
         }else{
             listProduct.addAll(rs);
         }

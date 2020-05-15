@@ -67,10 +67,17 @@ public class UserBean implements Serializable{
     public String doLogout(){
         ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
 				.getSession(true)).invalidate();
+        String url = "";
+        if (isAdmin){
+            url = "./index.xhtml?faces-redirect=true";
+        } else
+        {
+            url = "index.xhtml?faces-redirect=true";
+        }
         isAdmin = false;
         isLoggedin = false;
         acc = new UserAccount();
-        return "index.xhtml?faces-redirect=true";
+        return url;
     }
 
     public UserAccount getAcc() {

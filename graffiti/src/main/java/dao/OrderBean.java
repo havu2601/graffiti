@@ -54,7 +54,7 @@ public class OrderBean implements Serializable{
         status.add("Pending");
         status.add("On Delivery");
         status.add("Complete");
-        status.add("Denined");
+        status.add("Canceled");
         search();
     }
     public void search(){

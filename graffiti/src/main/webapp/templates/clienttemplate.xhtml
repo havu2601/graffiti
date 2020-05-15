@@ -75,22 +75,35 @@ and open the template in the editor.
                                             </ul>
                                         </li>
                                     </h:panelGroup>
+                                    
                                     <h:panelGroup rendered="#{userBean.isLoggedin}">
                                         <li class="d-shop-cart"><a href="#"><i class="far fa-user"></i></a>
                                             <ul class="minicart" style="width: 200px;margin-top: 5px">
                                                 <li>
                                                     <div class="cart-content">
-                                                        <h6>Hello, ${userBean.acc.userName}</h6>
+                                                        <h6><h:link outcome="userProfile.xhtml?userId=#{userBean.acc.userId}" value="Hello, ${userBean.acc.userName}"/></h6>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="cart-content">
-                                                        <h:commandButton class="btn-sm theme-btn" action="#{userBean.doLogout()}" value="Log out"/>
+                                                        <h6><h:link value="Order History" outcome="orderhistory.xhtml?uID=#{userBean.acc.userId}"/></h6>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <h6><h:link value="Feedback" outcome="feedback.xhtml?userId=#{userBean.acc.userId}"/></h6>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="cart-content">
+                                                        <h:form><h:commandButton class="btn-sm theme-btn" action="#{userBean.doLogout()}" value="Log out"/></h:form>
                                                     </div>
                                                 </li>
                                             </ul>
                                         </li>
+                                        
                                     </h:panelGroup>
+                                        
                                     <li class="d-shop-cart"><a href="shoppingcart.xhtml"><i class="fas fa-shopping-cart"></i><span class="cart-count"><h:outputText value="${shoppingCart.cartQuantity}"/></span></a>
                                         <c:choose>
                                              <c:when test="${!shoppingCart.isEmpty}">

@@ -66,7 +66,16 @@ and open the template in the editor.
                                         </li>
                                         <li>
                                             <a href="subcategory.xhtml">Sub Category</a>
+                                        </li>                                     
+                                        <li>
+                                            <a href="importdetail.xhtml">Import</a>
                                         </li>
+                                        <li>
+                                            <a href="supplier.xhtml">Supplier</a>
+                                        </li>   
+                                        <li>
+                                            <a href="adminfeedback.xhtml">Feedback</a>
+                                        </li>   
                                     </ul>
                                 </nav>
                             </div>
@@ -93,7 +102,9 @@ and open the template in the editor.
                                                 </li>
                                                 <li>
                                                     <div class="cart-content">
-                                                        <h:commandButton class="cart-product-name" action="#{userBean.doLogout()}" value="Log out"/>
+                                                        <h:form>
+                                                            <h:commandButton class="btn-sm theme-btn" action="#{userBean.doLogout()}" value="Log out"/>
+                                                        </h:form>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -107,7 +118,7 @@ and open the template in the editor.
             </div>
         </header>
         <!-- header end -->
-        <div id="content">
+        <div id="content" style="padding-top: 100px">
             <f:view>
                 <ui:insert name="content"/>
             </f:view>

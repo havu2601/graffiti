@@ -81,7 +81,7 @@
                                             <td><button style="background-color: #{colorBean.objColor.colorHexcode}; width: 400px; height: 30px" disabled="true"/></td>
                                         </tr>
                                         <tr>
-                                            <td>NAME</td>
+                                            <td>NAME <span  style="color: red;">**</span></td>
                                             <td><pr:inputText id="cname" style="width: 400px;" value="#{colorBean.objColor.colorName}" validatorMessage="Name invalid! Pls re-enter!">
                                                     <f:validateRequired/>
                                                     <f:validateLength minimum="1" maximum="50"/>
@@ -90,7 +90,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>HEXCODE</td>
+                                            <td>HEXCODE <span  style="color: red;">**</span></td>
                                             <td><pr:inputText id="hexcode" style="width: 400px;" value="#{colorBean.objColor.colorHexcode}" validatorMessage="Hexcode invalid! Pls re-enter!">
                                                     <f:validateRequired/>
                                                     <f:validateRegex pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"/>

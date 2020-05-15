@@ -3,7 +3,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:pr="http://primefaces.org/ui">
     <ui:composition template="/templates/clienttemplate.xhtml">
         <ui:define name="content"> 
 
@@ -35,9 +36,15 @@
                         <h3 class="text-center mb-60">Login From Here</h3>
                         <h:form>
                             <h:outputText value="Email Address"/>
-                            <h:inputText required="true" p:placeholder="Enter Username or Email address..." value="#{userBean.email}"></h:inputText>
+                            <pr:inputText id="uName" validatorMessage="Please enter email" value="#{userBean.email}">
+                                <f:validateRequired/>
+                            </pr:inputText>
+                            <h:message for="uName" style="color: red"></h:message><br/>
                             <h:outputText value="Password"/>
-                            <h:inputSecret required="true" p:placeholder="Enter password" value="#{userBean.password}"></h:inputSecret>
+                            <h:inputSecret id="uP" validatorMessage="Please enter password" value="#{userBean.password}">
+                                <f:validateRequired/>
+                            </h:inputSecret>
+                            <p><h:message for="uP" style="color: red"></h:message></p>
                             <h:commandButton class="btn theme-btn-2 w-100" action="#{userBean.doLogin()}" value="Log in"></h:commandButton>
                             <div class="or-divide"><span>or</span></div>
                             <h:link class="btn theme-btn w-100" value="Register Now" outcome="/register.xhtml"/>

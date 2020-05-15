@@ -34,17 +34,37 @@
                                     <h3 class="text-center mb-60">Signup From Here</h3>
                                     <h:form>
                                         <label for="name">Username <span>**</span></label>
-                                        <h:inputText required="true" p:placeholder="Enter Username" value="#{registerBean.name}"/>
+                                        <h:inputText id="userName" validatorMessage="Please enter username" p:placeholder="Enter Username" value="#{registerBean.name}">
+                                            <f:validateRequired/>
+                                        </h:inputText>
+                                        <h:message for="userName" style="color: red"/><br/>
                                         <label for="name">Email <span>**</span></label>
-                                        <h:inputText required="true" requiredMessage="Email can not be blanked" p:placeholder="Enter Email address" value="#{registerBean.email}"/>
+                                        <h:inputText id="email" validatorMessage="Email invalid" p:placeholder="Enter Email address" value="#{registerBean.email}">
+                                            <f:validateRequired/>
+                                            <f:validateRegex pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"/>
+                                        </h:inputText>
+                                        <h:message for="email" style="color: red"/><br/>
                                         <label for="name">Password <span>**</span></label>
-                                        <h:inputSecret required="true" p:placeholder="Enter Password" value="#{registerBean.password}"/>
+                                        <h:inputSecret id="pwd" validatorMessage="Please enter password" value="#{registerBean.password}">
+                                            <f:validateRequired/>
+                                        </h:inputSecret>
+                                        <h:message for="pwd" style="color: red"/><br/>
                                         <label for="name">Password <span>**</span></label>
-                                        <h:inputSecret required="true" p:placeholder="Re-Enter Password" value="#{registerBean.rePassword}"/>
+                                        <h:inputSecret id="rpwd" validatorMessage="Field can not be blanked" value="#{registerBean.rePassword}">
+                                            <f:validateRequired/>
+                                        </h:inputSecret>
+                                        <h:message for="rpwd" style="color: red"/><br/>
                                         <label for="name">Phone <span>**</span></label>
-                                        <h:inputText required="true" p:placehholder="Enter Phone No." value="#{registerBean.phone}"/>
+                                        <h:inputText id="phone" validatorMessage="Phone number invalid" value="#{registerBean.phone}">
+                                            <f:validateRequired/>
+                                            <f:validateRegex pattern="^[0][1-9]{1}[0-9]{8}$"/>
+                                        </h:inputText>
+                                        <h:message for="phone" style="color: red"/><br/>
                                         <label for="name">Address <span>**</span></label>
-                                        <h:inputText required="true" p:placehholder="Enter Address" value="#{registerBean.address}"/>
+                                        <h:inputText id="add" validatorMessage="Please enter address" value="#{registerBean.address}">
+                                            <f:validateRequired/>
+                                        </h:inputText>
+                                        <p><h:message for="add" style="color: red"/></p>
                                         <div class="mt-10"></div>
                                         <h:commandButton class="btn theme-btn-2 w-100" action="#{registerBean.register()}" value="Register Now"/>
                                         <div class="or-divide"><span>or</span></div>
