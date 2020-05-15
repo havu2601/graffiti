@@ -95,7 +95,12 @@ public class ShoppingCart implements Serializable {
     }
     
     public String increase(CartItem item){
-        item.setQuantity(item.getQuantity()+1);
+        if (item.getQuantity()<item.getProduct().getProductStock())
+        {
+            item.setQuantity(item.getQuantity()+1);
+        } else {
+            item.setQuantity(item.getProduct().getProductStock());
+        }
         getTotal();
         return null;
     }
@@ -120,6 +125,7 @@ public class ShoppingCart implements Serializable {
             detail.setOrderId(order);
             detail.setProductId(cartItem.getProduct());
             detail.setProductQty(cartItem.getQuantity());
+            cartItem.getProduct().setProductStock(cartItem.getProduct().getProductStock()-cartItem.getQuantity());
             detailEJB.createOrderDetail(detail);
         }
         resetCart();

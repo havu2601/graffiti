@@ -61,7 +61,7 @@ create table product(
     product_price double not null,
     product_capacity integer not null,
     product_desc varchar(250) not null,
-    product_status int default 1,
+    product_status int default 0,
     color_id integer not null,
     brand_id integer not null,
     subcat_id integer not null,

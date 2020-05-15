@@ -6,8 +6,8 @@
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:pr="http://primefaces.org/ui">
-     
-    <ui:composition template="/WEB-INF/templates/clienttemplate.xhtml">
+
+    <ui:composition template="/templates/clienttemplate.xhtml">
         <ui:define name="content"> 
 
             <main>
@@ -15,12 +15,12 @@
                 <section class="shop-area pt-150 pb-100">
                     <div class="container">
                         <div class="row">
-                            <div class="col-xl-9 col-lg-8">
+                            <div class="col-xl-12 col-lg-8">
                                 <!-- tab filter -->
                                 <div class="row mb-10">
                                     <div class="col-xl-5 col-lg-6 col-md-6">
                                         <div class="product-showing mb-40">
-                                            <p>ADD FEEDBACK</p>
+                                            <p>FEEDBACK</p>
                                         </div>
                                     </div>
                                 </div>
@@ -30,58 +30,52 @@
                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <h:form>
                                             <div class="row">
-                                                <h:dataTable class="table table-hover" value="#{replyBean.listFeedback}" var="f">
-                                                    <h:column>
+                                                <pr:dataTable class="table table-hover" value="#{replyBean.listFeedback}" var="f">
+                                                    <pr:column>
                                                         <f:facet name="header">DATE FEEDBACK</f:facet>
-                                                        <h:outputText value="#{f.feedbackDate}"/>                                      
-                                                    </h:column>             
-                                                    <h:column>
-                                                        <f:facet name="header">NAME</f:facet>
-                                                        <h:outputText value="#{f.userId.userName}"/>
-                                                    </h:column>
-                                                    <h:column>
-                                                        <f:facet name="header">YOUR COMMENT</f:facet>
-                                                        <h:outputText value="#{f.feedbackContent}"/>
-                                                    </h:column>
-                                                    <h:column>
+                                                        <pr:outputLabel value="#{f.feedbackDate}"/>                                      
+                                                    </pr:column>             
+                                                  
+                                                    <pr:column>
                                                         <f:facet name="header">ACTION</f:facet>
-                                                        <h:commandButton action="#{replyBean.loadFeedbackContent(f.feedbackId)}" value="View reply"/>
-                                                    </h:column>
-                                                </h:dataTable>
+                                                        <h:commandButton action="#{replyBean.loadFeedbackContent(f.feedbackId)}" value="View reply" style="margin-right: 40px"/>
+                                                    </pr:column>
+                                                </pr:dataTable>
                                             </div>
                                         </h:form>
                                     </div>
                                 </div>
                             </div>  
                         </div>
-                    </div>
 
-                </section>
-
-                <section>
-                    <div class="shop-widget">
+                    <div class="col-xl-9 col-lg-8">
                         <h3 class="shop-title" align="center">Add Your Feedback</h3>
                         <h:form>
                             <table class="table" id="repContent">
+                                <tr>
+                                    <td>
+                                        FEEDBACK CONTENT:
+                                    </td>
+                                    <td>                                     
+                                        <pr:inputTextarea id="editor" widgetVar="editorWidget" value="#{replyBean.newFeedback.feedbackContent}" style="width: 500px;" />                                      
+                                    </td>
+                                </tr>
 
-                           
+                                <tr> 
+                                    <td>REPLY FROM SHOP:</td>
+                                    <td class="fb"><h:inputTextarea value="#{replyBean.repContent}" style="width: 500px; height: 100px;" disabled="true"></h:inputTextarea>
+                                    </td>
+                                </tr>
                                 
-                                <tr>                                   
-                                    <td class="fb" align="center"><h:inputTextarea value="#{replyBean.newFeedback.feedbackContent}"></h:inputTextarea>
-                                    </td>
-                                </tr>
-                                 <tr>                                   
-                                     <td class="fb" align="center"><h:inputTextarea value="#{replyBean.repContent}" disabled="true"></h:inputTextarea>
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td colspan="2" style="text-align: center">
-                                        <h:commandButton class="button" action="#{replyBean.addNewFeedback()}" value="Give Feedback"></h:commandButton>
-                                        <h:commandButton class="button" action="#{replyBean.reset()}" value="Reset"></h:commandButton>
-                                   </td>
+                                        <h:commandButton value="Give Feedback"  action="#{replyBean.addNewFeedback()}" style="margin-right: 20px;" styleClass="ui-priority-primary" ></h:commandButton>
+                                        <h:commandButton  action="#{replyBean.reset()}" value="Reset" style="margin-right: 20px" styleClass="ui-priority-primary"></h:commandButton>
+                                    </td>
                                 </tr>
                             </table>
                         </h:form> 
+                    </div>
                     </div>
                 </section>
             </main>

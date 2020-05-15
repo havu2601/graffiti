@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pr="http://primefaces.org/ui">
+    <ui:composition template="/templates/clienttemplate.xhtml">
+        <ui:define name="content">
+            <main>
+                <section>
+                <f:metadata>
+                    <f:viewAction action="#{userprofileBean.loadProfile()}"/>
+                </f:metadata>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-9 col-lg-8">
+                                <!-- tab filter -->
+                                <div class="row mb-10">
+                                    <div class="col-xl-5 col-lg-6 col-md-6">
+                                        <div class="product-showing mb-40">
+                                            <p>PROFILE</p>
+                                        </div>
+                                    </div>
+                                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <h:form class="form-horizontal">
+                            
+                            <div class="form-group">
+                                <h:outputLabel for="inputName" class="col-sm-2 control-label" value="Name"/>
+                                  
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="inputName"
+                                                 value="#{userprofileBean.newUserAccount.userName}"/>
+                                
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="inputPhone" value="#{userprofileBean.newUserAccount.userContact}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress" class="col-sm-2 control-label">Address</label>
+
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="inputAddress" value="#{userprofileBean.newUserAccount.userAddress}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                                <div class="col-sm-10">
+                                    <h:inputText class="form-control" id="inputEmail"
+                                                 value="#{userprofileBean.newUserAccount.userEmail}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <h:commandButton class="btn btn-default" value="Update profile"
+                                                     action="#{userprofileBean.editProfile()}"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </section>
+            </main>
+        </ui:define>
+    </ui:composition>
+</html>
+

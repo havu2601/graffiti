@@ -49,7 +49,7 @@ public class UserBean implements Serializable{
                 if (acc.getRoleId().getRoleId()==1 || acc.getRoleId().getRoleId()==2)
                     isAdmin = true;
                 if (isAdmin){
-                    return "admin/admin_homepage.xhtml?faces-redirect=true";
+                    return "admin/orders.xhtml?faces-redirect=true";
                 } else {
                     return "index.xhtml";
                 }

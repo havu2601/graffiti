@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pr="http://primefaces.org/ui">
+    <ui:composition template="/templates/admintemplate.xhtml">
+        <ui:define name="content"> 
+            <main>
+                <section class="shop-area pt-150 pb-100">
+                    <div class="container">
+                            <center>  
+                                <h2><h:outputText value="Import Detail"/></h2>  
+                            </center>  
+                            <pr:layout style="min-width:400px;min-height:1000px">
+                                <pr:layoutUnit position="west" resizable="true" size="600" minSize="40" maxSize="600">
+
+                                <section><div class="shop-widget">
+                                                <h3 class="shop-title">Supplier Name</h3>
+                                                <h:form>
+                                                    <table class="table">
+
+
+                                                        <tr>
+                                                            <td>SUPPLIER</td>
+                                                            <td>
+                                                                <pr:selectOneMenu value="#{importBean.supplierId}" effect="fold" editable="true" >
+                                                                    <f:selectItems value="#{supplierBean.listSupplier}" 
+                                                                                   var="i" itemValue="#{i.supplierId}" itemLabel="#{i.supplierName}">
+                                                                    </f:selectItems>
+                                                                </pr:selectOneMenu>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+
+                                                </h:form>
+                                    </div></section>
+                                <br></br>
+
+                                    <!--Search-->
+
+                                    <h3 class="shop-title">Product Information</h3>
+                                    <h:form class="shop-search">
+                                        <pr:inputText p:placeholder="Your keyword...." value="#{importDetailBean.searchStr}">
+                                            <f:ajax event="change" listener="#{importDetailBean.search()}"/>
+                                        </pr:inputText>
+                                        <button onclick="#{importDetailBean.search()}"><i class="fa fa-search"></i></button>
+
+                                    </h:form>
+                                    <!--Search-->
+
+                                    <!--Productdata-->
+                                    <h:form>
+                                        <div class="row">
+                                            <!-- Product list -->
+
+                                            <pr:dataTable class="table table-hover" style="text-align: center;" value="#{importDetailBean.listProduct}" var="pr">
+                                                <pr:column headerText="ID" style="width: 50px;">
+                                                    <h:outputText value="#{pr.productId}"></h:outputText>
+                                                </pr:column>
+                                                <pr:column style="width: 150px" headerText="NAME" sortBy="#{pr.productName}">
+                                                    <h:outputText value="#{pr.productName}"></h:outputText>
+                                                </pr:column>
+                                                <pr:column headerText="CAPACITY" style="width: 100px">
+                                                    <h:outputText value="#{pr.productCapacity}"></h:outputText>
+                                                </pr:column>
+                                                <pr:column style="width: 100px" headerText="PRICE" sortBy="#{pr.productPrice}">
+                                                    <h:outputText value="#{pr.productPrice} USD"></h:outputText>
+                                                </pr:column>
+                                                <pr:column headerText="QUANTITY" style="width: 100px;">
+                                                    <!--<h:outputLabel for="@next" value="" />-->
+                                                    <!--<pr:spinner id="max" value="" min="0" max="100" placeholder="0" />-->
+                                                </pr:column>
+
+                                                <pr:column headerText="ACTION">
+                                                    <h:commandButton class="btn-link" value="ADD" action="#{importDetailBean.addToListDetail(pr.productId)}"></h:commandButton>
+                                                </pr:column>
+                                            </pr:dataTable>
+                                            <!-- Product list -->
+                                        </div>`
+                                    </h:form>
+                                </pr:layoutUnit>
+                                <!--Product data-->
+                                <h:form>
+                                <pr:layoutUnit position="center">
+                                    <pr:dataTable class="table table-hover" style="text-align: center;" value="#{importDetailBean.listImportDetail}" var="pd">
+                                                <pr:column headerText="ID" style="width: 50px;">
+                                                    <h:outputText value="#{pd.productId.productId}"></h:outputText>
+                                                </pr:column>
+                                                <pr:column style="width: 150px" headerText="NAME" sortBy="#{pr.productName}">
+                                                    <h:outputText value="#{pd.productId.productName}"></h:outputText>
+                                                </pr:column>
+                                                <pr:column headerText="QUANTITY" style="width: 100px;">
+                                                    <!--<h:outputLabel for="@next" value="" />-->
+                                                    <!--<pr:spinner id="max" value="" min="0" max="100" placeholder="0" />-->
+                                                </pr:column>
+
+                                                <pr:column headerText="ACTION">
+                                                    <h:commandButton class="btn-link" value="REMOVE" action="#{importDetailBean.removeItem(pd.productId.productId)}"></h:commandButton>
+                                                </pr:column>
+                                            </pr:dataTable>
+                                </pr:layoutUnit>
+    </h:form>
+                            </pr:layout>
+                        <h:form>
+                            <tr>
+                                <td colspan="2" style="text-align: center">
+                                    <button class="button" style="margin: auto" styleClass="ui-priority-primary" disabled="true">Submit</button>
+
+                                </td>
+                            </tr>
+                        </h:form>  
+                    </div>
+                </section>
+            </main>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

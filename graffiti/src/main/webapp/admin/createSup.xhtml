@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:hi = "http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"> 
+    <ui:composition template="/templates/admintemplate.xhtml">
+    <ui:define name="content">
+        <main>
+        <section class="shop-area pt-150 pb-100">
+            <div class="container">         
+                <h:form id="form" class="form-horizontal">  
+                    <div class="form-group">  
+                        <div class="col-sm-4"></div>  
+                        <div  class="col-sm-4">  
+                            <h2 style="text-align: center">Provide Following Details</h2>  
+                        </div>  
+                    </div>  
+                    <hr/>  
+                    <div class="form-group">  
+                        <h:outputLabel for="supName" class="control-label col-sm-4">Supplier Name</h:outputLabel>  
+                        <div class="col-sm-4">  
+                            <h:inputText id="name" value="#{supplierBean.newSupplier.supplierName}" class="form-control"   
+                                         validatorMessage="Supplier Name is required">
+                                <f:validateLength minimum = "3" maximum = "50" />
+
+                            </h:inputText>  
+                        </div>  
+                    </div>  
+                    <div class="form-group">  
+                        <h:outputLabel for="supEmail" class="control-label col-sm-4">Supplier Email</h:outputLabel>  
+                        <div class="col-sm-4">  
+                            <h:inputText id="email" value="#{supplierBean.newSupplier.supplierEmail}" class="form-control"   
+                                         validatorMessage="Email Id is required">                                      
+                            </h:inputText>  
+                        </div>  
+                    </div>  
+                    <div class="form-group">  
+                        <h:outputLabel for="supContact" class="control-label col-sm-4">Supplier Contact</h:outputLabel>  
+                        <div class="col-sm-4">  
+                            <h:inputText id="contact" value="#{supplierBean.newSupplier.supplierContact}" class="form-control"   
+                                         validatorMessage="Supplier Contact is required"> 
+                            </h:inputText>  
+                        </div>  
+                    </div>   
+                    <div class="form-group">  
+                        <h:outputLabel for="supAdress" class="control-label col-sm-4">Supplier Address</h:outputLabel>  
+                        <div class="col-sm-4">  
+                            <h:inputText id="address" value="#{supplierBean.newSupplier.supplierAddress}" class="form-control"   
+                                         validatorMessage="Supplier Address is required">  
+
+                            </h:inputText>  
+                        </div>  
+                    </div>   
+
+                    <div class="form-group">  
+                        <div class="col-sm-4"></div>  
+                        <div class="col-sm-4">  
+                            <div class="col-sm-2">  
+                                <h:commandButton value="Save" action="#{supplierBean.addNewSupplier()}" class="btn btn-success"></h:commandButton>  
+                            </div>  
+                            <div class="col-sm-1">  
+                            </div>  
+                            <div class="col-sm-2">  
+                                <h:link outcome="supplier" value="View Supplier Record List" class="btn btn-primary" /> 
+                                <h:message for = "name" style = "color:red" />
+                            </div>  
+                        </div>  
+                    </div>  
+                </h:form> 
+            </div>
+        </section>
+        </main>
+    </ui:define>
+    </ui:composition>
+</html>  
+
+
