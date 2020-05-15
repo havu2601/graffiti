@@ -51,7 +51,7 @@ public class UserBean implements Serializable{
                 if (isAdmin){
                     return "admin/orders.xhtml?faces-redirect=true";
                 } else {
-                    return "index.xhtml";
+                    return "index.xhtml?faces-redirect=true";
                 }
             }
             else {

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import model.UserAccount;
@@ -35,6 +37,7 @@ public class ManageUserBean implements Serializable{
     private UserRole role;
     private String uID;
     private Integer roleID;
+    private String searchStr;
 
     public Integer getRoleID() {
         return roleID;
@@ -50,6 +53,7 @@ public class ManageUserBean implements Serializable{
         userList = accEJB.findAll();
         account = new UserAccount();
         roleList = roleEJB.findAll();
+        search();
     }
     
     public void findByID(){
@@ -57,6 +61,29 @@ public class ManageUserBean implements Serializable{
         roleID = account.getRoleId().getRoleId();
     }
 
+    public void search(){
+        if (null == searchStr || searchStr.isEmpty()){
+            List<UserAccount> rs = new ArrayList<>();
+            rs = accEJB.findAll();
+            show(rs);
+        } else {
+            if (null!=accEJB.findBy("%"+searchStr+"%"))
+            {
+                List<UserAccount> p = accEJB.findBy("%"+searchStr+"%");
+                show(p);
+            }
+        }
+    }
+    
+    public void show(List<UserAccount> rs){
+        userList = new ArrayList<>();
+        if(rs.isEmpty() || rs==null){
+            String msg = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,msg,msg));
+        }else{
+            userList.addAll(rs);
+        }
+    }
     public String doSetRole(){
         role = new UserRole();
         role = roleEJB.findByID(roleID);
@@ -97,4 +124,13 @@ public class ManageUserBean implements Serializable{
     public void setRoleList(List<UserRole> roleList) {
         this.roleList = roleList;
     }
+
+    public String getSearchStr() {
+        return searchStr;
+    }
+
+    public void setSearchStr(String searchStr) {
+        this.searchStr = searchStr;
+    }
+
 }

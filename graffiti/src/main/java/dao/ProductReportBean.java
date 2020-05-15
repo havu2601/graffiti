@@ -44,7 +44,7 @@ public class ProductReportBean implements Serializable {
     JasperPrint jasperPrint;
     public void init() throws JRException{
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(listProduct);
-        jasperPrint = JasperFillManager.fillReport("/Users/havu2601/Documents/graffiti/graffiti/src/main/webapp/WEB-INF/reportGra.jasper", new HashMap(), beanCollectionDataSource);
+        jasperPrint = JasperFillManager.fillReport("/Users/havu2601/Documents/graffiti/graffiti/src/main/webapp/WEB-INF/report1.jasper", new HashMap(), beanCollectionDataSource);
 
     }
     

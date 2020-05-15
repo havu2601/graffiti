@@ -117,7 +117,7 @@ public class ShoppingCart implements Serializable {
         Orders order = new Orders();
         order.setUserId(user);
         order.setOrderDate(date);
-        order.setStatus("Paid");
+        order.setStatus("Pending");
         ejb.createOrder(order);
         order =  ejb.getLatest(user.getUserId()).get(0);
         for (CartItem cartItem : itemInCart) {
@@ -125,11 +125,10 @@ public class ShoppingCart implements Serializable {
             detail.setOrderId(order);
             detail.setProductId(cartItem.getProduct());
             detail.setProductQty(cartItem.getQuantity());
-            cartItem.getProduct().setProductStock(cartItem.getProduct().getProductStock()-cartItem.getQuantity());
             detailEJB.createOrderDetail(detail);
         }
         resetCart();
-        return "./orderhistory.xhtml?uID="+userId+"&&faces-redirect=true";
+        return "orderhistory.xhtml?uID="+userId+"&&faces-redirect=true";
     }
     
     public void resetCart(){

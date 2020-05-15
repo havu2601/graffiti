@@ -33,11 +33,15 @@ public class OrderEJB {
         return em.createNamedQuery("Orders.findByUserId")
                 .setParameter("userId", Integer.parseInt(userID)).getResultList();
     }
-    
+    public List<Orders> findBy(String searchStr){
+        return em.createNamedQuery("Orders.findBy").setParameter("searchStr", searchStr).getResultList();
+    }
     public void createOrder(Orders order){
         em.merge(order);
     }
-    
+    public void updateOrder(Orders order){
+        em.merge(order);
+    }
     public List<Orders> getLatest(Integer id){
         return em.createNamedQuery("Orders.findLastest").setParameter("userId", id).getResultList();
     }

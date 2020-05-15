@@ -39,6 +39,9 @@ public class AccountEJB {
         
     }
     
+    public List<UserAccount> findBy(String searchStr){
+        return em.createNamedQuery("UserAccount.findBy").setParameter("searchStr", searchStr).getResultList();
+    }
     public void register(UserAccount acc){
         em.merge(acc);
     }
